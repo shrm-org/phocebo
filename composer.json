@@ -1,0 +1,22 @@
+{
+    "name": "shrm/phocebo",
+    "description": "Delicious PHP wrapper for Docebo API",
+    "require": {
+        "guzzlehttp/guzzle": "^6.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "phake/phake": "^2.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Patricia Walton",
+            "email": "pwalton@shrm.org"
+        },
+        {
+            "name": "Brian Moelk",
+            "email": "bmoelk@shrm.org"
+        }
+    ]
+}
