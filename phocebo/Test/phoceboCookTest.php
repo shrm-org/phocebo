@@ -52,6 +52,28 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
     }    
 
 
+    public function testResponseIsJSONString() {
+        
+        $action = '/user/checkUsername';
+        
+        $data_params = array (
+            
+            'userid' => 'patricia.walton@shrm.org',
+            
+        	'also_check_as_email' => true,
+        	
+        );
+        						
+        $response = phoceboCook::call($action, $data_params);
+        
+        $json_error = 'JSON_ERROR_NONE';
+        
+        $json_error = json_decode($response);
+        
+        $this->assertNotEquals($json_error, 'JSON_ERROR_NONE', "Not a JSON Response");
+        
+    }    
+  
     
 }
 
