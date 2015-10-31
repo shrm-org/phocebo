@@ -37,6 +37,19 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     }    
 
+    public function testURLisValidk() {
+        
+        $URLisValid = true;
+        
+        if (filter_var( URL, FILTER_VALIDATE_URL) === FALSE) {
+            
+            $URLisValid = false;
+        }
+
+        $this->assertTrue($URLisValid, "The Docebo URL is invalid");
+
+    }    
+
     public function testKEYisNotBlank() {
               
         $this->assertNotEquals(KEY, "KEY", "Missing Docebo public key");
