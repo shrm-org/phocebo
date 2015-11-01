@@ -27,9 +27,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
         
         $params = array('userid', 'also_check_as_email');
         
-        $test = new phoceboCook();
-        
-        $codice = $test->getHash($params);
+        $codice = phoceboCook::getHash($params);
         
         $this->assertNotEmpty($codice, "GetHash returned a Null Value");
 
@@ -41,9 +39,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
         
         $params = array('userid', 'also_check_as_email');
         
-        $test = new phoceboCook();
-        
-        $codice = $test->getHash($params);
+        $codice = phoceboCook::getHash($params);
         
         $sha1_len = strlen ($codice['sha1']);
         
