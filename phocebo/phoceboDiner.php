@@ -1,21 +1,21 @@
 <?php
     
 /**
- * Phởcebo Dinner - Delicious PHP wrapper for https://doceboapi.docebosaas.com/api/docs
+ * Phởcebo Diner - Delicious PHP wrapper for https://doceboapi.docebosaas.com/api/docs
  *
- * Usu fastidii corrumpit honestatis ad, his ludus assueverit id, scripta 
- * insolens torquatos eu sea. Eum ei maiorum eleifend molestiae, eu mea movet 
- * placerat iudicabit. Pertinax quaestio te vim, falli utamur senserit in sea, 
- * vix id magna modus assueverit. No eirmod euismod mel, te his dicta evertitur,
- * an tota congue consul sed.
+ * The goal of the Phởcebo class is to manage the calls to the Docbeo API only.
+ * These classes will make the call and return a SHRM Standard JSON for Embark
+ * to process. Programming logic will remain with Embark.
+ * 
+ * Phởcebo Diner will house all API calls to manage users of the LMS
  *
- * @package Phởcebo User
+ * @package Phởcebo Diner
  * @author Patricia Walton <patricia.walton@shrm.org>
  * @version 0.0.1 In Development
  * @license MIT
  * @copyright 2015 SHRM
+ * @link https://doceboapi.docebosaas.com/api/docs#!/user
  *
- * https://doceboapi.docebosaas.com/api/docs#!/user
  */
  
 
@@ -24,26 +24,41 @@ namespace phocebo;
 
 class phoceboDiner extends phoceboCook {
     
-    // ultimate return Docebo User ID
+    // Goal:  wrap calls to Docebo and return JSON
+    //        Create SHRM JSON files for return - do not rely on Docebo JSON formats
+    // 
+    // Focus only on processing the call and return - logic will stay with the application that makes the call
+        
     
-    // check for user, return id
-    
-    // if no user, create user
-    
-    // also have update and delete functions based on Docebo User ID
+    // /user/checkUsername https://doceboapi.docebosaas.com/api/docs#!/user/user_checkUsername_post_0
+    // 
     
     
-    // /user/checkUsername
     
-    static public function getUserId ($userId, $checkEmail = true) {
+    /**
+     * checkUsername function.
+     * 
+     * @access public
+     * @static
+     * @param mixed $userid
+     * @param bool $also_check_as_email (default: true)
+     * @return void
+     *
+     * @todo determine if we need to check numeric id or email
+     * @todo add Confluence link?
+     *
+     */
+     
+     
+    static public function checkUsername ($userid, $also_check_as_email = true) {
         
        $action = '/user/checkUsername';
 
        $data_params = array (
     
-           'userid' => $userId,
+           'userid' => $userid,
     
-           'also_check_as_email' => $checkEmail,
+           'also_check_as_email' => $also_check_as_email,
 	
        );
  
@@ -53,7 +68,14 @@ class phoceboDiner extends phoceboCook {
  
     }
     
-      static public function isUserIdValid ($userId, $checkEmail = true) {
+    
+    
+    
+    
+    
+    
+    
+    static public function isUserIdValid ($userId, $checkEmail = true) {
         
        $response = self::getUserId($userId);
        
