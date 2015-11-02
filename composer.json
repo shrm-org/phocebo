@@ -9,9 +9,10 @@
         "phake/phake": "^2.1"
     },
     "autoload": {
-        "psr-0": {
-            "phocebo": ""
-        }
+        "classmap": ["phocebo/"]
+    },
+    "autoload-dev": {
+        "psr-4": { "phocebo\\Tests\\": "Test/" }
     },
     "license": "MIT",
     "authors": [
