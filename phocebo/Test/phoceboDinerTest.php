@@ -40,7 +40,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * @dataProvider providerTesttestcheckUsernameErrors
      */
      
-    public function testcheckUsernameErrors($userid,$expectedResult) {
+    public function testcheckUsernameErrors($userid,$expectedResult,$errorMessage) {
         
        $action = '/user/checkUsername';
         
@@ -57,9 +57,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         
         var_dump($response);
         
-        $this->assertEquals($expectedResult, $response, 'error');
-        
-      
+        $this->assertEquals($expectedResult, $response, $errorMessage);
 
     }    
     
@@ -67,17 +65,17 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         
         return array(
             
-            array('patricia.walton@shrm.org', 'what to expect?'),
+            array('patricia.walton@shrm.org', 'what to expect?', 'error message'),
             
-            array('someone@example.com', 'what to expect?'),
+            array('someone@example.com', 'what to expect?', 'error message'),
             
-            array('not a valid email', 'what to expect?'),
+            array('not a valid email', 'what to expect?', 'error message'),
 
-            array('12332', 'what to expect?'),
+            array('12332', 'what to expect?', 'Valid Docebo userid sent instead of email function is defaulted to check userid as email'),
             
-            array('11111', 'what to expect?'),
+            array('11111', '{"success":false,"error":201,"message":"User not found"}', 'Invalid Docebo userid sent instead of email function is defaulted to check userid as email'),
             
-            array('', ''),
+            array('', '{"success":false,"error":202,"message":"Invalid params passed"}', 'No parameters sent'),
             
         );
         
