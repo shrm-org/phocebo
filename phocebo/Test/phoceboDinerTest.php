@@ -23,17 +23,73 @@ use phocebo\phoceboDiner;
 
 class testphoceboDiner extends \PHPUnit_Framework_TestCase {
     
-    public function testgetUserIDresponse() {
+    public function testcheckUsername() {
         
-        $response = phoceboDiner::getUserID('patricia.walton@shrm.org');
-
-        $this->assertNotEmpty($response, "No Data returned from phoceboDiner getUserId using patricia.walton@shrm.org");
+        $responseObj = phoceboDiner::checkUsername('patricia.walton@shrm.org');
+        
+        $this->assertNotEmpty($responseObj, "No Data returned from phoceboDiner checkUsername using patricia.walton@shrm.org");
 
     }    
     
+    
+    
+    /**
+     * testcheckUsernameError201 function.
+     * 
+     * @access public
+     * @return void
+     * 
+     * @dataProvider providerTesttestcheckUsernameErrors
+     */
+     
+    public function testcheckUsernameErrors($userid,$expectedResult) {
+        
+       $action = '/user/checkUsername';
+        
+       $data_params = array (
+    
+           'userid' => $userid,
+    
+           'also_check_as_email' => true,
+	
+       );
+
+
+        $response = phoceboDiner::call($action, $data_params);
+        
+        var_dump($response);
+        
+        $this->assertEquals($expectedResult, $response, 'error');
+        
+      
+
+    }    
+    
+    public function providerTesttestcheckUsernameErrors() {
+        
+        return array(
+            
+            array('patricia.walton@shrm.org', 'what to expect?'),
+            
+            array('someone@example.com', 'what to expect?'),
+            
+            array('not a valid email', 'what to expect?'),
+
+            array('12332', 'what to expect?'),
+            
+            array('11111', 'what to expect?'),
+            
+            array('', ''),
+            
+        );
+        
+    }        //
+
+
+/*
     public function testgetUserIdResponseIsJSONString() {
         
-        $response = phoceboDiner::getUserID('patricia.walton@shrm.org');
+        $response = phoceboDiner::checkUsername('patricia.walton@shrm.org');
         
         $json_error = 'JSON_ERROR_NONE';
         
@@ -52,6 +108,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($response, "Invalid userid given, method should return false value");
 
     }    
+*/
     
     
 }
