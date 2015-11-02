@@ -31,8 +31,6 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     }    
     
-    
-    
     /**
      * testcheckUsernameError201 function.
      * 
