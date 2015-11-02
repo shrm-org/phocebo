@@ -27,10 +27,16 @@ class phoceboDiner extends phoceboCook {
     
     /**
      * checkUsername function.
+     *
+     * 201 User not found
+     * 202 Invalid Params passed
+     * 500 Internal server error
+     *
+     * {"success":false,"error":201,"message":"User not found"}"
      * 
      * @access public
      * @static
-     * @param mixed $userid
+     * @param mixed $userid (The username or email of a valid user in LMS)
      * @param bool $also_check_as_email (default: true)
      * @return void
      *
@@ -54,71 +60,34 @@ class phoceboDiner extends phoceboCook {
        );
  
        $response = self::call($action, $data_params);
-    
-       return($response);
+       
+       $responseObj = self::validateJSON($action, $response);
+       
+       return($responseObj);
  
     }
     
-    
-    
-    
-    
-    
-    
-    
-    static public function isUserIdValid ($userId, $checkEmail = true) {
+    static public function validateJSON($action, $response) {
         
-       $response = self::getUserId($userId);
-       
-       $check = json_decode($response);
-       
-       if (false == $check->success) {
-           
-           // reasons it can fail
-           // 202 Invlaid Params Used
-           // 201 User Not Found
-           // 500 Internal Server Error
-           
-           $response = false;
-           
-       }
-       
-       return($response);
- 
-    }
-    
-      static public function addUserId ($userId, $checkEmail = true) {
+        $json_decode = json_decode($response);
         
-       $action = '/user/create';
+        if (false == $json_decode->success) {
+            
+            var_dump($json_decode);
+            
+            $responseObj = $json_decode;
+        
+            
+        } else {
+            
+            $responseObj = $json_decode;
 
-       $data_params = array (
-    
-           'userid' => $userId,
-           
-           'firstname' => '',
-           
-           'lastname' => '',
-           
-           'email' => '',
-           
-           'valid' => true,
-           
-           'role' => 'student',
-           
-           'disableNotifications' => true   
-	
-       );
- 
-       $response = self::call($action, $data_params);
-    
-       return($response);
- 
+            
+        }
+        
+        return $responseObj;
+        
     }
-
-    
-    
-    
-
     
 }
 
