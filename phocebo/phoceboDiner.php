@@ -24,16 +24,6 @@ namespace phocebo;
 
 class phoceboDiner extends phoceboCook {
     
-    // Goal:  wrap calls to Docebo and return JSON
-    //        Create SHRM JSON files for return - do not rely on Docebo JSON formats
-    // 
-    // Focus only on processing the call and return - logic will stay with the application that makes the call
-        
-    
-    // /user/checkUsername https://doceboapi.docebosaas.com/api/docs#!/user/user_checkUsername_post_0
-    // 
-    
-    
     
     /**
      * checkUsername function.
@@ -44,6 +34,7 @@ class phoceboDiner extends phoceboCook {
      * @param bool $also_check_as_email (default: true)
      * @return void
      *
+     * @link https://doceboapi.docebosaas.com/api/docs#!/user/user_checkUsername_post_0
      * @todo determine if we need to check numeric id or email
      * @todo add Confluence link?
      *
