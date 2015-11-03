@@ -25,7 +25,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
     
     public function testGetHashParametersExist() {
         
-        $params = array('userid', 'also_check_as_email');
+        $params = array ( 'userid', 'also_check_as_email' );
         
         $codice = phoceboCook::getHash($params);
         
@@ -37,7 +37,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
         
         $sha1_len = 0;
         
-        $params = array('userid', 'also_check_as_email');
+        $params = array ( 'userid', 'also_check_as_email' );
         
         $codice = phoceboCook::getHash($params);
         
