@@ -1,7 +1,7 @@
 {
     "name": "shrm/phocebo",
     "description": "Delicious PHP wrapper for Docebo API",
-    "version" :  "0.0.2-beta",
+    "version" :  "v0.0.2-alpha",
     "type" : "library",
     "require": {
         "guzzlehttp/guzzle": "^6.1"
