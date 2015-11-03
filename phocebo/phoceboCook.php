@@ -80,6 +80,7 @@ class phoceboCook {
 	 * @access public
 	 * @static
 	 * @data_params mixed $params
+	 *
 	 * @return array $codice hash value for x_auth
 	 *
 	 */
@@ -111,7 +112,8 @@ class phoceboCook {
 	 * @access private
 	 * @static
 	 * @param mixed $x_auth
-	 * @return void
+	 *
+	 * @return array containting default header
 	 *
 	 */
 	 
@@ -139,6 +141,7 @@ class phoceboCook {
 	 * @static
 	 * @param mixed $action Docebo API Call
 	 * @param mixed $data_params parameters to send
+	 *
 	 * @return $output JSON formatted response
 	 *
 	 */
