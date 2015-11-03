@@ -36,8 +36,10 @@ class phoceboDiner extends phoceboCook {
      * 
      * @access public
      * @static
-     * @param mixed $userid (The username or email of a valid user in LMS)
-     * @param bool $also_check_as_email (default: true)
+     *
+     * @param mixed $parameters
+     *    userId as valid email address for the user account
+     *
      * @return void
      *
      * @link https://doceboapi.docebosaas.com/api/docs#!/user/user_checkUsername_post_0
@@ -47,47 +49,73 @@ class phoceboDiner extends phoceboCook {
      */
      
      
-    static public function checkUsername ($userid, $also_check_as_email = true) {
+    static public function checkUsername ( $parameters) {
         
-       $action = '/user/checkUsername';
+       if ( !array_key_exists( 'userId', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter userId missing');
+           
+       } elseif ( !filter_var($parameters['userId'], FILTER_VALIDATE_EMAIL)) {
+           
+           $json_array = array ('success' => false, 'error' => '302', 'message' => 'userId must be users email address');
 
-       $data_params = array (
-    
-           'userid' => $userid,
-    
-           'also_check_as_email' => $also_check_as_email,
-	
-       );
- 
-       $response = self::call($action, $data_params);
+       } else {
+           
+           $action = '/user/checkUsername';
        
-       $responseObj = self::validateJSON($action, $response);
+           $data_params = array (
+        
+               'userid' => $parameters['userId'],
+        
+               'also_check_as_email' => true,
+    	
+           );
+     
+           $response = self::call($action, $data_params);
+           
+           $json_array = json_decode($response, true);
+           
+           if ( false == $json_array['success']) {
+               
+               if ('201' == $json_array['error']) {
+                   
+                   $json_array['message'] = "User not found: $userid";
+                   
+               }
+               
+               if ('202' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Invalid Parameters passed: $data_params";
+                   
+               }
+    
+               if ('500' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Internal server error';
+                   
+               }
+    
+           } else {
+               
+               $json_array['userId'] = $json_array['idst'];
+               
+               unset($json_array['idst']);
+    
+               
+           }
+           
+           
+           
+       }
+       
+       $responseObj = json_decode ( json_encode( $json_array ), FALSE );
        
        return($responseObj);
  
     }
     
-    static public function validateJSON($action, $response) {
-        
-        $json_decode = json_decode($response);
-        
-        if (false == $json_decode->success) {
-            
-            var_dump($json_decode);
-            
-            $responseObj = $json_decode;
-        
-            
-        } else {
-            
-            $responseObj = $json_decode;
 
-            
-        }
-        
-        return $responseObj;
-        
-    }
+
     
 }
 
