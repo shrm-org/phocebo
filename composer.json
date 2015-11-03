@@ -1,12 +1,14 @@
 {
     "name": "shrm/phocebo",
     "description": "Delicious PHP wrapper for Docebo API",
+    "version" : { "0.0.2-beta" },
+    "type" : { "library" },
     "require": {
         "guzzlehttp/guzzle": "^6.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
-        "phake/phake": "^2.1"
+        "phake/phake": "@stable"
     },
     "autoload": {
         "classmap": ["phocebo/"]
@@ -18,11 +20,14 @@
     "authors": [
         {
             "name": "Patricia Walton",
-            "email": "pwalton@shrm.org"
+            "email": "pwalton@shrm.org".
+            "role" : "Developer"
         },
         {
             "name": "Brian Moelk",
-            "email": "bmoelk@shrm.org"
+            "email": "bmoelk@shrm.org",
+            "role" : "Senior Architect"
+            
         }
     ]
 }
