@@ -26,7 +26,7 @@ class phoceboDiner extends phoceboCook {
     
     
     /**
-     * checkUsername function.
+     * doceboId function.
      *
      * 201 User not found
      * 202 Invalid Params passed
@@ -38,9 +38,9 @@ class phoceboDiner extends phoceboCook {
      * @static
      *
      * @param mixed $parameters
-     *    userId as valid email address for the user account
+     *    doceboId - email address to create the User Name
      *
-     * @return void
+     * @return object
      *
      * @link https://doceboapi.docebosaas.com/api/docs#!/user/user_checkUsername_post_0
      * @todo determine if we need to check numeric id or email
@@ -48,16 +48,18 @@ class phoceboDiner extends phoceboCook {
      *
      */
      
+     // 
      
-    static public function checkUsername ( $parameters) {
+     
+    static public function doceboId ( $parameters ) {
         
-       if ( !array_key_exists( 'userId', $parameters) ) {
+       if ( !array_key_exists( 'email', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter userId missing');
+           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter email is missing');
            
-       } elseif ( !filter_var($parameters['userId'], FILTER_VALIDATE_EMAIL)) {
+       } elseif ( !filter_var($parameters['email'], FILTER_VALIDATE_EMAIL)) {
            
-           $json_array = array ('success' => false, 'error' => '302', 'message' => 'userId must be users email address');
+           $json_array = array ('success' => false, 'error' => '302', 'message' => 'must be users email address');
 
        } else {
            
@@ -65,13 +67,13 @@ class phoceboDiner extends phoceboCook {
        
            $data_params = array (
         
-               'userid' => $parameters['userId'],
+               'userid'                 => $parameters['email'],
         
-               'also_check_as_email' => true,
+               'also_check_as_email'    => true,
     	
            );
      
-           $response = self::call($action, $data_params);
+           $response = self::call ( $action, $data_params );
            
            $json_array = json_decode($response, true);
            
@@ -79,13 +81,13 @@ class phoceboDiner extends phoceboCook {
                
                if ('201' == $json_array['error']) {
                    
-                   $json_array['message'] = "User not found: $userid";
+                   $json_array['message'] = "User not found";
                    
                }
                
                if ('202' == $json_array['error']) {
                    
-                   $json_array['message'] = "Invalid Parameters passed: $data_params";
+                   $json_array['message'] = "Invalid Parameters passed";
                    
                }
     
@@ -97,25 +99,127 @@ class phoceboDiner extends phoceboCook {
     
            } else {
                
-               $json_array['userId'] = $json_array['idst'];
+               $json_array['doceboId'] = $json_array['idst'];
                
                unset($json_array['idst']);
     
-               
            }
-           
-           
            
        }
        
-       $responseObj = json_decode ( json_encode( $json_array ), FALSE );
+       $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
        
        return($responseObj);
  
     }
+
+
     
+    
+    /**
+     * addUser function.
+     * 
+     * @access public
+     * @static
+     * @param mixed $parameters
+     *      firstName - users first name
+     *      lastName - users last name
+     *      email - users email, also used to create users username
+     *
+     * @return object
+     *
+     */
+     
+     
+    static public function addUser ( $parameters ) {
+           
+        if ( !array_key_exists( 'firstName', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '303', 'message' => 'Parameter firstName is missing');
 
+        } elseif ( !array_key_exists( 'lastName', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '304', 'message' => 'Parameter lastName is missing');
 
+        } elseif ( !array_key_exists( 'email', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '305', 'message' => 'Parameter email is missing');
+
+        } else {
+            
+            $action = '/user/create';
+            
+            $data_params = array (
+            
+                'userid'                 => $parameters['email'],
+                
+                'firstname'              => $parameters['firstName'],
+                
+                'lastname'               => $parameters['lastName'],
+                
+                'email'                  => $parameters['email'],
+                
+                'valid'                  => true,
+                
+                'role'                   => 'student',
+                
+                'disableNotifications'   => false,
+            
+            );
+            
+            $response = self::call($action, $data_params);
+           
+            $json_array = json_decode($response, true);
+           
+            if ( false == $json_array['success']) {
+               
+               if ('201' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Empty email used for user name";
+                   
+               }
+               
+               if ('202' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Error while assigning user level";
+                   
+               }
+            
+               if ('203' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Cannot create godadmin users";
+                   
+               }
+            
+               if ('204' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Cannot save user";
+                   
+               }
+            
+               if ('500' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Internal server error';
+                   
+               }
+            
+            } else {
+               
+               $json_array['doceboId'] = $json_array['idst'];
+               
+               unset ( $json_array['idst'] );
+
+            
+            }
+           
+       }
+
+       $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
+       
+       return($responseObj);
+        
+        
+    }
     
 }
 
