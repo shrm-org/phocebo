@@ -38,7 +38,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      
     public function testdoceboId ( $email, $checkAttribute, $errorMessage ) {
         
-        $responseObj = phoceboDiner::doceboId( array( 'email' => $email ) );
+        $responseObj = phoceboDiner::getdoceboId( array( 'email' => $email ) );
         
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
@@ -81,7 +81,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      
     public function testdoceboIdObj ($checkAttribute, $errorMessage ) {
         
-        $responseObj = phoceboDiner::doceboId( array('email' => 'patricia.walton@shrm.org') );
+        $responseObj = phoceboDiner::getdoceboId( array('email' => 'patricia.walton@shrm.org') );
         
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
@@ -115,7 +115,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      
     public function testdoceboIdRemovedIdst () {
         
-        $responseObj = phoceboDiner::doceboId ( array( 'email' => 'patricia.walton@shrm.org') );
+        $responseObj = phoceboDiner::getdoceboId ( array( 'email' => 'patricia.walton@shrm.org') );
         
         $this->assertObjectNotHasAttribute ( 'idst', $responseObj, 'The parameter idst should be removed from $responseObj');
 
@@ -134,7 +134,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      
     public function testdoceboIdCustomErrorsJSONformat ($checkAttribute, $errorMessage) {
         
-        $responseObj = phoceboDiner::doceboId( array( 'noemail' => 'patricia.walton@shrm.org') );
+        $responseObj = phoceboDiner::getdoceboId( array( 'noemail' => 'patricia.walton@shrm.org') );
         
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
@@ -169,7 +169,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboIdCustomErrors ($parameters, $expected, $errorMessage) {
         
-        $responseObj = phoceboDiner::doceboId( $parameters );
+        $responseObj = phoceboDiner::getdoceboId( $parameters );
         
         $this->assertEquals( $responseObj->error, $expected, $errorMessage);
 

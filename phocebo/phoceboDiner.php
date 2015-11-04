@@ -26,14 +26,8 @@ class phoceboDiner extends phoceboCook {
     
     
     /**
-     * doceboId function.
+     * getdoceboId function.
      *
-     * 201 User not found
-     * 202 Invalid Params passed
-     * 500 Internal server error
-     *
-     * {"success":false,"error":201,"message":"User not found"}"
-     * 
      * @access public
      * @static
      *
@@ -51,7 +45,7 @@ class phoceboDiner extends phoceboCook {
      // 
      
      
-    static public function doceboId ( $parameters ) {
+    static public function getdoceboId ( $parameters ) {
         
        if ( !array_key_exists( 'email', $parameters) ) {
            
