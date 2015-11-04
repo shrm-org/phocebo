@@ -1,5 +1,5 @@
 {
-    "name": "shrm/phocebo",
+    "name": "shrm-org/phocebo",
     "description": "Delicious PHP wrapper for Docebo API",
     "version" :  "0.0.3",
     "type" : "library",
