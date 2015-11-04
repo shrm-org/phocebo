@@ -367,13 +367,25 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
     
     public function testaddUser () {
         
-/*
+/*  object should not have idst but user doceboId instead
 object(stdClass)#345 (2) {
   ["idst"]=>
   string(5) "12365"
   ["success"]=>
   bool(true)
-}        
+} 
+
+ERROR on add user is NULL
+
+object(stdClass)#347 (2) {
+  ["success"]=>
+  bool(true)
+  ["doceboId"]=>
+  string(5) "12367"
+}
+
+
+       
 */
         
         $parameters = array (
@@ -382,7 +394,7 @@ object(stdClass)#345 (2) {
             
             'lastName'                  => 'Dasic',
             
-            'email'                     => 'vdasic@example.com'
+            'email'                     => 'vdasic1@example.com'
             
         );
         
@@ -396,6 +408,225 @@ object(stdClass)#345 (2) {
     }    
     
     
+    public function testdeleteUser () {
+        
+/*
+object(stdClass)#347 (3) {
+  ["success"]=>
+  bool(false)
+  ["error"]=>
+  int(211)
+  ["message"]=>
+  string(22) "Error in user deletion"
+}
+
+
+object(stdClass)#347 (2) {
+  ["success"]=>
+  bool(true)
+  ["doceboId"]=>
+  string(5) "12366"
+}
+
+
+
+*/
+        
+        $parameters = array (
+            
+            'doceboId'                 => '12366',
+            
+        );
+        
+//         $responseObj = phoceboDiner::deleteUser( $parameters );
+        
+//         var_dump($responseObj);
+        
+        
+//         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, 'test addUser');
+
+    }    
+    
+
+    public function testgetUserFields () {
+        
+/*
+    
+This Error is created when the parameters are not sent.
+
+object(stdClass)#349 (3) {
+  ["success"]=>
+  bool(false)
+  ["message"]=>
+  string(40) "Authorization header value doesn't match"
+  ["code"]=>
+  int(104)
+}
+
+object(stdClass)#349 (2) {
+  ["fields"]=>
+  array(1) {
+    [0]=>
+    object(stdClass)#344 (2) {
+      ["id"]=>
+      int(1)
+      ["name"]=>
+      string(8) "Job Role"
+    }
+  }
+  ["success"]=>
+  bool(true)
+}
+
+
+
+*/
+
+        
+//         $responseObj = phoceboDiner::getUserFields( );
+        
+//         var_dump($responseObj);       
+        
+//         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, 'test addUser');
+
+    }    
+
+
+    public function testgetUserProfile () {
+        
+/*
+
+Errror if retrieving a Global Admin Profile
+    
+object(stdClass)#351 (3) {
+  ["success"]=>
+  bool(false)
+  ["error"]=>
+  int(201)
+  ["message"]=>
+  string(26) "Invalid user specification"
+}
+
+
+object(stdClass)#351 (11) {
+  ["id_user"]=>
+  string(5) "12337"
+  ["userid"]=>
+  string(4) "Test"
+  ["firstname"]=>
+  string(4) "Test"
+  ["lastname"]=>
+  string(0) ""
+  ["email"]=>
+  string(13) "test@shrm.org"
+  ["signature"]=>
+  string(0) ""
+  ["valid"]=>
+  bool(true)
+  ["register_date"]=>
+  string(19) "2015-09-21 19:55:00"
+  ["last_enter"]=>
+  NULL
+  ["fields"]=>
+  array(1) {
+    [0]=>
+    object(stdClass)#346 (3) {
+      ["id"]=>
+      string(1) "1"
+      ["name"]=>
+      string(8) "Job Role"
+      ["value"]=>
+      string(0) ""
+    }
+  }
+  ["success"]=>
+  bool(true)
+}
+
+
+
+*/
+
+        $parameters = array (
+            
+            'doceboId'                 => '12339',
+            
+        );
+        
+        $responseObj = phoceboDiner::getUserProfile( $parameters );
+        
+//         var_dump($responseObj);       
+        
+//         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, 'test addUser');
+
+    }    
+
+
+    public function testsuspendUser () {
+        
+/*
+
+Will always respond True even if user was previously suspended
+
+object(stdClass)#353 (2) {
+  ["idst"]=>
+  string(5) "12339"
+  ["success"]=>
+  bool(true)
+}
+
+
+
+
+*/
+
+        $parameters = array (
+            
+            'doceboId'                 => '12339',
+            
+        );
+        
+//         $responseObj = phoceboDiner::suspendUser( $parameters );
+        
+//         var_dump($responseObj);       
+        
+//         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, 'test addUser');
+
+    }    
+
+    public function testsuspendUser () {
+        
+/*
+
+Will always respond true on sucess even if user was not suspended
+
+object(stdClass)#353 (2) {
+  ["idst"]=>
+  string(5) "12339"
+  ["success"]=>
+  bool(true)
+}
+
+
+
+
+*/
+
+        $parameters = array (
+            
+            'doceboId'                 => '12339',
+            
+        );
+        
+        $responseObj = phoceboDiner::unsuspendUser( $parameters );
+        
+        var_dump($responseObj);       
+        
+//         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, 'test addUser');
+
+    }    
+
+
 
 }
 

@@ -212,9 +212,426 @@ class phoceboDiner extends phoceboCook {
        
        return($responseObj);
         
+    }
+    
+    
+    /**
+     * deleteUser function.
+     * 
+     * @access public
+     * @static
+     * @param mixed $parameters
+     * @return void
+     */
+     
+    static public function deleteUser ( $parameters ) {
+           
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+
+        } else {
+            
+            $action = '/user/delete';
+            
+            $data_params = array (
+            
+                'id_user'                 => $parameters['doceboId'],
+            
+            );
+            
+            $response = self::call($action, $data_params);
+           
+            $json_array = json_decode($response, true);
+            
+            if ( false == $json_array['success']) {
+               
+               if ('210' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Invalid user specification";
+                   
+               }
+               
+               if ('211' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Error in user deletion";
+                   
+               }
+            
+               if ('500' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Internal server error';
+                   
+               }
+            
+            } else {
+               
+               $json_array['doceboId'] = $json_array['idst'];
+               
+               unset ( $json_array['idst'] );
+
+            
+            }
+           
+       }
+
+       $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
+       
+       return($responseObj);
+        
+    }
+
+
+    
+    /**
+     * editUser function.
+     * 
+     * @access public
+     * @static
+     * @param mixed $parameters
+     * @return void
+     */
+     
+    static public function editUser ( $parameters ) {
+           
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+
+        } else {
+            
+            $action = '/user/edit';
+            
+            $data_params = array (
+            
+                'id_user'                 => $parameters['doceboId'],
+                
+                'userid'                  => $parameters['email'],
+                
+                'firstname'               => $parameters['firstName'],
+            
+                'firstname'               => $parameters['firstName'],
+
+            );
+            
+            $response = self::call($action, $data_params);
+           
+            $json_array = json_decode($response, true);
+            
+            var_dump($json_array);
+           
+            if ( false == $json_array['success']) {
+               
+               if ('201' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Invalid user specification";
+                   
+               }
+               
+               if ('203' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Error while updating user";
+                   
+               }
+            
+               if ('500' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Internal server error';
+                   
+               }
+            
+            } else {
+               
+               $json_array['doceboId'] = $json_array['idst'];
+               
+               unset ( $json_array['idst'] );
+
+            
+            }
+           
+       }
+
+       $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
+       
+       return($responseObj);
+        
+    }
+
+    
+
+    /**
+     * getUserFields function.
+     * 
+     * @access public
+     * @static
+     * @return void
+     */
+     
+    static public function getUserFields ( ) {
+        
+/*
+       if ( !array_key_exists( 'doceboId', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+           
+       } else {
+*/
+
+            $action = '/user/fields';
+            
+            $data_params = array (
+            
+                'language'                 => null,
+                
+            );
+            
+
+           $response = self::call ( $action, $data_params );
+           
+           $json_array = json_decode($response, true);
+           
+           if ( false == $json_array['success']) {
+    
+               if ('500' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Internal server error';
+                   
+               }
+    
+           } else { // Success == true
+               
+    
+           }
+           
+//        }
+        
+       $responseObj = json_decode ( json_encode( $json_array ), FALSE );
+       
+       return($responseObj);
+        
+    }
+
+    
+
+    /**
+     * getUserProfile function.
+     * 
+     * @access public
+     * @static
+     * @return void
+     */
+     
+    static public function getUserProfile ( $parameters ) {
+
+/*
+       $action = '/user/checkUsername';
+   
+       $data_params = array (
+    
+           'userid'                 => 'patricia.walton@shrm.org',
+    
+           'also_check_as_email'    => true,
+	
+       );
+ 
+       $response = self::call ( $action, $data_params );
+       
+       var_dump($response);
+*/
+        
+       if ( !array_key_exists( 'doceboId', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+           
+       } else {
+
+            $action = '/user/profile';
+            
+            $data_params = array (
+            
+                'id_user'                 => $parameters['doceboId'],
+                
+            );
+            
+
+           $response = self::call ( $action, $data_params );
+           
+           $json_array = json_decode($response, true);
+           
+           if ( false == $json_array['success']) {
+    
+               if ('201' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Invalid user specification';
+                   
+               }
+
+               if ('500' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Internal server error';
+                   
+               }
+    
+           } else { // Success == true
+               
+    
+           }
+           
+       }
+        
+       $responseObj = json_decode ( json_encode( $json_array ), FALSE );
+       
+       return($responseObj);
+        
+    }
+
+    
+
+    /**
+     * suspendUser function.
+     * 
+     * @access public
+     * @static
+     * @param mixed $parameters
+     * @return void
+     */
+     
+    static public function suspendUser ( $parameters ) {
+           
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+
+        } else {
+            
+            $action = '/user/suspend';
+            
+            $data_params = array (
+            
+                'id_user'                 => $parameters['doceboId'],
+                
+//                 'unenroll_deactivated'    => Shoudl we deactivate all the future enrollments?
+            
+            );
+            
+            $response = self::call($action, $data_params);
+           
+            $json_array = json_decode($response, true);
+            
+            if ( false == $json_array['success']) {
+               
+               if ('210' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Invalid user specification";
+                   
+               }
+               
+               if ('211' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Error in user deletion";
+                   
+               }
+            
+               if ('500' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Internal server error';
+                   
+               }
+            
+            } else {
+               
+/*
+               $json_array['doceboId'] = $json_array['idst'];
+               
+               unset ( $json_array['idst'] );
+*/
+
+            
+            }
+           
+       }
+
+       $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
+       
+       return($responseObj);
         
     }
     
+    
+
+
+    /**
+     * unsuspendUser function.
+     * 
+     * @access public
+     * @static
+     * @param mixed $parameters
+     * @return void
+     */
+     
+    static public function unsuspendUser ( $parameters ) {
+           
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+           
+           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+
+        } else {
+            
+            $action = '/user/unsuspend';
+            
+            $data_params = array (
+            
+                'id_user'                 => $parameters['doceboId'],
+                
+//                 'unenroll_deactivated'    => Shoudl we deactivate all the future enrollments?
+            
+            );
+            
+            $response = self::call($action, $data_params);
+           
+            $json_array = json_decode($response, true);
+            
+            if ( false == $json_array['success']) {
+               
+               if ('210' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Invalid user specification";
+                   
+               }
+               
+               if ('211' == $json_array['error']) {
+                   
+                   $json_array['message'] = "Error in user deletion";
+                   
+               }
+            
+               if ('500' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Internal server error';
+                   
+               }
+            
+            } else {
+               
+/*
+               $json_array['doceboId'] = $json_array['idst'];
+               
+               unset ( $json_array['idst'] );
+*/
+
+            
+            }
+           
+       }
+
+       $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
+       
+       return($responseObj);
+        
+    }
+
+
+
 }
 
 ?>
