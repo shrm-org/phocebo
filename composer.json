@@ -1,7 +1,7 @@
 {
     "name": "shrm/phocebo",
     "description": "Delicious PHP wrapper for Docebo API",
-    "version" :  "v0.0.3-alpha",
+    "version" :  "0.0.3",
     "type" : "library",
     "require": {
         "guzzlehttp/guzzle": "^6.1"
@@ -27,7 +27,7 @@
             "name": "Brian Moelk",
             "email": "bmoelk@shrm.org",
             "role" : "Senior Architect"
-            
+
         }
     ]
 }
