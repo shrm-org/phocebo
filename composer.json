@@ -1,22 +1,9 @@
 {
     "name": "shrm-org/phocebo",
-    "description": "Delicious PHP wrapper for Docebo API",
-    "version" :  "0.0.3",
     "type" : "library",
-    "require": {
-        "guzzlehttp/guzzle": "^6.1"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~4.0",
-        "phake/phake": "@stable"
-    },
-    "autoload": {
-        "classmap": ["phocebo/"]
-    },
-    "autoload-dev": {
-        "psr-4": { "phocebo\\Tests\\": "Test/" }
-    },
+    "description": "Delicious PHP wrapper for Docebo API",
     "license": "MIT",
+    "version" :  "0.0.4",
     "authors": [
         {
             "name": "Patricia Walton",
@@ -29,5 +16,21 @@
             "role" : "Senior Architect"
 
         }
-    ]
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "phake/phake": "@stable"
+    },
+    "autoload": {
+        "psr-0": {
+            "Phocebo": "src/",
+            "Phocebo\\Tests":  "tests/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "src\\tests\\": "Test/" }
+    }
 }

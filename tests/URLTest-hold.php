@@ -11,9 +11,9 @@
  */
 
     
-namespace phocebo\Test;
+namespace Phocebo\tests;
 
-use phocebo\URL;
+use URL;
 
 class URLTest extends \PHPUnit_Framework_TestCase {
     

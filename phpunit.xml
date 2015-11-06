@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true">
     <testsuites>
-        <testsuite name="Phocebo Tests">
-            <directory>./phocebo/Test</directory>
+        <testsuite name="Phocebo Test Suite">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

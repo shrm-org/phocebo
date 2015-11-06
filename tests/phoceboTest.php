@@ -16,10 +16,159 @@
  * @copyright 2015 SHRM
  * 
  */  
-    
-namespace phocebo\Test;
 
-use phocebo\phoceboDiner;
+    
+namespace Phocebo\Tests;
+
+use Phocebo\phocebo;
+
+use Phocebo\phoceboCook;
+
+/**
+ * Phởcebo Recipe File
+ * @const INI Environment Settings File
+ */
+ 
+
+define('INI', '.env');
+
+if (file_exists(INI)) {
+    
+    $settings = parse_ini_file (INI, true);   
+    
+    /**
+     * @const URL Docebo URL
+     */
+
+    define('URL', $settings[docebo]['URL']);
+    
+    /**
+     * @const KEY Docebo public Key
+     */
+
+    define('KEY', $settings[docebo]['KEY']);
+
+    /**
+     * @const SECRET Docebo secret Key
+     */
+
+    define('SECRET', $settings[docebo]['SECRET']);
+
+    /**
+     * @const SSO - Future SSO 
+     */
+
+    define('SSO', $settings[docebo]['SSO']);   
+    
+} else die( "\nERROR: Phởcebo ingredients are missing (.env) \n\n");
+
+
+
+
+
+$phocebo = new phocebo();
+
+
+class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
+    
+    public function testEnvironmentSettingsLoaded() {
+        
+        global $settings;
+
+        $this->assertArrayHasKey("docebo", $settings, "Environment settings not loaded");
+
+    }    
+
+    public function testURLisNotBlank() {
+              
+        $this->assertNotEquals(URL, "URL", "Missing Docebo URL");
+
+    }    
+
+    public function testURLisValidk() {
+        
+        $URLisValid = true;
+        
+        if (filter_var( URL, FILTER_VALIDATE_URL) === FALSE) {
+            
+            $URLisValid = false;
+        }
+
+        $this->assertTrue($URLisValid, "The Docebo URL is invalid");
+
+    }    
+
+    public function testKEYisNotBlank() {
+              
+        $this->assertNotEquals(KEY, "KEY", "Missing Docebo public key");
+
+    }    
+
+    public function testSECRETisNotBlank() {
+              
+        $this->assertNotEquals(SECRET, "SECRET", "Missing Docebo secret key");
+
+    }    
+
+    public function testSSOisNotBlank() {
+              
+        $this->assertNotEquals(SSO, "SSO", "Missing Docebo SSO");
+
+    } 
+    
+}
+
+class testphoceboCooking extends \PHPUnit_Framework_TestCase {
+    
+    public function testGetHashParametersExist() {
+        
+        $params = array ( 'userid', 'also_check_as_email' );
+        
+        $codice = phoceboCook::getHash($params);
+        
+        $this->assertNotEmpty($codice, "GetHash returned a Null Value");
+
+    }    
+
+    public function testGetHashsha1String40() {
+        
+        $sha1_len = 0;
+        
+        $params = array ( 'userid', 'also_check_as_email' );
+        
+        $codice = phoceboCook::getHash($params);
+        
+        $sha1_len = strlen ($codice['sha1']);
+        
+        $this->assertEquals(40, $sha1_len, "Sha1 not calculating incorrectly");
+
+    }    
+
+
+    public function testResponseIsJSONString() {
+        
+        $action = '/user/checkUsername';
+        
+        $data_params = array (
+            
+            'userid' => 'patricia.walton@shrm.org',
+            
+        	'also_check_as_email' => true,
+        	
+        );
+        						
+        $response = phoceboCook::call($action, $data_params);
+        
+        $json_error = 'JSON_ERROR_NONE';
+        
+        $json_error = json_decode($response);
+        
+        $this->assertNotEquals($json_error, 'JSON_ERROR_NONE', "Not a JSON Response");
+        
+    }    
+  
+    
+}
 
 class testphoceboDiner extends \PHPUnit_Framework_TestCase {
     
@@ -38,7 +187,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      
     public function testdoceboId ( $email, $checkAttribute, $errorMessage ) {
         
-        $responseObj = phoceboDiner::getdoceboId( array( 'email' => $email ) );
+        $responseObj = phocebo::getdoceboId( array( 'email' => $email ) );
         
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
@@ -81,7 +230,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      
     public function testdoceboIdObj ($checkAttribute, $errorMessage ) {
         
-        $responseObj = phoceboDiner::getdoceboId( array('email' => 'patricia.walton@shrm.org') );
+        $responseObj = phocebo::getdoceboId( array('email' => 'patricia.walton@shrm.org') );
         
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
@@ -115,7 +264,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      
     public function testdoceboIdRemovedIdst () {
         
-        $responseObj = phoceboDiner::getdoceboId ( array( 'email' => 'patricia.walton@shrm.org') );
+        $responseObj = phocebo::getdoceboId ( array( 'email' => 'patricia.walton@shrm.org') );
         
         $this->assertObjectNotHasAttribute ( 'idst', $responseObj, 'The parameter idst should be removed from $responseObj');
 
@@ -134,7 +283,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      
     public function testdoceboIdCustomErrorsJSONformat ($checkAttribute, $errorMessage) {
         
-        $responseObj = phoceboDiner::getdoceboId( array( 'noemail' => 'patricia.walton@shrm.org') );
+        $responseObj = phocebo::getdoceboId( array( 'noemail' => 'patricia.walton@shrm.org') );
         
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
@@ -169,7 +318,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboIdCustomErrors ($parameters, $expected, $errorMessage) {
         
-        $responseObj = phoceboDiner::getdoceboId( $parameters );
+        $responseObj = phocebo::getdoceboId( $parameters );
         
         $this->assertEquals( $responseObj->error, $expected, $errorMessage);
 
@@ -219,7 +368,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
             
         );
         
-        $responseObj = phoceboDiner::addUser( $parameters );
+        $responseObj = phocebo::addUser( $parameters );
         
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
@@ -263,7 +412,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
             
         );
         
-        $responseObj = phoceboDiner::addUser( $parameters );
+        $responseObj = phocebo::addUser( $parameters );
         
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
@@ -307,7 +456,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
             
         );
         
-        $responseObj = phoceboDiner::addUser( $parameters );
+        $responseObj = phocebo::addUser( $parameters );
         
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
@@ -342,7 +491,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testaddUserCustomErrors ($parameters, $expected, $errorMessage) {
         
-        $responseObj = phoceboDiner::addUser ( $parameters );
+        $responseObj = phocebo::addUser ( $parameters );
         
         $this->assertEquals ( $responseObj->error, $expected, $errorMessage );
 
@@ -398,7 +547,7 @@ object(stdClass)#347 (2) {
             
         );
         
-//         $responseObj = phoceboDiner::addUser( $parameters );
+//         $responseObj = phocebo::addUser( $parameters );
         
 //         var_dump($responseObj);
         
@@ -438,7 +587,7 @@ object(stdClass)#347 (2) {
             
         );
         
-//         $responseObj = phoceboDiner::deleteUser( $parameters );
+//         $responseObj = phocebo::deleteUser( $parameters );
         
 //         var_dump($responseObj);
         
@@ -483,7 +632,7 @@ object(stdClass)#349 (2) {
 */
 
         
-//         $responseObj = phoceboDiner::getUserFields( );
+//         $responseObj = phocebo::getUserFields( );
         
 //         var_dump($responseObj);       
         
@@ -553,7 +702,7 @@ object(stdClass)#351 (11) {
             
         );
         
-        $responseObj = phoceboDiner::getUserProfile( $parameters );
+        $responseObj = phocebo::getUserProfile( $parameters );
         
 //         var_dump($responseObj);       
         
@@ -586,7 +735,7 @@ object(stdClass)#353 (2) {
             
         );
         
-//         $responseObj = phoceboDiner::suspendUser( $parameters );
+//         $responseObj = phocebo::suspendUser( $parameters );
         
 //         var_dump($responseObj);       
         
@@ -594,7 +743,7 @@ object(stdClass)#353 (2) {
 
     }    
 
-    public function testsuspendUser () {
+    public function testunsuspendUser () {
         
 /*
 
@@ -618,7 +767,7 @@ object(stdClass)#353 (2) {
             
         );
         
-        $responseObj = phoceboDiner::unsuspendUser( $parameters );
+        $responseObj = phocebo::unsuspendUser( $parameters );
         
         var_dump($responseObj);       
         
@@ -627,6 +776,112 @@ object(stdClass)#353 (2) {
     }    
 
 
+
+}
+
+
+class testphoceboCourse extends \PHPUnit_Framework_TestCase {
+    
+
+    /**
+     * testuserCoursesCustomErrorNoDoceboId function.
+     * 
+     * @access public
+     * @return void
+     *
+     */
+
+    public function testuserCoursesCustomErrorNoDoceboId () {
+        
+        $parameters = array ('no key' => '12332');
+        
+        $responseObj = phocebo::userCourses( $parameters );
+        
+        $this->assertEquals( $responseObj->error, '301', 'JSON response should be reporting error 301');
+
+    }    
+
+
+    /**
+     * testuserCoursesCustomErrorNoCoursesForUser function.
+     * 
+     * @access public
+     * @return void
+     */
+     
+    public function testuserCoursesCustomErrorNoCoursesForUser () {
+        
+/*
+        $response = array ('success' => false, 'error' => '306', 'message' => 'Learner is not enrolled in any courses');
+        
+        $responseObj = json_decode ( json_encode( $response ), FALSE );
+        
+        $this->assertEquals( $responseObj->error, '306', 'JSON response should be reporting error 301');
+*/
+
+    }    
+
+    public function testuserCourses () {
+
+        $parameters = array ('doceboId' => '12332');
+        
+        $responseObj = phocebo::userCourses( $parameters );
+        
+    }    
+
+
+    public function testlistCourses () {
+       
+        $responseObj = phocebo::listCourses();
+
+    }    
+
+
+    public function testlistUsersCourses () {
+        
+        $parameters = array ('doceboId' => '12332');
+       
+        $responseObj = phocebo::listUsersCourses($parameters);
+
+    }    
+
+
+    public function testenrollUserInCourse () {
+        
+        $parameters = array (
+        
+            'doceboId' => '12332',
+            
+            'courseCode'    => '14-06'
+
+        );
+       
+        $responseObj = phocebo::enrollUserInCourse($parameters);
+        
+    }    
+
+
+    public function testunenrollUserInCourse () {
+        
+        $parameters = array (
+        
+            'doceboId' => '12332',
+            
+            'courseCode'    => '14-06'
+
+        );
+       
+        $responseObj = phocebo::unenrollUserInCourse($parameters);
+        
+//         var_dump($responseObj);
+
+
+    }    
+
+
+
+
+    
 
 }
 

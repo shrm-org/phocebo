@@ -8,7 +8,7 @@
  *
  */
 
-namespace phocebo;
+namespace Phocebo;
 
 class URL
 {
