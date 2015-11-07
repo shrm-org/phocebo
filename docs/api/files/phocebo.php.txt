@@ -1,19 +1,13 @@
 <?php
     
 /**
- * Phởcebo - Delicious PHP wrapper for https://doceboapi.docebosaas.com/api/docs
+ * Phởcebo
  *
- * The goal of the Phởcebo class is to manage the calls to the Docbeo API only.
- * These classes will make the call and return a SHRM Standard JSON for Embark
- * to process. Programming logic will remain with Embark.
- * 
+ * PHP Version 5.
  *
- * @package Phởcebo
- * @author Patricia Walton <patricia.walton@shrm.org>
- * @version 0.0.1 In Development
- * @license MIT
- * @copyright 2015 SHRM
- *
+ * @copyright 2015-2016 SHRM (http://www.shrm.org)
+ * @license   http://www.opensource.org/licenses/mit-license.php
+ * @link      https://github.com/shrm-org/phocebo
  */
  
 
@@ -21,81 +15,48 @@ namespace Phocebo;
 
 
 /**
- * Phởcebo Recipe File
- * @const INI Environment Settings File
+ * phocebo class.
+ *
+ * The hởcebo class is to manage the calls from the internal application Embark
+ * to the Docbeo API. This class will make the call and return a SHRM standard
+ * JSON file for Embark to process. Programming logic will remain with Embark.
+ * 
+ * @package Phởcebo
+ * @author Patricia Walton <patricia.walton@shrm.org>
+ * @version 0.0.4
+ * @license MIT
+ * @copyright 2015 SHRM
+ * @link https://doceboapi.docebosaas.com/api/docs
  */
  
-define('INI', '.env');
-
-if (file_exists(INI)) {
-    
-    $settings = parse_ini_file (INI, true);   
-    
-    /**
-     * @const URL Docebo URL
-     */
-
-    define('URL', $settings[docebo]['URL']);
-    
-    /**
-     * @const KEY Docebo public Key
-     */
-
-    define('KEY', $settings[docebo]['KEY']);
-
-    /**
-     * @const SECRET Docebo secret Key
-     */
-
-    define('SECRET', $settings[docebo]['SECRET']);
-
-    /**
-     * @const SSO - Future SSO 
-     */
-
-    define('SSO', $settings[docebo]['SSO']);   
-    
-} else die( "\nERROR: Phởcebo ingredients are missing (.env) \n\n");
-
-
-
-
-
 class phocebo {
 
     /**
-     * User Functions
-     *
-     */
-
-
-    /**
      * getdoceboId function.
+     * Return the Docebo ID based on the users username which is set to the
+     * users email address.
      *
+     * @package Phởcebo Diner
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
      * @access public
-     * @static
-     *
-     * @param mixed $parameters
-     *    doceboId - email address to create the User Name
-     *
-     * @return object
-     *
+     * @param array $parameters Array containing 'email'
+     * @return object Object containing 'doceboId' or 'error' if failed
      * @link https://doceboapi.docebosaas.com/api/docs#!/user/user_checkUsername_post_0
      * @todo determine if we need to check numeric id or email
-     * @todo add Confluence link?
-     *
+     * @todo update test to report on Object not JSON
      */
      
      
-    static public function getdoceboId ( $parameters ) {
+    public function getdoceboId ( $parameters ) {
         
        if ( !array_key_exists( 'email', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter email is missing');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'Parameter email is missing');
            
        } elseif ( !filter_var($parameters['email'], FILTER_VALIDATE_EMAIL)) {
            
-           $json_array = array ('success' => false, 'error' => '302', 'message' => 'must be users email address');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'must be users email address');
 
        } else {
            
@@ -109,7 +70,7 @@ class phocebo {
     	
            );
      
-           $response = phoceboCook::call ( $action, $data_params );
+           $response = self::call ( $action, $data_params );
            
            $json_array = json_decode($response, true);
            
@@ -145,41 +106,50 @@ class phocebo {
        
        $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
  
     }
 
-
-    
+   
     
     /**
      * addUser function.
-     * 
+     * Add a user Docebo using the email address. Sets the login username to
+     * the email address.
+     *
+     * @package Phởcebo Diner
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
      * @access public
-     * @static
-     * @param mixed $parameters
-     *      firstName - users first name
-     *      lastName - users last name
-     *      email - users email, also used to create users username
+     * @param array $parameters Array containing 'firstName', 'lastname',
+     *    'email'
+     * @return object $responseObj
+     * (stdClass) (2) { ["success"]=> bool(true) ["doceboId"]=> string(5) "12367" }
      *
-     * @return object
-     *
+     * @link https://doceboapi.docebosaas.com/api/docs#!/user/user_create_post_5
+     * @todo test $responseObj has expected attributes from server when valid 
+     * @todo test $responseObj has expected attributes from server when invalid 
+     * @todo test $responseObj has each of the expected attributes when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj custom errors has proper attributes success, error and message
+     * @todo test $responseObj custom errors responds with reporting error 400
+     * @todo add phake mocking for addUser testing
      */
      
      
-    static public function addUser ( $parameters ) {
+    public function addUser ( $parameters ) {
            
         if ( !array_key_exists( 'firstName', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '303', 'message' => 'Parameter firstName is missing');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'Parameter firstName is missing');
 
         } elseif ( !array_key_exists( 'lastName', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '304', 'message' => 'Parameter lastName is missing');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'Parameter lastName is missing');
 
         } elseif ( !array_key_exists( 'email', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '305', 'message' => 'Parameter email is missing');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'Parameter email is missing');
 
         } else {
             
@@ -203,7 +173,7 @@ class phocebo {
             
             );
             
-            $response = phoceboCook::call($action, $data_params);
+            $response = self::call($action, $data_params);
            
             $json_array = json_decode($response, true);
            
@@ -252,7 +222,7 @@ class phocebo {
 
        $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
     
@@ -260,17 +230,27 @@ class phocebo {
     /**
      * deleteUser function.
      * 
+     * @package Phởcebo Diner
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
      * @access public
-     * @static
-     * @param mixed $parameters
+     * @param array $parameters
      * @return void
+     
+     * @todo test $responseObj has expected attributes from server when valid 
+     * @todo test $responseObj has expected attributes from server when invalid 
+     * @todo test $responseObj has each of the expected attributes when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj custom errors has proper attributes success, error and message
+     * @todo test $responseObj custom errors responds with reporting error 400
+     * @todo add phake mocking to test deleteUser
      */
      
-    static public function deleteUser ( $parameters ) {
+    public function deleteUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'Parameter doceboId missing');
 
         } else {
             
@@ -282,7 +262,7 @@ class phocebo {
             
             );
             
-            $response = phoceboCook::call($action, $data_params);
+            $response = self::call($action, $data_params);
            
             $json_array = json_decode($response, true);
             
@@ -319,7 +299,7 @@ class phocebo {
 
        $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
 
@@ -328,17 +308,27 @@ class phocebo {
     /**
      * editUser function.
      * 
+     * @package Phởcebo Diner
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
      * @access public
-     * @static
-     * @param mixed $parameters
+     * @param array $parameters
      * @return void
+     
+     * @todo test $responseObj has expected attributes from server when valid 
+     * @todo test $responseObj has expected attributes from server when invalid 
+     * @todo test $responseObj has each of the expected attributes when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj custom errors has proper attributes success, error and message
+     * @todo test $responseObj custom errors responds with reporting error 400
+     
      */
      
-    static public function editUser ( $parameters ) {
+    public function editUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'Parameter doceboId missing');
 
         } else {
             
@@ -356,7 +346,7 @@ class phocebo {
 
             );
             
-            $response = phoceboCook::call($action, $data_params);
+            $response = self::call($action, $data_params);
            
             $json_array = json_decode($response, true);
             
@@ -395,7 +385,7 @@ class phocebo {
 
        $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
 
@@ -404,52 +394,56 @@ class phocebo {
     /**
      * getUserFields function.
      * 
+     * @package Phởcebo Diner
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
      * @access public
-     * @static
-     * @return void
+     * @return object $responseObj
+       object(stdClass) (2) {
+              ["fields"]=>
+              array(1) {
+                [0]=>
+                object(stdClass) (2) {
+                  ["id"]=>
+                  int(1)
+                  ["name"]=>
+                  string(8) "Job Role"
+                }
+              }
+              ["success"]=>
+              bool(true)
+            }
+     * @todo test $responseObj has expected attributes from server when invalid 
      */
      
-    static public function getUserFields ( ) {
+    public function getUserFields ( ) {
         
-/*
-       if ( !array_key_exists( 'doceboId', $parameters) ) {
-           
-           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
-           
-       } else {
-*/
+        $action = '/user/fields';
+        
+        $data_params = array (
+        
+            'language'                 => null,
+            
+        );
+        
 
-            $action = '/user/fields';
-            
-            $data_params = array (
-            
-                'language'                 => null,
-                
-            );
-            
+       $response = self::call ( $action, $data_params );
+       
+       $json_array = json_decode($response, true);
+       
+       if ( false == $json_array['success']) {
 
-           $response = phoceboCook::call ( $action, $data_params );
-           
-           $json_array = json_decode($response, true);
-           
-           if ( false == $json_array['success']) {
-    
-               if ('500' == $json_array['error']) {
-                   
-                   $json_array['message'] = 'Internal server error';
-                   
-               }
-    
-           } else { // Success == true
+           if ('500' == $json_array['error']) {
                
-    
+               $json_array['message'] = 'Internal server error';
+               
            }
+
+       } 
            
-//        }
-        
        $responseObj = json_decode ( json_encode( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
 
@@ -458,32 +452,63 @@ class phocebo {
     /**
      * getUserProfile function.
      * 
+     * @package Phởcebo Diner
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
      * @access public
      * @static
-     * @return void
+     * @return object $responseObj 
+         object(stdClass) (11) {
+          ["id_user"]=>
+          string(5) "12339"
+          ["userid"]=>
+          string(4) "vdas"
+          ["firstname"]=>
+          string(3) "Vla"
+          ["lastname"]=>
+          string(3) "Das"
+          ["email"]=>
+          string(16) "vdasic@gmail.com"
+          ["signature"]=>
+          string(0) ""
+          ["valid"]=>
+          bool(true)
+          ["register_date"]=>
+          string(19) "2015-09-23 03:16:23"
+          ["last_enter"]=>
+          string(19) "2015-09-23 01:20:11"
+          ["fields"]=>
+          array(1) {
+            [0]=>
+            object(stdClass) (3) {
+              ["id"]=>
+              string(1) "1"
+              ["name"]=>
+              string(8) "Job Role"
+              ["value"]=>
+              string(1) "3"
+            }
+          }
+          ["success"]=>
+          bool(true)
+        }
+
+        object(stdClass) (3) {
+          ["success"]=>
+          bool(false)
+          ["error"]=>
+          int(201)
+          ["message"]=>
+          string(26) "Invalid user specification"
+        }
+     * @todo add Phake to mock calls 
      */
      
-    static public function getUserProfile ( $parameters ) {
+    public function getUserProfile ( $parameters ) {
 
-/*
-       $action = '/user/checkUsername';
-   
-       $data_params = array (
-    
-           'userid'                 => 'patricia.walton@shrm.org',
-    
-           'also_check_as_email'    => true,
-	
-       );
- 
-       $response = phoceboCook::call ( $action, $data_params );
-       
-       var_dump($response);
-*/
-        
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'Parameter doceboId missing');
            
        } else {
 
@@ -496,7 +521,7 @@ class phocebo {
             );
             
 
-           $response = phoceboCook::call ( $action, $data_params );
+           $response = self::call ( $action, $data_params );
            
            $json_array = json_decode($response, true);
            
@@ -516,14 +541,33 @@ class phocebo {
     
            } else { // Success == true
                
+               $json_array['doceboId'] = $json_array['id_user'];
+
+               unset ( $json_array['id_user'] );
     
+               $json_array['firstName'] = $json_array['firstname'];
+               
+               unset ( $json_array['firstname'] );
+
+               $json_array['lastName'] = $json_array['lastname'];
+               
+               unset ( $json_array['lastname'] );
+
+               $json_array['registerDate'] = $json_array['register_date'];
+               
+               unset ( $json_array['register_date'] );
+
+               $json_array['lastEnter'] = $json_array['last_enter'];
+               
+               unset ( $json_array['last_enter'] );
+
            }
            
        }
         
        $responseObj = json_decode ( json_encode( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
 
@@ -532,17 +576,38 @@ class phocebo {
     /**
      * suspendUser function.
      * 
+     * @package Phởcebo Diner
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
      * @access public
-     * @static
-     * @param mixed $parameters
-     * @return void
+     * @param array $parameters
+     * @return object $responseObj
+     
+            object(stdClass) (2) {
+              ["doceboId"]=>
+              string(5) "12339"
+              ["success"]=>
+              bool(true)
+            }
+     
+             object(stdClass)#355 (3) {
+              ["success"]=>
+              bool(false)
+              ["error"]=>
+              int(210)
+              ["message"]=>
+              string(26) "Invalid user specification"
+            }
+
+     * @todo add Phake to mock calls 
+     * @todo follow up on unenroll_deactivated
      */
      
-    static public function suspendUser ( $parameters ) {
+    public function suspendUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'Parameter doceboId missing');
 
         } else {
             
@@ -552,11 +617,11 @@ class phocebo {
             
                 'id_user'                 => $parameters['doceboId'],
                 
-//                 'unenroll_deactivated'    => Shoudl we deactivate all the future enrollments?
+//                 'unenroll_deactivated'    => Should we deactivate all the future enrollments?
             
             );
             
-            $response = phoceboCook::call($action, $data_params);
+            $response = self::call($action, $data_params);
            
             $json_array = json_decode($response, true);
             
@@ -582,12 +647,10 @@ class phocebo {
             
             } else {
                
-/*
+
                $json_array['doceboId'] = $json_array['idst'];
                
                unset ( $json_array['idst'] );
-*/
-
             
             }
            
@@ -595,7 +658,7 @@ class phocebo {
 
        $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
     
@@ -605,17 +668,27 @@ class phocebo {
     /**
      * unsuspendUser function.
      * 
+     * @package Phởcebo Diner
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
      * @access public
-     * @static
-     * @param mixed $parameters
-     * @return void
+     * @param array $parameters
+     * @return object 
+     
+        object(stdClass) (2) {
+          ["idst"]=>
+          string(5) "12339"
+          ["success"]=>
+          bool(true)
+        }
+     
      */
      
-    static public function unsuspendUser ( $parameters ) {
+    public function unsuspendUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
-           $json_array = array ('success' => false, 'error' => '301', 'message' => 'Parameter doceboId missing');
+           $json_array = array ('success' => false, 'error' => '400', 'message' => 'Parameter doceboId missing');
 
         } else {
             
@@ -629,7 +702,7 @@ class phocebo {
             
             );
             
-            $response = phoceboCook::call($action, $data_params);
+            $response = self::call($action, $data_params);
            
             $json_array = json_decode($response, true);
             
@@ -655,11 +728,9 @@ class phocebo {
             
             } else {
                
-/*
                $json_array['doceboId'] = $json_array['idst'];
                
                unset ( $json_array['idst'] );
-*/
 
             
             }
@@ -668,7 +739,7 @@ class phocebo {
 
        $responseObj = json_decode ( json_encode ( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
 
@@ -677,24 +748,7 @@ class phocebo {
      *
      */
 
-    static public function userCourses ( $parameters) {
-        
-/*
-       $action = '/user/checkUsername';
-   
-       $data_params = array (
-    
-           'userid'                 => 'patricia.walton@shrm.org',
-    
-           'also_check_as_email'    => true,
-	
-       );
- 
-       $response = phoceboCook::call ( $action, $data_params );
-       
-       var_dump($response);
-*/
-
+    public function userCourses ( $parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -710,7 +764,7 @@ class phocebo {
     	
            );
      
-           $response = phoceboCook::call ( $action, $data_params );
+           $response = self::call ( $action, $data_params );
            
            $json_array = json_decode($response, true);
            
@@ -737,12 +791,12 @@ class phocebo {
        
        $responseObj = json_decode ( json_encode( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
  
     }
     
     
-    static public function listCourses () {
+    public function listCourses () {
         
            $action = '/course/listCourses';
        
@@ -752,7 +806,7 @@ class phocebo {
     	
            );
      
-           $response = phoceboCook::call ( $action, $data_params );
+           $response = self::call ( $action, $data_params );
            
            $json_array = json_decode($response, true);
            
@@ -771,11 +825,11 @@ class phocebo {
         
        $responseObj = json_decode ( json_encode( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
 
-    static public function listUsersCourses ($parameters) {
+    public function listUsersCourses ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -791,7 +845,7 @@ class phocebo {
     	
            );
      
-           $response = phoceboCook::call ( $action, $data_params );
+           $response = self::call ( $action, $data_params );
            
            $json_array = json_decode($response, true);
            
@@ -818,11 +872,11 @@ class phocebo {
         
        $responseObj = json_decode ( json_encode( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
     
-    static public function enrollUserInCourse ($parameters) {
+    public function enrollUserInCourse ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -842,7 +896,7 @@ class phocebo {
     	
            );
      
-           $response = phoceboCook::call ( $action, $data_params );
+           $response = self::call ( $action, $data_params );
            
            $json_array = json_decode($response, true);
            
@@ -887,11 +941,11 @@ class phocebo {
         
        $responseObj = json_decode ( json_encode( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
 
-    static public function unenrollUserInCourse ($parameters) {
+    public function unenrollUserInCourse ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -911,7 +965,7 @@ class phocebo {
     	
            );
      
-           $response = phoceboCook::call ( $action, $data_params );
+           $response = self::call ( $action, $data_params );
            
            $json_array = json_decode($response, true);
            
@@ -956,37 +1010,18 @@ class phocebo {
         
        $responseObj = json_decode ( json_encode( $json_array ), FALSE );
        
-       return($responseObj);
+       return( $responseObj );
         
     }
 
 
-}
-
-
-
-
-
-
-/**
- * Phởcebo Cooking Instructions
- *
- * Usu fastidii corrumpit honestatis ad, his ludus assueverit id, scripta 
- * insolens torquatos eu sea. Eum ei maiorum eleifend molestiae, eu mea movet 
- * placerat iudicabit. Pertinax quaestio te vim, falli utamur senserit in sea, 
- * vix id magna modus assueverit. No eirmod euismod mel, te his dicta evertitur,
- * an tota congue consul sed.
- *
- * @package classpackage
- */
- 
-class phoceboCook {
-
 	/**
 	 * getHash function.
 	 * 
-	 * @access public
-	 * @static
+     * @package Phởcebo Cooking
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
+     * @access public
 	 * @data_params mixed $params
 	 *
 	 * @return array $codice hash value for x_auth
@@ -1017,15 +1052,17 @@ class phoceboCook {
 	/**
 	 * getDefaultHeader function.
 	 * 
-	 * @access private
-	 * @static
+     * @package Phởcebo Cooking
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
+     * @access public
 	 * @param mixed $x_auth
 	 *
 	 * @return array containting default header
 	 *
 	 */
 	 
-	static private function getDefaultHeader( $x_auth ) {
+	private function getDefaultHeader( $x_auth ) {
     	
 		$host = parse_url ( URL, PHP_URL_HOST );
 		
@@ -1045,8 +1082,10 @@ class phoceboCook {
 	/**
 	 * call function.
 	 * 
-	 * @access public
-	 * @static
+     * @package Phởcebo Cooking
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.0.4
+     * @access public
 	 * @param mixed $action Docebo API Call
 	 * @param mixed $data_params parameters to send
 	 *
@@ -1054,7 +1093,7 @@ class phoceboCook {
 	 *
 	 */
 	 
-	static public function call ( $action, $data_params ) {
+	public function call ( $action, $data_params ) {
     	
 		$curl = curl_init();
 
@@ -1091,9 +1130,8 @@ class phoceboCook {
 		return $output;
 		
 	}
-    
-}
 
+}
 
 
 ?>

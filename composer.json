@@ -22,7 +22,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
-        "phake/phake": "@stable"
+        "phake/phake": "@stable",
+        "phpdocumentor/phpdocumentor": "^2.0"
     },
     "autoload": {
         "psr-0": {
