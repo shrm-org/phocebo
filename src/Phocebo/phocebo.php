@@ -38,7 +38,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
      * @param array $parameters
      *
@@ -373,7 +373,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
      * @param array $parameters Array containing 'firstName', 'lastname',
      *    'email'
@@ -484,7 +484,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
      * @param array $parameters
      * @return void
@@ -568,7 +568,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
      * @param array $parameters
      * @return void
@@ -667,7 +667,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
      * @return object
        object(stdClass) (2) {
@@ -726,7 +726,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
      * @static
      * @return object  
@@ -977,7 +977,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
      * @param array $parameters
      * @return object
@@ -1064,7 +1064,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
      * @param array $parameters
      * @return object 
@@ -2459,7 +2459,7 @@ class phocebo {
 	 * 
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
 	 * @data_params mixed $params
 	 *
@@ -2493,7 +2493,7 @@ class phocebo {
 	 * 
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
 	 * @param mixed $x_auth
 	 *
@@ -2523,7 +2523,7 @@ class phocebo {
 	 * 
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.5
+     * @version 0.0.6
      * @access public
 	 * @param mixed $action Docebo API Call
 	 * @param mixed $data_params parameters to send
