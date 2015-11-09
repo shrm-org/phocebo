@@ -23,7 +23,7 @@ namespace Phocebo;
  * 
  * @package Phởcebo
  * @author Patricia Walton <patricia.walton@shrm.org>
- * @version 0.0.5
+ * @version 0.0.6
  * @license MIT
  * @copyright 2015 SHRM
  * @link https://doceboapi.docebosaas.com/api/docs
@@ -71,11 +71,11 @@ class phocebo {
         
        if ( !array_key_exists( 'email', $parameters ) ) {
            
-           $json_array = self::dataError ( 'email', 'The username or email of a valid user in the LMS');
+           $json_array = self::dataError ( 'email', 'Required parameter "email": The username or email of a valid user in the LMS');
            
        } elseif ( !filter_var( $parameters[ 'email' ], FILTER_VALIDATE_EMAIL ) ) {
            
-           $json_array = self::dataError ( 'email', 'The username or email of a valid user in the LMS');
+           $json_array = self::dataError ( 'email', 'Required parameter "email": The username or email of a valid user in the LMS');
 
        } else {
            
@@ -1409,21 +1409,24 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return object
+     * @return
      
-        object(stdClass)#271 (3) {
-          ["success"]=>
-          bool(false)
-          ["error"]=>
-          int(203)
-          ["message"]=>
-          string(35) "User already enrolled to the course"
+        object(stdClass) {
+            
+          ["success"] => bool(true)
+          
+        }
+
+        object(stdClass) {
+            
+          ["success"] => bool(false)
+          
+          ["error"] => int(203)
+          
+          ["message"] => string(35) "User already enrolled to the course"
+          
         }
      
-     * @todo test $responseObj has expected attributes from server when valid 
-     * @todo test $responseObj does not have attributes (such as idst)
-     * @todo test $responseObj has expected attributes from server when invalid 
-     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
     public function unenrollUserInCourse ($parameters) {
@@ -1499,11 +1502,48 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
-     * @todo test $responseObj has expected attributes from server when valid 
-     * @todo test $responseObj does not have attributes (such as idst)
+     * @return 
+     
+        object(stdClass) {
+            
+          ["0"]=>
+          
+          object(stdClass) {
+              
+            ["course_info"] => object(stdClass) {
+                
+              ["course_id"] => string(2) "10"
+              
+              ["code"] => string(5) "14-06"
+              
+              ["course_name"] => string(98) "The Foundation for Success: Effectively Aligning Performance Management Systems with Total Rewards"
+              
+              ["credits"] => string(4) "0.00"
+              
+              ["total_time"] => string(2) "0s"
+              
+              ["enrollment_date"] => string(19) "2015-11-09 13:00:44"
+              
+              ["completion_date"] => NULL
+              
+              ["first_access_date"] => NULL
+              
+              ["score"] => int(0)
+              
+              ["status"] => string(10) "Subscribed"
+              
+            }
+            
+          }
+          
+          ["success"] => bool(true)
+          
+        }
+     
      * @todo test $responseObj has expected attributes from server when invalid 
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     * @todo expand tests into Course Information
+     *
      */
 
     public function listUserCourses ( $parameters ) {
@@ -1643,22 +1683,22 @@ class phocebo {
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
-     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     * @todo how to get list of orgchart/node/branch IDs
      */
 
     public function createBranch ($parameters) {
         
-       if ( !array_key_exists( 'code', $parameters) ) {
+       if ( !array_key_exists( 'branchCode', $parameters) ) {
            
-           $json_array = self::dataError ( 'code', 'Parameter code missing: alphanumeric code for the node');
+           $json_array = self::dataError ( 'branchCode', 'Required parameter "branchCode" missing: alphanumeric code for the branch');
            
        } elseif ( !array_key_exists( 'branchName', $parameters) ) {
            
-           $json_array = self::dataError ( 'branchName', 'Parameter array for branchName missing');
+           $json_array = self::dataError ( 'branchName', 'Required parameter array for "branchName" missing');
 
-       } elseif ( !array_key_exists( 'parentId', $parameters) ) {
+       } elseif ( !array_key_exists( 'parentBranchId', $parameters) ) {
            
-           $json_array = self::dataError ( 'parentId', 'Parameter parentId missing');
+           $json_array = self::dataError ( 'parentBranchId', 'Required parameter "parentBranchId" missing');
 
        } else {
 
@@ -1666,11 +1706,11 @@ class phocebo {
        
            $data_params = array (
         
-               'code'                => $parameters['code'],
+               'code'                => $parameters['branchCode'],
                
                'translation'         => array ('english' => $parameters['branchName']),
 
-               'id_parent'           => $parameters['parentId'],
+               'id_parent'           => $parameters['parentBranchId'],
     	
            );
      
