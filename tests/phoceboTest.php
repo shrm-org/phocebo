@@ -1565,6 +1565,21 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         
     }    
 
+    public function testgetBranchbyCode () {
+        
+        $parameters = array (
+        
+            'branchCode' => 'Test',
+            
+        );
+       
+
+        $responseObj = phocebo::getBranchbyCode($parameters);
+        
+        var_dump($response);
+
+        
+    }    
 
 }
 

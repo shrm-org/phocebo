@@ -2051,17 +2051,17 @@ class phocebo {
 
     public function getBranchbyCode ($parameters) {
         
-       if ( !array_key_exists( 'code', $parameters) ) {
+       if ( !array_key_exists( 'branchCode', $parameters) ) {
            
-           $json_array = self::dataError ( 'code', 'Parameter "code" missing: Alphanumeric code of the node to retrieve');
+           $json_array = self::dataError ( 'branchCode', 'Parameter "branchCode" missing: Alphanumeric branchCode of the node to retrieve');
 
        } else {
 
-           $action = '/orgchart/getNodeInfo';
+           $action = '/orgchart/findNodeByCode';
        
            $data_params = array (
         
-               'code'                => $parameters['code'],
+               'code'                => $parameters['branchCode'],
     	
            );
      
