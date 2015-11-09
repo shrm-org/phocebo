@@ -1977,6 +1977,7 @@ class phocebo {
      * @access public
      * @param array $parameters
      * @return void
+     * @todo talk to Docebo - API just retruns NULL
      * @todo create tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)

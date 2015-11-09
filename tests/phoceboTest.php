@@ -50,25 +50,25 @@ if (file_exists(INI)) {
      * @const URL Docebo URL
      */
 
-    define('URL', $settings[docebo]['URL']);
+    define('URL', $settings['docebo']['URL']);
     
     /**
      * @const KEY Docebo public Key
      */
 
-    define('KEY', $settings[docebo]['KEY']);
+    define('KEY', $settings['docebo']['KEY']);
 
     /**
      * @const SECRET Docebo secret Key
      */
 
-    define('SECRET', $settings[docebo]['SECRET']);
+    define('SECRET', $settings['docebo']['SECRET']);
 
     /**
      * @const SSO - Future SSO 
      */
 
-    define('SSO', $settings[docebo]['SSO']);   
+    define('SSO', $settings['docebo']['SSO']);   
     
 } else die( "\nERROR: Phởcebo ingredients are missing (.env) \n\n");
 
@@ -1553,7 +1553,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         
         $parameters = array (
         
-            'branchId' => '1',
+            'branchId' => null,
             
         );
        
@@ -1569,7 +1569,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         
         $parameters = array (
         
-            'branchCode' => 'Test',
+            'branchCode' => 'root',
             
         );
        
