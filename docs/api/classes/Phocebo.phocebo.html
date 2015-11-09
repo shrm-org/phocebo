@@ -119,7 +119,7 @@
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">125</span>
+                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">121</span>
                                 </a>
                             </li>
                             <li>
@@ -144,19 +144,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1882312295"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2023894691"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1882312295" class="accordion-body collapse in">
+            <div id="namespace-2023894691" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-545713123"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-668477104"></a>
                                 <a href="../namespaces/Phocebo.html" style="margin-left: 30px; padding-left: 0">Phocebo</a>
             </div>
-            <div id="namespace-545713123" class="accordion-body collapse ">
+            <div id="namespace-668477104" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -349,7 +349,7 @@ JSON file for Embark to process. Programming logic will remain with Embark.</p>
             <article class="method">
                 <h3 class="public ">getdoceboId()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getdoceboId(array  <span class="argument">$parameters</span>) : object</pre>
+                <pre class="signature" style="margin-right: 54px;">getdoceboId(array  <span class="argument">$parameters</span>) : \Phocebo\object(stdClass)</pre>
                 <p><em>getdoceboId function.</em></p>
                 <p>Return the Docebo ID based on the users username which is set to the
 users email address.</p>
@@ -359,20 +359,19 @@ users email address.</p>
                                                     <tr>
                                 <td>array</td>
                                 <td>$parameters </td>
-                                <td><p>email(string): The username or email of a valid user in the LMS</p>
-<p>email(string): The username or email of a valid user in the LMS</p></td>
+                                <td><p>'email' =&gt; $email</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    object
-                                            &mdash; <p>getdoceboId {</p>
-<p>success (boolean): True if operation was successfully completed,</p>
-<p>doceboId (integer): Internal ID of the authenticated user,</p>
-<p>firstName (string): The user's firstname,</p>
-<p>lastName (string): The user's lastname,</p>
-<p>email (string): The user's email,</p>
+                    \Phocebo\object(stdClass)
+                                            &mdash; <p>{</p>
+<p>[&quot;email&quot;] =&gt; string(13) &quot;test@shrm.org&quot;</p>
+<p>[&quot;success&quot;]  =&gt; bool(true)</p>
+<p>[&quot;doceboId&quot;] =&gt; int(12337)</p>
+<p>[&quot;firstName&quot;] =&gt; string(4) &quot;Test&quot;</p>
+<p>[&quot;lastName&quot;] =&gt; string(0) &quot;&quot;</p>
 <p>}</p>
                                     				
                             </article>
@@ -406,7 +405,7 @@ users email address.</p>
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                                     <tr>
@@ -428,38 +427,34 @@ users email address.</p>
             <article class="method">
                 <h3 class="public ">authenticateUser()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">authenticateUser(mixed  <span class="argument">$parameters</span>) : object</pre>
+                <pre class="signature" style="margin-right: 54px;">authenticateUser(array  <span class="argument">$parameters</span>) : \Phocebo\object(stdClass)</pre>
                 <p><em>authenticateUser function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
-                                <td></td>
+                                <td><p>'doceboId' =&gt; $doceboID</p>
+<p>'username' =&gt; $username</p>
+<p>'password' =&gt; $password</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    object
-                                            &mdash; <p>object(stdClass) (3) {</p>
-<p>[&quot;success&quot;]=&gt;</p>
-<p>bool(false)</p>
-<p>[&quot;error&quot;]=&gt;</p>
-<p>int(201)</p>
-<p>[&quot;message&quot;]=&gt;</p>
-<p>string(42) &quot;Invalid login data provided: test@shrm.org&quot;</p>
+                    \Phocebo\object(stdClass)
+                                            &mdash; <p>{</p>
+<p>[&quot;success&quot;] =&gt; bool(false)</p>
+<p>[&quot;error&quot;] =&gt; int(201)</p>
+<p>[&quot;message&quot;] =&gt; string(42) &quot;Invalid login data provided: test@shrm.org&quot;</p>
 <p>}</p>
-<p>object(stdClass)#363 (8) {
-[&quot;id_user&quot;]=&gt;
-string(5) &quot;12369&quot;
-[&quot;token&quot;]=&gt;
-string(36) &quot;62a9d6c6-4434-4e95-9c8b-1e1a1a5fe52d&quot;
-[&quot;success&quot;]=&gt;
-bool(true)
-}</p>
+<p>object(stdClass) {</p>
+<p>[&quot;id_user&quot;] =&gt; string(5) &quot;12369&quot;</p>
+<p>[&quot;token&quot;] =&gt; string(36) &quot;62a9d6c6-4434-4e95-9c8b-1e1a1a5fe52d&quot;</p>
+<p>[&quot;success&quot;] =&gt; bool(true)</p>
+<p>}</p>
                                     				
                             </article>
         </div>
@@ -480,16 +475,16 @@ bool(true)
             <article class="method">
                 <h3 class="public ">getToken()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getToken(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">getToken(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>getToken function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
-                                <td></td>
+                                <td><p>'username' =&gt; $username</p></td>
                             </tr>
                                             </table>
                 
@@ -525,14 +520,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">checkToken()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">checkToken(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">checkToken(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>checkToken function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -570,7 +565,7 @@ bool(true)
             <article class="method">
                 <h3 class="public ">addUser()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">addUser(array  <span class="argument">$parameters</span>) : object</pre>
+                <pre class="signature" style="margin-right: 54px;">addUser(array  <span class="argument">$parameters</span>) : \Phocebo\object(stdClass)</pre>
                 <p><em>addUser function.</em></p>
                 <p>Add a user Docebo using the email address. Sets the login username to
 the email address.</p>
@@ -580,20 +575,19 @@ the email address.</p>
                                                     <tr>
                                 <td>array</td>
                                 <td>$parameters </td>
-                                <td><p>Array containing 'firstName', 'lastname',
-'email'</p></td>
+                                <td><p>'firstName' =&gt; $firstName</p>
+<p>'lastName'  =&gt; $lastName</p>
+<p>'email'     =&gt;  $email</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    object
-                                            &mdash; <p>object(stdClass)#347 (2) {
-[&quot;success&quot;]=&gt;
-bool(true)
-[&quot;doceboId&quot;]=&gt;
-string(5) &quot;12367&quot;
-}</p>
+                    \Phocebo\object(stdClass)
+                                            &mdash; <p>{</p>
+<p>[&quot;success&quot;] =&gt; bool(true)</p>
+<p>[&quot;doceboId&quot;] =&gt; string(5) &quot;12367&quot;</p>
+<p>}</p>
                                     				
                             </article>
         </div>
@@ -626,7 +620,7 @@ string(5) &quot;12367&quot;
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                                     <tr>
@@ -651,7 +645,7 @@ string(5) &quot;12367&quot;
             <article class="method">
                 <h3 class="public ">deleteUser()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">deleteUser(array  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">deleteUser(array  <span class="argument">$parameters</span>) : \Phocebo\object(stdClass)#347</pre>
                 <p><em>deleteUser function.</em></p>
                 
 
@@ -665,7 +659,23 @@ string(5) &quot;12367&quot;
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \Phocebo\object(stdClass)#347
+                                            &mdash; <p>(3) {
+[&quot;success&quot;]=&gt;
+bool(false)
+[&quot;error&quot;]=&gt;
+int(211)
+[&quot;message&quot;]=&gt;
+string(22) &quot;Error in user deletion&quot;
+}</p>
+<p>object(stdClass)#347 (2) { 12370
+[&quot;success&quot;]=&gt;
+bool(true)
+[&quot;doceboId&quot;]=&gt;
+string(5) &quot;12366&quot;
+}</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -695,7 +705,7 @@ string(5) &quot;12367&quot;
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                                     <tr>
@@ -760,7 +770,7 @@ string(5) &quot;12367&quot;
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                                     <tr>
@@ -841,7 +851,7 @@ bool(true)
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                                     <tr>
@@ -953,7 +963,7 @@ string(26) &quot;Invalid user specification&quot;
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                                     <tr>
@@ -1031,14 +1041,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">loggedinUser()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">loggedinUser(mixed  <span class="argument">$parameters</span>) : object</pre>
+                <pre class="signature" style="margin-right: 54px;">loggedinUser(array  <span class="argument">$parameters</span>) : object</pre>
                 <p><em>loggedinUser function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1139,7 +1149,7 @@ string(26) &quot;Invalid user specification&quot;
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                                     <tr>
@@ -1213,7 +1223,7 @@ bool(true)
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                                     <tr>
@@ -1235,14 +1245,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">userCourses()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">userCourses(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">userCourses(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>userCourses function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1313,14 +1323,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">listUsersCourses()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">listUsersCourses(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">listUsersCourses(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>listUsersCourses function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1357,14 +1367,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">enrollUserInCourse()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">enrollUserInCourse(mixed  <span class="argument">$parameters</span>) : object</pre>
+                <pre class="signature" style="margin-right: 54px;">enrollUserInCourse(array  <span class="argument">$parameters</span>) : object</pre>
                 <p><em>enrollUserInCourse function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1373,10 +1383,14 @@ bool(true)
                 
                                     <h4>Returns</h4>
                     object
-                                            &mdash; <p>object(stdClass)#271 (1) {
-[&quot;success&quot;]=&gt;
-bool(true)
-}</p>
+                                            &mdash; <p>object(stdClass) (1) {</p>
+<p>[&quot;success&quot;] =&gt; bool(true)</p>
+<p>}</p>
+<p>object(stdClass) (3) {</p>
+<p>[&quot;success&quot;] =&gt; bool(false)</p>
+<p>[&quot;error&quot;] =&gt; int(203)</p>
+<p>[&quot;message&quot;] =&gt; string(35) &quot;User already enrolled to the course&quot;</p>
+<p>}</p>
                                     				
                             </article>
         </div>
@@ -1386,17 +1400,7 @@ bool(true)
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                                                            <p>test $responseObj has expected attributes from server when valid</p>
-                                                                                            <p>test $responseObj does not have attributes (such as idst)</p>
-                                                                                            <p>test $responseObj has expected attributes from server when invalid</p>
-                                                                                            <p>test $responseObj custom errors has proper attributes success, error and message and error value 400</p>
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
@@ -1407,21 +1411,31 @@ bool(true)
             <article class="method">
                 <h3 class="public ">unenrollUserInCourse()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">unenrollUserInCourse(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">unenrollUserInCourse(array  <span class="argument">$parameters</span>) : object</pre>
                 <p><em>unenrollUserInCourse function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    object
+                                            &mdash; <p>object(stdClass)#271 (3) {
+[&quot;success&quot;]=&gt;
+bool(false)
+[&quot;error&quot;]=&gt;
+int(203)
+[&quot;message&quot;]=&gt;
+string(35) &quot;User already enrolled to the course&quot;
+}</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1451,14 +1465,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">listUserCourses()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">listUserCourses(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">listUserCourses(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>listUserCourses function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1495,14 +1509,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">subscribeWithCode()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">subscribeWithCode(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">subscribeWithCode(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>subscribeWithCode function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1539,14 +1553,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">createBranch()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">createBranch(mixed  <span class="argument">$parameters</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">createBranch(array  <span class="argument">$parameters</span>) </pre>
                 <p><em>createBranch function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1584,14 +1598,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">updateBranch()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">updateBranch(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">updateBranch(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>updateBranch function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1629,14 +1643,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">deleteBranch()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">deleteBranch(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">deleteBranch(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>deleteBranch function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1674,14 +1688,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">moveBranch()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">moveBranch(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">moveBranch(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>moveBranch function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1719,14 +1733,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">getBranchInfo()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getBranchInfo(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">getBranchInfo(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>getBranchInfo function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1764,14 +1778,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">getBranchbyCode()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getBranchbyCode(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">getBranchbyCode(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>getBranchbyCode function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1809,14 +1823,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">getBranchChildren()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getBranchChildren(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">getBranchChildren(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>getBranchChildren function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1854,14 +1868,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">getBranchParentId()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getBranchParentId(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">getBranchParentId(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>getBranchParentId function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1899,14 +1913,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">assignUserToBranch()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">assignUserToBranch(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">assignUserToBranch(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>assignUserToBranch function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1944,14 +1958,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">upgradeUserToPowerUser()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">upgradeUserToPowerUser(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">upgradeUserToPowerUser(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>upgradeUserToPowerUser function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -1989,14 +2003,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">downgradeUserToPowerUser()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">downgradeUserToPowerUser(mixed  <span class="argument">$parameters</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">downgradeUserToPowerUser(array  <span class="argument">$parameters</span>) : void</pre>
                 <p><em>downgradeUserToPowerUser function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$parameters </td>
                                 <td></td>
                             </tr>
@@ -2034,14 +2048,14 @@ bool(true)
             <article class="method">
                 <h3 class="public ">jsonSHRM()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">jsonSHRM(mixed  <span class="argument">$json_array</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">jsonSHRM(array  <span class="argument">$json_array</span>) : void</pre>
                 <p><em>jsonSHRM function.</em></p>
                 <p>Pass JSON array to ensure all variables are returned with consistent names.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$json_array </td>
                                 <td></td>
                             </tr>
@@ -2125,7 +2139,7 @@ bool(true)
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                                     <tr>
@@ -2133,7 +2147,7 @@ bool(true)
                             data_params
                         </th>
                         <td>
-                                                                                            <p>mixed $params</p>
+                                                                                            <p>array $params</p>
                                                     </td>
                     </tr>
                             </table>
@@ -2198,7 +2212,7 @@ bool(true)
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                             </table>
@@ -2211,19 +2225,19 @@ bool(true)
             <article class="method">
                 <h3 class="private ">dataError()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">dataError(mixed  <span class="argument">$attribute</span>, mixed  <span class="argument">$message</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">dataError(string  <span class="argument">$attribute</span>, string  <span class="argument">$message</span>) : array</pre>
                 <p><em>dataError function.</em></p>
                 <p>Return JSON array with error message.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>string</td>
                                 <td>$attribute </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td>mixed</td>
+                                <td>string</td>
                                 <td>$message </td>
                                 <td></td>
                             </tr>
@@ -2263,14 +2277,14 @@ bool(true)
             <article class="method">
                 <h3 class="private ">getDefaultHeader()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getDefaultHeader(mixed  <span class="argument">$x_auth</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">getDefaultHeader(array  <span class="argument">$x_auth</span>) : array</pre>
                 <p><em>getDefaultHeader function.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>array</td>
                                 <td>$x_auth </td>
                                 <td></td>
                             </tr>
@@ -2310,7 +2324,7 @@ bool(true)
                             version
                         </th>
                         <td>
-                                                            0.0.5                                
+                                                            0.0.6                                
                                                     </td>
                     </tr>
                             </table>
@@ -2369,7 +2383,7 @@ bool(true)
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
                     on 
 Warning: date_default_timezone_get(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in /Volumes/Data/sites/phocebo/vendor/twig/twig/lib/Twig/Extension/Core.php on line 89
-November 8th, 2015 at 21:02.
+November 9th, 2015 at 03:38.
                 </section>
             </section>
         </section>

@@ -13,6 +13,24 @@ Docebo LMS eLearning Platform Integration:
 https://github.com/wp-plugins/docebo-lms-elearning-platform-integration
 
 
+
+Embark
+--------------
+
+User transactions and Course transactions are completed with the Docboe numeric 
+ID. All authentication transactions user the username, the login to the system
+using the email address.
+
+$doceboId = phocebo::getdoceboId ( array ('email' => $email) );
+
+phocebo::addUser( array ( 'email' => $email, 'firstName' => $firstName, 'lastName' => $lastName );
+
+phocebo::enrollUserInCourse( 'doceboId' => $doceboId, 'courseCode' => $courseCode );
+
+
+
+
+
 What is the X-Authorization parameter?
 --------------
 
@@ -25,9 +43,6 @@ to authenticate to the Docebo API.
 
 
 Compute the X-Authorization for Docebo API
---------------
-
-Example
 --------------
 
 $action = '/user/checkUsername';
@@ -44,4 +59,5 @@ SCRECT = Docebo Private Key
 2. $cypher_base64 = base64_encode ( KEY . ':' . cypher_sha] );
 
 3. 'X-Authorization: Docebo '. cypher_base64
+
 
