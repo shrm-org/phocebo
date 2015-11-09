@@ -2542,7 +2542,7 @@ class phocebo {
 	 *
 	 */
 	 
-	public function getHash( $data_params ) {
+	static public function getHash( $data_params ) {
     	
     	if ( !empty ( $data_params ) ) {
         	
