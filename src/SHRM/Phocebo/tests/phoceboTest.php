@@ -12,9 +12,9 @@
  */  
 
     
-namespace Phocebo\Tests;
+namespace SHRM\Phocebo\Tests;
 
-use Phocebo\phocebo;
+use SHRM\Phocebo\phocebo;
 
 
 /**
@@ -1549,22 +1549,6 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }    
 
-    public function testgetBranchInfo () {
-        
-        $parameters = array (
-        
-            'branchId' => null,
-            
-        );
-       
-
-        $responseObj = phocebo::getBranchInfo($parameters);
-        
-        var_dump($response);
-
-        
-    }    
-
     public function testgetBranchbyCode () {
         
         $parameters = array (
@@ -1576,7 +1560,22 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         $responseObj = phocebo::getBranchbyCode($parameters);
         
-        var_dump($response);
+//         var_dump($responseObj);
+
+        
+    }    
+
+    public function testgetBranchInfo () {
+        
+        $parameters = array (
+        
+            'branchId' => "0",
+            
+        );
+       
+        $responseObj = phocebo::getBranchInfo($parameters);
+        
+        var_dump($responseObj);
 
         
     }    

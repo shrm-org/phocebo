@@ -11,7 +11,7 @@
  */
  
 
-namespace Phocebo;
+namespace SHRM\Phocebo;
 
 
 /**

@@ -26,9 +26,9 @@
         "phpdocumentor/phpdocumentor": "^2.0"
     },
     "autoload": {
-        "psr-0": {
-            "Phocebo": "src/",
-            "Phocebo\\Tests":  "tests/"
+        "psr-4": {
+            "SHRM\\Phocebo\\": "src/SHRM/phocebo/src",
+            "SHRM\\Phocebo\\Tests\\":  "tests/"
         }
     },
     "autoload-dev": {
