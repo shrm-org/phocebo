@@ -1479,15 +1479,369 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         
     }    
 
+    public function testgetBranchbyCodeValid () {
+        
+        $parameters = array (
+        
+            'branchCode' => 'root',
+            
+        );
+
+        $responseObj = phocebo::getBranchbyCode($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+        
+        $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
+
+        $this->assertObjectHasAttribute( 'translation', $responseObj, 'Object response missing attribute "translation"');
+        
+        $translation = $responseObj->translation;
+
+        $this->assertObjectHasAttribute( 'arabic', $translation, 'Object response missing attribute "arabic"');
+
+        $this->assertObjectHasAttribute( 'bosnian', $translation, 'Object response missing attribute "bosnian"');
+
+        $this->assertObjectHasAttribute( 'bulgarian', $translation, 'Object response missing attribute "bulgarian"');
+
+        $this->assertObjectHasAttribute( 'croatian', $translation, 'Object response missing attribute "croatian"');
+
+        $this->assertObjectHasAttribute( 'czech', $translation, 'Object response missing attribute "czech"');
+
+        $this->assertObjectHasAttribute( 'danish', $translation, 'Object response missing attribute "danish"');
+
+        $this->assertObjectHasAttribute( 'dutch', $translation, 'Object response missing attribute "dutch"');
+
+        $this->assertObjectHasAttribute( 'english', $translation, 'Object response missing attribute "english"');
+
+        $this->assertObjectHasAttribute( 'farsi', $translation, 'Object response missing attribute "farsi"');
+
+        $this->assertObjectHasAttribute( 'finnish', $translation, 'Object response missing attribute "finnish"');
+
+        $this->assertObjectHasAttribute( 'french', $translation, 'Object response missing attribute "french"');
+
+        $this->assertObjectHasAttribute( 'german', $translation, 'Object response missing attribute "german"');
+
+        $this->assertObjectHasAttribute( 'greek', $translation, 'Object response missing attribute "greek"');
+
+        $this->assertObjectHasAttribute( 'hebrew', $translation, 'Object response missing attribute "hebrew"');
+
+        $this->assertObjectHasAttribute( 'hungarian', $translation, 'Object response missing attribute "hungarian"');
+
+        $this->assertObjectHasAttribute( 'indonesian', $translation, 'Object response missing attribute "indonesian"');
+
+        $this->assertObjectHasAttribute( 'italian', $translation, 'Object response missing attribute "italian"');
+        
+        $this->assertObjectHasAttribute( 'japanese', $translation, 'Object response missing attribute "japanese"');
+
+        $this->assertObjectHasAttribute( 'korean', $translation, 'Object response missing attribute "korean"');
+
+        $this->assertObjectHasAttribute( 'norwegian', $translation, 'Object response missing attribute "norwegian"');
+
+        $this->assertObjectHasAttribute( 'polish', $translation, 'Object response missing attribute "polish"');
+
+        $this->assertObjectHasAttribute( 'portuguese', $translation, 'Object response missing attribute "portuguese"');
+
+        $this->assertObjectHasAttribute( 'portuguese-br', $translation, 'Object response missing attribute "portuguese-br"');
+
+        $this->assertObjectHasAttribute( 'romanian', $translation, 'Object response missing attribute "romanian"');
+
+        $this->assertObjectHasAttribute( 'russian', $translation, 'Object response missing attribute "russian"');
+
+        $this->assertObjectHasAttribute( 'simplified_chinese', $translation, 'Object response missing attribute "simplified_chinese"');
+
+        $this->assertObjectHasAttribute( 'spanish', $translation, 'Object response missing attribute "spanish"');
+
+        $this->assertObjectHasAttribute( 'swedish', $translation, 'Object response missing attribute "swedish"');
+
+        $this->assertObjectHasAttribute( 'thai', $translation, 'Object response missing attribute "thai"');
+
+        $this->assertObjectHasAttribute( 'turkish', $translation, 'Object response missing attribute "turkish"');
+
+        $this->assertObjectHasAttribute( 'ukrainian', $translation, 'Object response missing attribute "ukrainian"');
+
+    }    
+
+
+    public function testgetBranchbyCodeInValid () {
+        
+        $parameters = array (
+        
+            'branchCode' => 'invalid',
+            
+        );
+
+        $responseObj = phocebo::getBranchbyCode($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+        
+        $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
+
+        $this->assertNull ( $responseObj->branchId,  'Parameter "branchId" should be NULL' );
+
+    }    
+
+    public function testgetBranchbyCodeCustomErrors () {
+        
+        $parameters = array (
+        
+            'nobranchCode' => 'invalid',
+            
+        );
+
+        $responseObj = phocebo::getBranchbyCode($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }    
+
+    public function testgetBranchInfo () {
+        
+        $parameters = array (
+        
+            'branchId' => "0",
+            
+        );
+       
+        $responseObj = phocebo::getBranchInfo($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+        
+        $this->assertObjectHasAttribute( 'branchCode', $responseObj, 'Object response missing attribute "branchCode"');
+
+        $this->assertObjectHasAttribute( 'translation', $responseObj, 'Object response missing attribute "translation"');
+        
+        $translation = $responseObj->translation;
+
+        $this->assertObjectHasAttribute( 'arabic', $translation, 'Object response missing attribute "arabic"');
+
+        $this->assertObjectHasAttribute( 'bosnian', $translation, 'Object response missing attribute "bosnian"');
+
+        $this->assertObjectHasAttribute( 'bulgarian', $translation, 'Object response missing attribute "bulgarian"');
+
+        $this->assertObjectHasAttribute( 'croatian', $translation, 'Object response missing attribute "croatian"');
+
+        $this->assertObjectHasAttribute( 'czech', $translation, 'Object response missing attribute "czech"');
+
+        $this->assertObjectHasAttribute( 'danish', $translation, 'Object response missing attribute "danish"');
+
+        $this->assertObjectHasAttribute( 'dutch', $translation, 'Object response missing attribute "dutch"');
+
+        $this->assertObjectHasAttribute( 'english', $translation, 'Object response missing attribute "english"');
+
+        $this->assertObjectHasAttribute( 'farsi', $translation, 'Object response missing attribute "farsi"');
+
+        $this->assertObjectHasAttribute( 'finnish', $translation, 'Object response missing attribute "finnish"');
+
+        $this->assertObjectHasAttribute( 'french', $translation, 'Object response missing attribute "french"');
+
+        $this->assertObjectHasAttribute( 'german', $translation, 'Object response missing attribute "german"');
+
+        $this->assertObjectHasAttribute( 'greek', $translation, 'Object response missing attribute "greek"');
+
+        $this->assertObjectHasAttribute( 'hebrew', $translation, 'Object response missing attribute "hebrew"');
+
+        $this->assertObjectHasAttribute( 'hungarian', $translation, 'Object response missing attribute "hungarian"');
+
+        $this->assertObjectHasAttribute( 'indonesian', $translation, 'Object response missing attribute "indonesian"');
+
+        $this->assertObjectHasAttribute( 'italian', $translation, 'Object response missing attribute "italian"');
+        
+        $this->assertObjectHasAttribute( 'japanese', $translation, 'Object response missing attribute "japanese"');
+
+        $this->assertObjectHasAttribute( 'korean', $translation, 'Object response missing attribute "korean"');
+
+        $this->assertObjectHasAttribute( 'norwegian', $translation, 'Object response missing attribute "norwegian"');
+
+        $this->assertObjectHasAttribute( 'polish', $translation, 'Object response missing attribute "polish"');
+
+        $this->assertObjectHasAttribute( 'portuguese', $translation, 'Object response missing attribute "portuguese"');
+
+        $this->assertObjectHasAttribute( 'portuguese-br', $translation, 'Object response missing attribute "portuguese-br"');
+
+        $this->assertObjectHasAttribute( 'romanian', $translation, 'Object response missing attribute "romanian"');
+
+        $this->assertObjectHasAttribute( 'russian', $translation, 'Object response missing attribute "russian"');
+
+        $this->assertObjectHasAttribute( 'simplified_chinese', $translation, 'Object response missing attribute "simplified_chinese"');
+
+        $this->assertObjectHasAttribute( 'spanish', $translation, 'Object response missing attribute "spanish"');
+
+        $this->assertObjectHasAttribute( 'swedish', $translation, 'Object response missing attribute "swedish"');
+
+        $this->assertObjectHasAttribute( 'thai', $translation, 'Object response missing attribute "thai"');
+
+        $this->assertObjectHasAttribute( 'turkish', $translation, 'Object response missing attribute "turkish"');
+
+        $this->assertObjectHasAttribute( 'ukrainian', $translation, 'Object response missing attribute "ukrainian"');
+
+
+        
+    }    
+
+    public function testgetBranchbyInfoInValid () {
+        
+        $parameters = array (
+        
+            'branchId' => '-1',
+            
+        );
+
+        $responseObj = phocebo::getBranchInfo($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+        
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+    }    
+
+    public function testgetBranchbyInfoCustomErrors () {
+        
+        $parameters = array (
+        
+            'nobranchId' => '0',
+            
+        );
+
+        $responseObj = phocebo::getBranchInfo($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+        
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }    
+
+    public function testgetBranchChildren () {
+        
+        $parameters = array (
+        
+            'branchId' => '0',
+            
+        );
+
+        $responseObj = phocebo::getBranchChildren($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'children', $responseObj, 'Object response missing attribute "children"');
+
+    }    
+
+    public function testgetBranchParentId () {
+        
+        $testObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ));
+        
+        $parameters = array (
+        
+            'branchId' => $testObj->branchId,
+            
+        );
+
+        $responseObj = phocebo::getBranchParentId($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'branchCode', $responseObj, 'Object response missing attribute "branchCode"');
+
+    }    
+
+
+    public function testassignUserToBranch () {
+        
+        $branchObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ) );
+        
+        $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+
+        $parameters = array (
+        
+            'branchId' => $branchObj->branchId,
+            
+            'ids'   => $userObj->doceboId
+            
+        );
+
+        $responseObj = phocebo::assignUserToBranch($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
+
+    }    
+
+    public function testcreateBranch () {
+        
+/*
+        $branchObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ) );
+        
+        $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+*/
+
+        $parameters = array (
+        
+            'branchCode' => 'Testing',
+            
+            'parentBranchId' => '0',
+
+            'branchName'    => 'Test Branch Creation'2757
+            
+
+        );
+
+/*
+        $responseObj = phocebo::createBranch( $parameters );
+        
+        var_dump($responseObj);
+*/
+        
+        
+/*        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
+*/
+
+    }    
+
     public function testcreateBranchCustomError () {
         
         $parameters = array (
             
             'nobranchCode'    => 'TEST',
 
-            'branchName'    => 'Test Branch Creation',
+            'parentBranchId'    => '0',
 
-            'parentBranchId'    => 'Parent Branch ID'
+            'branchName'    => 'Test Branch Creation'
+
 
         );
        
@@ -1547,37 +1901,6 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
-    }    
-
-    public function testgetBranchbyCode () {
-        
-        $parameters = array (
-        
-            'branchCode' => 'root',
-            
-        );
-       
-
-        $responseObj = phocebo::getBranchbyCode($parameters);
-        
-//         var_dump($responseObj);
-
-        
-    }    
-
-    public function testgetBranchInfo () {
-        
-        $parameters = array (
-        
-            'branchId' => "0",
-            
-        );
-       
-        $responseObj = phocebo::getBranchInfo($parameters);
-        
-        var_dump($responseObj);
-
-        
     }    
 
 }

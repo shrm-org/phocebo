@@ -113,15 +113,11 @@ class phocebo {
                    
                }
     
-           } else {
-               
-               $json_array = self::jsonSHRM ( $json_array );
-
-           }
+           } 
            
        }
        
-       return( json_decode ( json_encode ( $json_array ), FALSE ) );
+       return( self::jsonSHRM ( $json_array ) );
  
     }
 
@@ -217,15 +213,11 @@ class phocebo {
                    
                }
     
-           } else {
-               
-               $json_array = self::jsonSHRM ( $json_array );
-    
-           }
+           } 
            
        }
        
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
  
     }
     
@@ -288,15 +280,11 @@ class phocebo {
                    
                }
     
-           } else {
-               
-               $json_array = self::jsonSHRM ( $json_array );
-
-           }
+           } 
            
        }
        
-       return( json_decode ( json_encode ( $json_array ), FALSE ) );
+       return( self::jsonSHRM ( $json_array ) );
  
     }
     
@@ -360,15 +348,11 @@ class phocebo {
                    
                }
     
-           } else {
-               
-               $json_array = self::jsonSHRM ( $json_array );
-
-           }
+           } 
            
        }
        
-       return( json_decode ( json_encode ( $json_array ), FALSE ) );
+       return( self::jsonSHRM ( $json_array ) );
  
     }
     
@@ -479,15 +463,11 @@ class phocebo {
                    
                }
             
-            } else {
-               
-               $json_array = self::jsonSHRM ( $json_array );
-            
-            }
+            } 
            
        }
 
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
     
@@ -562,15 +542,11 @@ class phocebo {
                    
                }
             
-            } else {
-               
-               $json_array = self::jsonSHRM ( $json_array );
-            
-            }
+            } 
            
        }
 
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -662,15 +638,11 @@ class phocebo {
                    
                }
             
-            } else {
-               
-               $json_array = self::jsonSHRM ( $json_array );
-            
-            }
+            } 
            
        }
 
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -728,7 +700,7 @@ class phocebo {
 
        } 
            
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -824,15 +796,11 @@ class phocebo {
                    
                }
     
-           } else { // Success == true
-               
-               $json_array = self::jsonSHRM ( $json_array );
-
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
     
@@ -895,15 +863,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-               $json_array = self::jsonSHRM ( $json_array );
-
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
     
@@ -972,15 +936,11 @@ class phocebo {
                    
                 }
     
-            } else { 
-               
-                $json_array = self::jsonSHRM ( $json_array );
-
-            }
+            } 
            
         }
         
-        return( json_decode ( json_encode( $json_array ), FALSE ) );
+       return( self::jsonSHRM ( $json_array ) );
         
     }
     
@@ -1057,15 +1017,11 @@ class phocebo {
                    
                }
             
-            } else {
-               
-               $json_array = self::jsonSHRM ( $json_array );
-            
-            }
+            } 
            
        }
       
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
        
     }
     
@@ -1135,15 +1091,11 @@ class phocebo {
                    
                }
             
-            } else {
-               
-               $json_array = self::jsonSHRM ( $json_array );
-            
-            }
+            } 
            
        }
 
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1194,14 +1146,11 @@ class phocebo {
                    
                }
     
-           } else { // Success == true
-               
-    
            }
            
        }
        
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
  
     }
     
@@ -1219,32 +1168,29 @@ class phocebo {
 
     public function listCourses () {
         
-           $action = '/course/listCourses';
+       $action = '/course/listCourses';
+   
+       $data_params = array (
+    
+           'category'                 => null,
+	
+       );
+ 
+       $response = self::call ( $action, $data_params );
        
-           $data_params = array (
-        
-               'category'                 => null,
-    	
-           );
-     
-           $response = self::call ( $action, $data_params );
-           
-            $json_array = json_decode( $response, true );
-           
-           if ( false == $json_array['success']) {
-    
-               if ('500' == $json_array['error']) {
-                   
-                   $json_array['message'] = 'Internal server error';
-                   
-               }
-    
-           } else { // Success == true
+        $json_array = json_decode( $response, true );
+       
+       if ( false == $json_array['success']) {
+
+           if ('500' == $json_array['error']) {
                
-    
+               $json_array['message'] = 'Internal server error';
+               
            }
-        
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+
+       } 
+           
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1295,14 +1241,11 @@ class phocebo {
                    
                }
     
-           } else { // Success == true
-               
-    
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
     
@@ -1392,14 +1335,11 @@ class phocebo {
                    
                 }
     
-            } else { 
-               
-    
-            }
+            } 
            
         }
         
-        return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1485,14 +1425,11 @@ class phocebo {
                    
                }
     
-           } else { // Success == true
-               
-    
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1581,14 +1518,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1660,14 +1594,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1703,12 +1634,18 @@ class phocebo {
        } else {
 
            $action = '/orgchart/createNode';
+           
+           $translation = array (
+               
+               'english' => $parameters['branchName'],
+               
+           );
        
            $data_params = array (
         
                'code'                => $parameters['branchCode'],
                
-               'translation'         => array ('english' => $parameters['branchName']),
+               'translation'         => $translation,
 
                'id_parent'           => $parameters['parentBranchId'],
     	
@@ -1738,14 +1675,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
            }
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1825,14 +1759,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1889,14 +1820,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
            }
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1960,14 +1888,148 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
+        
+    }
+
+    /**
+     * getBranchbyCode function.
+     * 
+     * @access public
+     * @param array $parameters
+     * @return
+     
+            object(stdClass) {
+                
+              ["branchCode"] => string(4) "root"
+              
+              ["translation"] => object(stdClass) {
+                  
+                ["arabic"] => string(4) "root"
+                
+                ["bosnian"] => string(4) "root"
+                
+                ["bulgarian"] => string(4) "root"
+                
+                ["croatian"] => string(4) "root"
+                
+                ["czech"] => string(4) "root"
+                
+                ["danish"] => string(4) "root"
+                
+                ["dutch"] => string(4) "root"
+                
+                ["english"] => string(4) "root"
+                
+                ["farsi"] => string(4) "root"
+                
+                ["finnish"] => string(4) "root"
+                
+                ["french"] => string(4) "root"
+                
+                ["german"] => string(4) "root"
+                
+                ["greek"] => string(4) "root"
+                
+                ["hebrew"] => string(4) "root"
+                
+                ["hungarian"] => string(4) "root"
+                
+                ["indonesian"] => string(4) "root"
+                
+                ["italian"] => string(4) "root"
+                
+                ["japanese"] => string(4) "root"
+                
+                ["korean"] => string(4) "root"
+                
+                ["norwegian"] => string(4) "root"
+                
+                ["polish"] => tring(4) "root"
+                
+                ["portuguese"] => string(4) "root"
+                
+                ["portuguese-br"] => string(4) "root"
+                
+                ["romanian"] => string(4) "root"
+                
+                ["russian"] => string(4) "root"
+                
+                ["simplified_chinese"] => string(4) "root"
+                
+                ["spanish"] => string(4) "root"
+                
+                ["swedish"] => string(4) "root"
+                
+                ["thai"] => string(4) "root"
+                
+                ["turkish"] => string(4) "root"
+                
+                ["ukrainian"] => string(4) "root"
+                
+              }
+              
+              ["success"] => bool(true)
+              
+            }
+            
+            object(stdClass) {
+                
+              ["branchCode"] => NULL
+              
+              ["translation"] => array(0) {
+                  
+              }
+              
+              ["success"] => bool(true)
+            }
+
+            
+                 
+     */
+
+    public function getBranchbyCode ($parameters) {
+        
+       if ( !array_key_exists( 'branchCode', $parameters) ) {
+           
+           $json_array = self::dataError ( 'branchCode', 'Parameter "branchCode" missing: Alphanumeric "branchCode" of the node to retrieve');
+
+       } else {
+
+           $action = '/orgchart/findNodeByCode';
+       
+           $data_params = array (
+        
+               'code'                => $parameters['branchCode'],
+    	
+           );
+     
+           $response = self::call ( $action, $data_params );
+           
+           $json_array = json_decode( $response, true );
+           
+           if ( false == $json_array['success']) {
+    
+               if ('401' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Missing or invalid required parameter "code"';
+                   
+               }
+
+               if ('500' == $json_array['error']) {
+                   
+                   $json_array['message'] = 'Internal server error';
+                   
+               }
+    
+           }           
+       }
+
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -1976,13 +2038,83 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
-     * @todo talk to Docebo - API just retruns NULL
-     * @todo create tests
-     * @todo test $responseObj has expected attributes from server when valid 
-     * @todo test $responseObj does not have attributes (such as idst)
-     * @todo test $responseObj has expected attributes from server when invalid 
-     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     * @return
+     * @return
+     
+            object(stdClass) {
+                
+              ["branchCode"] => string(4) "root"
+              
+              ["translation"] => object(stdClass) {
+                  
+                ["arabic"] => string(4) "root"
+                
+                ["bosnian"] => string(4) "root"
+                
+                ["bulgarian"] => string(4) "root"
+                
+                ["croatian"] => string(4) "root"
+                
+                ["czech"] => string(4) "root"
+                
+                ["danish"] => string(4) "root"
+                
+                ["dutch"] => string(4) "root"
+                
+                ["english"] => string(4) "root"
+                
+                ["farsi"] => string(4) "root"
+                
+                ["finnish"] => string(4) "root"
+                
+                ["french"] => string(4) "root"
+                
+                ["german"] => string(4) "root"
+                
+                ["greek"] => string(4) "root"
+                
+                ["hebrew"] => string(4) "root"
+                
+                ["hungarian"] => string(4) "root"
+                
+                ["indonesian"] => string(4) "root"
+                
+                ["italian"] => string(4) "root"
+                
+                ["japanese"] => string(4) "root"
+                
+                ["korean"] => string(4) "root"
+                
+                ["norwegian"] => string(4) "root"
+                
+                ["polish"] => tring(4) "root"
+                
+                ["portuguese"] => string(4) "root"
+                
+                ["portuguese-br"] => string(4) "root"
+                
+                ["romanian"] => string(4) "root"
+                
+                ["russian"] => string(4) "root"
+                
+                ["simplified_chinese"] => string(4) "root"
+                
+                ["spanish"] => string(4) "root"
+                
+                ["swedish"] => string(4) "root"
+                
+                ["thai"] => string(4) "root"
+                
+                ["turkish"] => string(4) "root"
+                
+                ["ukrainian"] => string(4) "root"
+                
+              }
+              
+              ["success"] => bool(true)
+              
+            }
+            
      */
 
     public function getBranchInfo ($parameters) {
@@ -2025,87 +2157,82 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
     
-    /**
-     * getBranchbyCode function.
-     * 
-     * @access public
-     * @param array $parameters
-     * @return void
-     * @todo create tests
-     * @todo test $responseObj has expected attributes from server when valid 
-     * @todo test $responseObj does not have attributes (such as idst)
-     * @todo test $responseObj has expected attributes from server when invalid 
-     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
-     */
-
-    public function getBranchbyCode ($parameters) {
-        
-       if ( !array_key_exists( 'branchCode', $parameters) ) {
-           
-           $json_array = self::dataError ( 'branchCode', 'Parameter "branchCode" missing: Alphanumeric branchCode of the node to retrieve');
-
-       } else {
-
-           $action = '/orgchart/findNodeByCode';
-       
-           $data_params = array (
-        
-               'code'                => $parameters['branchCode'],
-    	
-           );
-     
-           $response = self::call ( $action, $data_params );
-           
-           $json_array = json_decode( $response, true );
-           
-           if ( false == $json_array['success']) {
-    
-               if ('401' == $json_array['error']) {
-                   
-                   $json_array['message'] = 'Missing or invalid required parameter "code"';
-                   
-               }
-
-               if ('500' == $json_array['error']) {
-                   
-                   $json_array['message'] = 'Internal server error';
-                   
-               }
-    
-           } else { 
-               
-    
-           }
-           
-       }
-        
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
-        
-    }
     
     /**
      * getBranchChildren function.
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return
+     
+            object(stdClass)#273 (2) {
+              ["children"]=>
+              array(4) {
+                [0]=>
+                object(stdClass)#243 (3) {
+                  ["code"]=>
+                  string(3) "CG2"
+                  ["id_org"]=>
+                  int(2)
+                  ["translation"]=>
+                  object(stdClass)#245 (31) {
+                    ...
+                  }
+                }
+                [1]=>
+                object(stdClass)#241 (3) {
+                  ["code"]=>
+                  string(3) "CG3"
+                  ["id_org"]=>
+                  int(3)
+                  ["translation"]=>
+                  object(stdClass)#245 (31) {
+                    ...
+                  }
+                }
+                [2]=>
+                object(stdClass)#250 (3) {
+                  ["code"]=>
+                  NULL
+                  ["id_org"]=>
+                  int(7)
+                  ["translation"]=>
+                  object(stdClass)#245 (31) {
+                    ...
+                  }
+                }
+                [3]=>
+                object(stdClass)#244 (3) {
+                  ["code"]=>
+                  string(4) "Test"
+                  ["id_org"]=>
+                  int(8)
+                  ["translation"]=>
+                  object(stdClass)#245 (31) {
+                    ...
+                  }
+                }
+              }
+              ["success"]=>
+              bool(true)
+            }
+
+     
      * @todo create tests
-     * @todo test $responseObj has expected attributes from server when valid 
-     * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     * @todo change children->code to children-branchCode
+     * @todo change children->id_org to children-branchId
+     
      */
 
     public function getBranchChildren ($parameters) {
@@ -2136,7 +2263,7 @@ class phocebo {
                    
                }
 
-               if ('401' == $json_array['error']) {
+               if ('402' == $json_array['error']) {
                    
                    $json_array['message'] = 'Branch not found';
                    
@@ -2148,14 +2275,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
     
@@ -2164,9 +2288,84 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return
+
+            object(stdClass) {
+                
+              ["branchCode"] => string(4) "root"
+              
+              ["translation"] => object(stdClass) {
+                  
+                ["arabic"] => string(4) "root"
+                
+                ["bosnian"] => string(4) "root"
+                
+                ["bulgarian"] => string(4) "root"
+                
+                ["croatian"] => string(4) "root"
+                
+                ["czech"] => string(4) "root"
+                
+                ["danish"] => string(4) "root"
+                
+                ["dutch"] => string(4) "root"
+                
+                ["english"] => string(4) "root"
+                
+                ["farsi"] => string(4) "root"
+                
+                ["finnish"] => string(4) "root"
+                
+                ["french"] => string(4) "root"
+                
+                ["german"] => string(4) "root"
+                
+                ["greek"] => string(4) "root"
+                
+                ["hebrew"] => string(4) "root"
+                
+                ["hungarian"] => string(4) "root"
+                
+                ["indonesian"] => string(4) "root"
+                
+                ["italian"] => string(4) "root"
+                
+                ["japanese"] => string(4) "root"
+                
+                ["korean"] => string(4) "root"
+                
+                ["norwegian"] => string(4) "root"
+                
+                ["polish"] => tring(4) "root"
+                
+                ["portuguese"] => string(4) "root"
+                
+                ["portuguese-br"] => string(4) "root"
+                
+                ["romanian"] => string(4) "root"
+                
+                ["russian"] => string(4) "root"
+                
+                ["simplified_chinese"] => string(4) "root"
+                
+                ["spanish"] => string(4) "root"
+                
+                ["swedish"] => string(4) "root"
+                
+                ["thai"] => string(4) "root"
+                
+                ["turkish"] => string(4) "root"
+                
+                ["ukrainian"] => string(4) "root"
+                
+              }
+              
+              ["success"] => bool(true)
+              
+            }
+
+     
      * @todo create tests
-     * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
@@ -2212,14 +2411,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
            }
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
     
@@ -2228,9 +2424,21 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return 
+     
+            object(stdClass) {
+                
+              ["assigned_users"] => string(5) "12337"
+              
+              ["success"] => bool(true)
+              
+            }
+
+            note: returns same if user is already in the branch
+            
+     * @todo talk to Richard at Docebo - no method to remove a user from a branch
+     * +. /poweruser/unassignUsers
      * @todo create tests
-     * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
@@ -2240,7 +2448,7 @@ class phocebo {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
-           $json_array = self::dataError ( 'branchId', 'Parameter "branchId" missing: Branch Id');
+           $json_array = self::dataError ( 'branchId', 'Required parameter "branchId" missing');
 
        } elseif ( !array_key_exists( 'ids', $parameters) ) {
            
@@ -2282,17 +2490,15 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
-           }
+           } 
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
     
+
     /**
      * upgradeUserToPowerUser function.
      * 
@@ -2370,14 +2576,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
            }
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -2395,7 +2598,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function downgradeUserToPowerUser ($parameters) {
+    public function downgradeUserFromPowerUser ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -2441,14 +2644,11 @@ class phocebo {
                    
                }
     
-           } else { 
-               
-    
            }
            
        }
         
-       return( json_decode ( json_encode( $json_array ), FALSE ) );        
+       return( self::jsonSHRM ( $json_array ) );
         
     }
 
@@ -2467,7 +2667,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
      
-    public function jsonSHRM ( $json_array ) { // logged_in
+    public function jsonSHRM ( $json_array ) { 
         
         $attributes = array (
             
@@ -2485,6 +2685,12 @@ class phocebo {
             
             'logged_in' => 'loggedIn',
 
+            'code' => 'branchCode',
+
+            'id_org' => 'branchId',
+            
+            'assigned_users' => 'assignedUsers'
+
         );
         
         foreach ( $attributes as $old => $new) {
@@ -2499,8 +2705,8 @@ class phocebo {
             
         }
 
-       return( $json_array );
-        
+       return( json_decode ( json_encode ( $json_array ), FALSE ) );
+
     }
     
 
