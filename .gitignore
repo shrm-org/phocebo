@@ -3,3 +3,4 @@
 ./docs/api/phpdoc-cache*
 *.dat
 .idea
+*.lock
