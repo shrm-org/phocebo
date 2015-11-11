@@ -41,23 +41,23 @@ class phocebo {
      * @version 0.0.6
      * @access public
      * @param array $parameters
-     
+
       'email' => $email
-     
-     * @return 
-     
+
+     * @return
+
         object(stdClass) {
-             
+
           ["email"] => string(13) "test@shrm.org"
-          
+
           ["success"]  => bool(true)
-          
+
           ["doceboId"] => int(12337)
-          
+
           ["firstName"] => string(4) "Test"
-          
+
           ["lastName"] => string(0) ""
-          
+
         }
 
      *
@@ -233,7 +233,7 @@ class phocebo {
       'username' => $username
 
      
-     * @return void
+     * @return object
      * @todo write tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj has expected attributes from server when invalid 
@@ -294,7 +294,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      * @todo write tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj has expected attributes from server when invalid 
