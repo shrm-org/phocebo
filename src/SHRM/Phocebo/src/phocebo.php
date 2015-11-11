@@ -44,9 +44,9 @@ class phocebo {
 
       'email' => $email
 
-     * @return
+     * @return object
 
-        object(stdClass) {
+        (stdClass) {
 
           ["email"] => string(13) "test@shrm.org"
 
@@ -121,43 +121,41 @@ class phocebo {
  
     }
 
-    
-    
+
+
     /**
      * authenticateUser function.
-     * 
+     *
      * @access public
      * @param array $parameters
-     
-      'doceboId' => $doceboID
-     
-      'username' => $username
-      
-      'password' => $password
-      
-
-     * @return 
-          
-            object(stdClass) {
-                
-              ["success"] => bool(false)
-              
-              ["error"] => int(201)
-              
-              ["message"] => string(42) "Invalid login data provided: test@shrm.org"
-              
-            }
-            
-            object(stdClass) {
-                
-              ["id_user"] => string(5) "12369"
-              
-              ["token"] => string(36) "62a9d6c6-4434-4e95-9c8b-1e1a1a5fe52d"
-              
-              ["success"] => bool(true)
-              
-            }
-
+     *
+     * 'doceboId' => $doceboID
+     *
+     * 'username' => $username
+     *
+     * 'password' => $password
+     *
+     * @return object
+     *
+     *       (stdClass) {
+     *
+     *         ["success"] => bool(false)
+     *
+     *         ["error"] => int(201)
+     *
+     *         ["message"] => string(42) "Invalid login data provided: test@shrm.org"
+     *
+     *       }
+     *
+     *       (stdClass) {
+     *
+     *         ["id_user"] => string(5) "12369"
+     *
+     *         ["token"] => string(36) "62a9d6c6-4434-4e95-9c8b-1e1a1a5fe52d"
+     *
+     *         ["success"] => bool(true)
+     *
+     *       }
      */
      
      
@@ -229,10 +227,9 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     
-      'username' => $username
-
-     
+     *
+     * 'username' => $username
+     *
      * @return object
      * @todo write tests
      * @todo test $responseObj has expected attributes from server when valid 
@@ -373,9 +370,9 @@ class phocebo {
         
         'email'     =>  $email
         
-     * @return
+     * @return object
      
-            object(stdClass) {
+            (stdClass) {
                 
               ["success"] => bool(true)
               
@@ -480,9 +477,9 @@ class phocebo {
      * @version 0.0.6
      * @access public
      * @param array $parameters
-     * @return 
+     * @return object
             
-            object(stdClass)#347 (3) {
+            (stdClass)#347 (3) {
               ["success"]=>
               bool(false)
               ["error"]=>
@@ -491,7 +488,7 @@ class phocebo {
               string(22) "Error in user deletion"
             }
             
-            object(stdClass)#347 (2) { 12370
+            (stdClass)#347 (2) { 12370
               ["success"]=>
               bool(true)
               ["doceboId"]=>
@@ -560,7 +557,7 @@ class phocebo {
      * @version 0.0.6
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
@@ -591,6 +588,8 @@ class phocebo {
         } else {
             
             $action = '/user/edit';
+
+            $data_params = array();
 
             (array_key_exists('doceboId', $parameters) ?  $data_params['id_user'] = $parameters['doceboId'] : '');
             
@@ -655,20 +654,24 @@ class phocebo {
      * @version 0.0.6
      * @access public
      * @return object
-       object(stdClass) (2) {
-              ["fields"]=>
-              array(1) {
-                [0]=>
-                object(stdClass) (2) {
-                  ["id"]=>
-                  int(1)
-                  ["name"]=>
-                  string(8) "Job Role"
+     *
+       (stdClass) (2) {
+              ["fields"] => array(1) {
+     *
+                [0] => object(stdClass) (2) {
+     *
+                  ["id"] => int(1)
+     *
+                  ["name"] => string(8) "Job Role"
+     *
                 }
+     *
               }
-              ["success"]=>
-              bool(true)
+     *
+              ["success"] => bool(true)
+     *
             }
+     *
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
@@ -704,18 +707,20 @@ class phocebo {
         
     }
 
-    
+
 
     /**
      * getUserProfile function.
-     * 
+     *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
      * @version 0.0.6
      * @access public
      * @static
-     * @return object  
-         object(stdClass) (11) {
+     * @param array $parameters
+     * @return object
+     *
+         (stdClass) (11) {
           ["id_user"]=>
           string(5) "12339"
           ["userid"]=>
@@ -750,7 +755,7 @@ class phocebo {
           bool(true)
         }
 
-        object(stdClass) (3) {
+        (stdClass) (3) {
           ["success"]=>
           bool(false)
           ["error"]=>
@@ -758,7 +763,7 @@ class phocebo {
           ["message"]=>
           string(26) "Invalid user specification"
         }
-     * @todo add Phake to mock calls 
+     * @todo add Phake to mock calls
      */
      
     public function getUserProfile ( $parameters ) {
@@ -813,9 +818,9 @@ class phocebo {
      * @param array $parameters
      * @return object
      
-            object(stdClass) (2) {
+            (stdClass) (2) {
               ["results"]=>
-              object(stdClass) (2) {
+              (stdClass) (2) {
                 ["groups"]=>
                 array(0) {
                 }
@@ -878,14 +883,14 @@ class phocebo {
      * @param array $parameters
      * @return object
      
-            object(stdClass)#376 (2) {
+            (stdClass)#376 (2) {
               ["loggedIn"]=>
               bool(false)
               ["success"]=>
               bool(true)
             }
 
-            object(stdClass)#376 (2) {
+            (stdClass)#376 (2) {
               ["loggedIn"]=>
               bool(false)
               ["success"]=>
@@ -911,6 +916,8 @@ class phocebo {
        } else {
 
             $action = '/user/user_logged_in';
+
+           $data_params = array ();
             
             (array_key_exists('doceboId', $parameters) ?  $data_params['id_user'] = $parameters['doceboId'] : '');
 
@@ -955,14 +962,14 @@ class phocebo {
      * @param array $parameters
      * @return object
      
-            object(stdClass) (2) {
+            (stdClass) (2) {
               ["doceboId"]=>
               string(5) "12339"
               ["success"]=>
               bool(true)
             }
      
-             object(stdClass)#355 (3) {
+             (stdClass)#355 (3) {
               ["success"]=>
               bool(false)
               ["error"]=>
@@ -1038,7 +1045,7 @@ class phocebo {
      * @param array $parameters
      * @return object 
      
-        object(stdClass) (2) {
+        (stdClass) (2) {
           ["doceboId"]=>
           string(5) "12339"
           ["success"]=>
@@ -1107,7 +1114,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
      */
@@ -1159,7 +1166,7 @@ class phocebo {
      * listCourses function.
      * 
      * @access public
-     * @return void
+     * @return object
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
@@ -1200,7 +1207,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
@@ -1257,13 +1264,13 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            object(stdClass) (1) {
+            (stdClass) (1) {
                 
               ["success"] => bool(true)
               
             }
              
-            object(stdClass) (3) {
+            (stdClass) (3) {
                 
               ["success"] => bool(false)
               
@@ -1349,15 +1356,15 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return
+     * @return object
      
-        object(stdClass) {
+        (stdClass) {
             
           ["success"] => bool(true)
           
         }
 
-        object(stdClass) {
+        (stdClass) {
             
           ["success"] => bool(false)
           
@@ -1382,15 +1389,19 @@ class phocebo {
        } else {
 
            $action = '/course/deleteUserSubscription';
-       
+
+           $data_params = array ();
+
             (array_key_exists('doceboId', $parameters) ?  $data_params['id_user'] = $parameters['doceboId'] : '');
 
             (array_key_exists('courseCode', $parameters) ?  $data_params['course_code'] = $parameters['courseCode'] : '');
 
             (array_key_exists('courseId', $parameters) ?  $data_params['course_id'] = $parameters['courseId'] : '');
-     
+
+           /** @var string $response */
+
            $response = self::call ( $action, $data_params );
-           
+
            $json_array = json_decode( $response, true );
            
            if ( false == $json_array['success']) {
@@ -1439,9 +1450,9 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return 
+     * @return object
      
-        object(stdClass) {
+        (stdClass) {
             
           ["0"]=>
           
@@ -1532,7 +1543,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
@@ -1610,6 +1621,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
+     * @return object
      * @todo create tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
@@ -1689,7 +1701,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      * @todo create tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
@@ -1720,7 +1732,9 @@ class phocebo {
        } else {
 
            $action = '/orgchart/updateNode';
-       
+
+           $data_params = array();
+
             (array_key_exists('branchId', $parameters) ?  $data_params['id_org'] = $parameters['branchId'] : '');
 
             (array_key_exists('code', $parameters) ?  $data_params['code'] = $parameters['code'] : '');
@@ -1772,7 +1786,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      * @todo create tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
@@ -1833,7 +1847,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      * @todo create tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
@@ -1901,9 +1915,9 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return
+     * @return object
      
-            object(stdClass) {
+            (stdClass) {
                 
               ["branchCode"] => string(4) "root"
               
@@ -1977,7 +1991,7 @@ class phocebo {
               
             }
             
-            object(stdClass) {
+            (stdClass) {
                 
               ["branchCode"] => NULL
               
@@ -2038,10 +2052,9 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return
-     * @return
+     * @return object
      
-            object(stdClass) {
+            (stdClass) {
                 
               ["branchCode"] => string(4) "root"
               
@@ -2172,9 +2185,9 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return
+     * @return object
      
-            object(stdClass)#273 (2) {
+            (stdClass)#273 (2) {
               ["children"]=>
               array(4) {
                 [0]=>
@@ -2288,9 +2301,9 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return
+     * @return object
 
-            object(stdClass) {
+            (stdClass) {
                 
               ["branchCode"] => string(4) "root"
               
@@ -2424,9 +2437,9 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return 
+     * @return object
      
-            object(stdClass) {
+            (stdClass) {
                 
               ["assigned_users"] => string(5) "12337"
               
@@ -2436,8 +2449,7 @@ class phocebo {
 
             note: returns same if user is already in the branch
             
-     * @todo talk to Richard at Docebo - no method to remove a user from a branch
-     * +. /poweruser/unassignUsers
+     * @todo talk to Richard at Docebo - no method to remove a user from a branch /poweruser/unassignUsers
      * @todo create tests
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
@@ -2504,7 +2516,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      * @todo create tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
@@ -2592,7 +2604,7 @@ class phocebo {
      * 
      * @access public
      * @param array $parameters
-     * @return void
+     * @return object
      * @todo create tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
@@ -2662,7 +2674,7 @@ class phocebo {
      * 
      * @access private
      * @param array $json_array
-     * @return void
+     * @return object
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo test $responseObj has expected attributes from server when invalid 
@@ -2737,22 +2749,23 @@ class phocebo {
     }
 
 
-	/**
-	 * getHash function.
-	 * 
+    /**
+     * getHash function.
+     *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
      * @version 0.0.6
      * @access public
-	 * @data_params array $params
-	 *
-	 * @return array $codice hash value for x_auth
-	 *
-	 */
+     * @param array $data_params
+     * @return array $codice hash value for x_auth
+     *
+     */
 	 
 	static public function getHash( $data_params ) {
-    	
-    	if ( !empty ( $data_params ) ) {
+
+        /** @var array $data_params */
+
+        if ( !empty ( $data_params ) ) {
         	
     		$codice = array( 'sha1' => '', 'x_auth' => '' );
     		
@@ -2780,7 +2793,7 @@ class phocebo {
      * @access public
 	 * @param array $x_auth
 	 *
-	 * @return array containting default header
+	 * @return array containing default header
 	 *
 	 */
 	 
@@ -2811,7 +2824,7 @@ class phocebo {
 	 * @param mixed $action Docebo API Call
 	 * @param mixed $data_params parameters to send
 	 *
-	 * @return $output JSON formatted response
+	 * @return array $output JSON formatted response
 
      * @todo fix encoding to create branch, issue with translation	 
         array(3) {
