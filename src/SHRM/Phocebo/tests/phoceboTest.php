@@ -1479,6 +1479,38 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         
     }    
 
+
+
+    public function upgradeUserToPowerUser () {
+        
+        
+        $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        
+        var_dump($userObj);
+        
+
+        $parameters = array (
+        
+            'branchId' => $branchObj->branchId,
+            
+            'ids'   => $userObj->doceboId
+            
+        );
+
+/*
+        $responseObj = phocebo::upgradeUserToPowerUser($parameters);
+        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
+*/
+
+    }    
+
+
+
     public function testgetBranchbyCodeValid () {
         
         $parameters = array (
@@ -1811,7 +1843,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
             
             'parentBranchId' => '0',
 
-            'branchName'    => 'Test Branch Creation'2757
+            'branchName'    => 'Test Branch Creation'
             
 
         );
@@ -1823,7 +1855,8 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 */
         
         
-/*        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+/*        
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
         $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
@@ -1834,6 +1867,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     public function testcreateBranchCustomError () {
         
+/*
         $parameters = array (
             
             'nobranchCode'    => 'TEST',
@@ -1900,6 +1934,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
 
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+*/
 
     }    
 

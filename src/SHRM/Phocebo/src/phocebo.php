@@ -2518,6 +2518,7 @@ class phocebo {
            
            $json_array = self::dataError ( 'doceboId', 'Parameter "doceboId" missing: Docebo ID of an existing non Power User account');
 
+/*
        } elseif ( !array_key_exists( 'profileName', $parameters) ) {
            
            $json_array = self::dataError ( 'profileName', 'Parameter "profileName" missing: Power User profile name to be assigned');
@@ -2525,6 +2526,7 @@ class phocebo {
        } elseif ( !array_key_exists( 'branchIds', $parameters) ) {
            
            $json_array = self::dataError ( 'branchIds', 'Parameter "branchIds" missing: comma separated list of Branch Ids');
+*/
 
        } else {
 
@@ -2536,7 +2538,7 @@ class phocebo {
     	
                'profile_name'           => $parameters['profileName'],
                
-               'orgchart'                => $parameters['branchIds'],
+               'orgchart'                => $parameters['branchId'],
 
            );
      
@@ -2810,13 +2812,42 @@ class phocebo {
 	 * @param mixed $data_params parameters to send
 	 *
 	 * @return $output JSON formatted response
-	 *
+
+     * @todo fix encoding to create branch, issue with translation	 
+        array(3) {
+          ["code"]=>
+          string(7) "Testing"
+          ["translation"]=>
+          string(34) "{"english":"Test Branch Creation"}"
+          ["id_parent"]=>
+          string(1) "0"
+        }
+
 	 */
 	 
 	public function call ( $action, $data_params ) {
     	
 		$curl = curl_init();
 
+    	if ( array_key_exists('translation', $data_params ) ) { // { english: 'First Node' }
+        	
+        	$translation = '{';
+        	
+        	foreach ($data_params['translation'] as $lang => $branchName) {
+            	
+            	$translation .= $lang . ": '" . $branchName . "'"; 
+            	
+        	}
+        	
+        	$translation .= '}';
+        	
+        	$data_params['translation']  = $translation;
+        	
+        	var_dump($data_params);
+        	
+
+    	}
+        	
 		$hash_info = self::getHash ( $data_params );
 
 		$http_header = self::getDefaultHeader ( $hash_info['x_auth'] );
