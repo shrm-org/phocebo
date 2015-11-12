@@ -194,12 +194,10 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      *
      * @access public
      * @param mixed $email
-     * @param mixed $expectedResult
+     * @param mixed $checkAttribute
      * @param mixed $errorMessage
-     * @return void
      *
      * @dataProvider providerTesttestdoceboId
-     *
      */
 
     public function testdoceboId ( $email, $checkAttribute, $errorMessage ) {
@@ -216,9 +214,8 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * providerTesttestdoceboId function.
      *
      * Test data for the testdoceboId function.
-
+     *
      * @access public
-     * @return void
      *
      */
 
@@ -263,7 +260,6 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testdoceboIdCustomErrorsJSONformat function.
      *
      * @access public
-     * @return void
      *
      */
 
@@ -343,8 +339,6 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testauthenticateUserInvalid function.
      *
      * @access public
-     * @param mixed $checkAttribute
-     *
      * @dataProvider providerTesttestauthenticateUserInvalid
      *
      */
@@ -384,10 +378,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testauthenticateUserInvalidJSONMessage400 function.
      *
      * @access public
-     * @param mixed $checkAttribute
-     *
      * @dataProvider providerTesttestauthenticateUserInvalidJSONMessage400
-     *
      */
 
     public function testauthenticateUserInvalidJSONMessage400 ( $parameters ) {
@@ -453,9 +444,6 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testaddUserCustomErrorsJSONformatlastName function.
      *
      * @access public
-     * @param mixed $checkAttribute
-     * @param mixed $errorMessage
-     *
      */
 
 
@@ -487,9 +475,6 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testaddUserCustomErrorsJSONformatemail function.
      *
      * @access public
-     * @param mixed $checkAttribute
-     * @param mixed $errorMessage
-     *
      */
 
 

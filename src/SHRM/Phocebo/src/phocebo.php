@@ -67,7 +67,7 @@ class phocebo {
      */
      
      
-    public function getdoceboId ( $parameters ) {
+    static public function getdoceboId ( $parameters ) {
         
        if ( !array_key_exists( 'email', $parameters ) ) {
            
@@ -159,7 +159,7 @@ class phocebo {
      */
      
      
-    public function authenticateUser ( $parameters ) {
+    static public function authenticateUser ( $parameters ) {
         
        if ( array_key_exists( 'doceboId', $parameters) ) {
            
@@ -238,7 +238,7 @@ class phocebo {
      * @todo test $responseObj does not have attributes (such as idst)    
      */
 
-    public function getToken ( $parameters ) {
+    static public function getToken ( $parameters ) {
         
        if ( !array_key_exists( 'username', $parameters ) ) {
            
@@ -299,7 +299,7 @@ class phocebo {
      * @todo test $responseObj does not have attributes (such as idst)    
      */
 
-    public function checkToken ( $parameters ) {
+    static public function checkToken ( $parameters ) {
         
        if ( !array_key_exists( 'doceboId', $parameters ) ) {
            
@@ -388,7 +388,7 @@ class phocebo {
      * @todo add phake mocking for addUser testing
      */
      
-    public function addUser ( $parameters ) {
+    static public function addUser ( $parameters ) {
            
         if ( !array_key_exists( 'firstName', $parameters) ) {
            
@@ -499,7 +499,7 @@ class phocebo {
      * @todo add phake mocking to test deleteUser
      */
      
-    public function deleteUser ( $parameters ) {
+    static public function deleteUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -571,7 +571,7 @@ class phocebo {
      
      */
      
-    public function editUser ( $parameters ) {
+    static public function editUser ( $parameters ) {
         
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -678,7 +678,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
      
-    public function getUserFields ( ) {
+    static public function getUserFields ( ) {
         
         $action = '/user/fields';
         
@@ -766,7 +766,7 @@ class phocebo {
      * @todo add Phake to mock calls
      */
      
-    public function getUserProfile ( $parameters ) {
+    static public function getUserProfile ( $parameters ) {
 
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -899,7 +899,7 @@ class phocebo {
 
      */
      
-    public function loggedinUser ( $parameters ) {
+    static public function loggedinUser ( $parameters ) {
 
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -982,7 +982,7 @@ class phocebo {
      * @todo follow up on unenroll_deactivated
      */
      
-    public function suspendUser ( $parameters ) {
+    static public function suspendUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
             
@@ -1056,7 +1056,7 @@ class phocebo {
      
      */
      
-    public function unsuspendUser ( $parameters ) {
+    static public function unsuspendUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1119,7 +1119,7 @@ class phocebo {
      * @todo test $responseObj has expected attributes from server when invalid 
      */
 
-    public function userCourses ( $parameters) {
+    static public function userCourses ( $parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1173,7 +1173,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function listCourses () {
+    static public function listCourses () {
         
        $action = '/course/listCourses';
    
@@ -1214,7 +1214,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function listUsersCourses ($parameters) {
+    static public function listUsersCourses ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1376,7 +1376,7 @@ class phocebo {
      
      */
 
-    public function unenrollUserInCourse ($parameters) {
+    static public function unenrollUserInCourse ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1494,7 +1494,7 @@ class phocebo {
      *
      */
 
-    public function listUserCourses ( $parameters ) {
+    static public function listUserCourses ( $parameters ) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1550,7 +1550,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function subscribeWithCode ($parameters) {
+    static public function subscribeWithCode ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1629,7 +1629,7 @@ class phocebo {
      * @todo how to get list of orgchart/node/branch IDs
      */
 
-    public function createBranch ($parameters) {
+    static public function createBranch ($parameters) {
         
        if ( !array_key_exists( 'branchCode', $parameters) ) {
            
@@ -1709,7 +1709,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function updateBranch ($parameters) {
+    static public function updateBranch ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -1794,7 +1794,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function deleteBranch ($parameters) {
+    static public function deleteBranch ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -2006,7 +2006,7 @@ class phocebo {
                  
      */
 
-    public function getBranchbyCode ($parameters) {
+    static public function getBranchbyCode ($parameters) {
         
        if ( !array_key_exists( 'branchCode', $parameters) ) {
            
@@ -2130,7 +2130,7 @@ class phocebo {
             
      */
 
-    public function getBranchInfo ($parameters) {
+    static public function getBranchInfo ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -2384,7 +2384,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function getBranchParentId ($parameters) {
+    static public function getBranchParentId ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -2456,7 +2456,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function assignUserToBranch ($parameters) {
+    static public function assignUserToBranch ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -2612,7 +2612,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function downgradeUserFromPowerUser ($parameters) {
+    static public function downgradeUserFromPowerUser ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -2739,8 +2739,8 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      
      */
-     
-    private function dataError ( $attribute, $message) {
+
+    static private function dataError ( $attribute, $message) {
         
        $json_array = array ('success' => false, 'error' => '400', 'message' => "$attribute: $message");
        
@@ -2796,8 +2796,8 @@ class phocebo {
 	 * @return array containing default header
 	 *
 	 */
-	 
-	private function getDefaultHeader( $x_auth ) {
+
+    static public function getDefaultHeader( $x_auth ) {
     	
 		$host = parse_url ( URL, PHP_URL_HOST );
 		
@@ -2837,8 +2837,8 @@ class phocebo {
         }
 
 	 */
-	 
-	public function call ( $action, $data_params ) {
+
+    static public function call ( $action, $data_params ) {
     	
 		$curl = curl_init();
 
