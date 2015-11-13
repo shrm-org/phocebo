@@ -118,8 +118,6 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertTrue($URLisValid, "The Docebo URL is invalid");
 
-//        echo 'URL : ' . ($URLisValid) . "\n";
-
     }
 
 
@@ -173,6 +171,8 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
      * testGetHashParametersExist function.
      *
      * @access public
+     * @internal param array $params
+     * @internal param array $codice
      */
 
     public function testGetHashParametersExist() {
@@ -189,6 +189,9 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
      * testGetHashsha1String40 function.
      *
      * @access public
+     * @internal param array $params
+     * @internal param array $codice
+     * @internal param array $sha1_len
      */
 
     public function testGetHashsha1String40() {
@@ -208,6 +211,10 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
      * testResponseIsJSONString function.
      *
      * @access public
+     * @internal param string $action
+     * @internal param array $data_params
+     * @internal param string $response
+     * @internal param string $json_error
      */
 
     public function testResponseIsJSONString() {
@@ -232,7 +239,6 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
     }
 
-
 }
 
 /**
@@ -250,7 +256,6 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * @param mixed $email
      * @param mixed $checkAttribute
      * @param mixed $errorMessage
-     *
      * @dataProvider providerTesttestdoceboId
      */
 
@@ -270,7 +275,6 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * Test data for the testdoceboId function.
      *
      * @access public
-     *
      */
 
     public function providerTesttestdoceboId() {
@@ -371,6 +375,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testauthenticateUserValid function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testauthenticateUserValid ( ) {
@@ -396,8 +401,8 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testauthenticateUserInvalid function.
      *
      * @access public
+     * @param array $parameters
      * @dataProvider providerTesttestauthenticateUserInvalid
-     *
      */
 
     public function testauthenticateUserInvalid ( $parameters ) {
@@ -414,6 +419,11 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * providerTesttestauthenticateUserInvalid function.
+     *
+     * @access public
+     */
 
     public function providerTesttestauthenticateUserInvalid() {
 
@@ -435,6 +445,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testauthenticateUserInvalidJSONMessage400 function.
      *
      * @access public
+     * @param array $parameters
      * @dataProvider providerTesttestauthenticateUserInvalidJSONMessage400
      */
 
@@ -450,6 +461,11 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * providerTesttestauthenticateUserInvalidJSONMessage400 function.
+     *
+     * @access public
+     */
 
     public function providerTesttestauthenticateUserInvalidJSONMessage400() {
 
@@ -470,8 +486,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testaddUserCustomErrorsJSONformatfirstName function.
      *
      * @access public
-     * @param mixed $checkAttribute
-     *
+     * @internal param array $parameters
      */
 
     public function testaddUserCustomErrorsJSONformatfirstName ( ) {
@@ -501,6 +516,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testaddUserCustomErrorsJSONformatlastName function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testaddUserCustomErrorsJSONformatlastName ( ) {
@@ -602,6 +618,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testaddUser function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testaddUser () {
@@ -638,6 +655,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testdeleteUserCustomError function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testdeleteUserCustomError () {
@@ -666,6 +684,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testdeleteUserDoesntExist function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testdeleteUserDoesntExist () {
@@ -690,6 +709,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testdeleteUserValid function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testdeleteUserValid () {
@@ -717,8 +737,8 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testeditUserCustomErrors function.
      *
      * @access public
-     * @dataProvider providerTesttesteditUserCustomErrors
      * @param $parameters
+     * @dataProvider providerTesttesteditUserCustomErrors
      */
 
     public function testeditUserCustomErrors ( $parameters ) {
@@ -767,7 +787,6 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      */
 
     public function testeditUser ( $parameters ) {
-
 
         $responseObj = phocebo::editUser ( $parameters );
 
@@ -863,6 +882,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testgetUserProfileCustomErrors function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetUserProfileCustomErrors () {
@@ -891,6 +911,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testgetUserProfileValid function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetUserProfileValid () {
@@ -940,6 +961,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testgetUserProfileInvalid function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetUserProfileInvalid () {
@@ -966,6 +988,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testgetUserGroupsCustomErrors function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetUserGroupsCustomErrors () {
@@ -994,6 +1017,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testgetUserGroupsCustomErrors function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetUserGroupsValid () {
@@ -1024,6 +1048,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testloggedinUserCustomError function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testloggedinUserCustomError () {
@@ -1052,6 +1077,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testloggedinUserValid function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testloggedinUserValid () {
@@ -1076,6 +1102,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testloggedinUserInValid function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testloggedinUserInValid () {
@@ -1104,6 +1131,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testsuspendUseCustomErrors function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testsuspendUseCustomErrors () {
@@ -1132,6 +1160,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testsuspendUserValidUser function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testsuspendUserValidUser () {
@@ -1160,6 +1189,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testsuspendUserInValidUser function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testsuspendUserInValidUser () {
@@ -1189,6 +1219,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testunsuspendUseCustomErrors function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testunsuspendUseCustomErrors () {
@@ -1218,6 +1249,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testunsuspendUserValidUser function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testunsuspendUserValidUser () {
@@ -1244,6 +1276,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testunsuspendUserInValidUser function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testunsuspendUserInValidUser () {
@@ -1276,13 +1309,11 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
 class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
-
     /**
      * testuserCoursesCustomErrorNoDoceboId function.
      *
      * @access public
-     * @return void
-     *
+     * @internal param array $parameters
      */
 
     public function testuserCoursesCustomErrorNoDoceboId () {
@@ -1304,6 +1335,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * testuserCoursesValid function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
 
     public function testuserCoursesValid () {
 
@@ -1323,6 +1360,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testlistCourses function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testlistCourses () {
@@ -1339,6 +1377,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testlistUsersCourses function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testlistUsersCourses () {
@@ -1355,6 +1394,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testenrollUserInCourseCustomErrors function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testenrollUserInCourseCustomErrors () {
@@ -1405,6 +1445,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testenrollUserInCourse function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testenrollUserInCourse () {
@@ -1417,7 +1458,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::unenrollUserInCourse($parameters);
+        phocebo::unenrollUserInCourse($parameters);
 
         $responseObj = phocebo::enrollUserInCourse($parameters);
 
@@ -1441,6 +1482,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testunenrollUserInCourse function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testunenrollUserInCourse () {
@@ -1467,6 +1509,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testunenrollUserInCourseError function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testunenrollUserInCourseError () {
@@ -1497,6 +1540,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testunenrollUserInCourseCustomError function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testunenrollUserInCourseCustomError () {
@@ -1552,6 +1596,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testlistUserCourses function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testlistUserCourses () {
@@ -1589,6 +1634,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testlistUserCoursesNoCourse function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testlistUserCoursesNoCourse () {
@@ -1619,6 +1665,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * upgradeUserToPowerUser function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function upgradeUserToPowerUser () {
@@ -1656,6 +1703,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testgetBranchbyCodeValid function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetBranchbyCodeValid () {
@@ -1746,6 +1794,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testgetBranchbyCodeInValid function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetBranchbyCodeInValid () {
@@ -1772,6 +1821,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testgetBranchbyCodeCustomErrors function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetBranchbyCodeCustomErrors () {
@@ -1800,6 +1850,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testgetBranchInfo function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetBranchInfo () {
@@ -1892,6 +1943,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testgetBranchbyInfoInValid function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetBranchbyInfoInValid () {
@@ -1918,6 +1970,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testgetBranchbyInfoCustomErrors function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetBranchbyInfoCustomErrors () {
@@ -1946,6 +1999,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testgetBranchChildren function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetBranchChildren () {
@@ -1970,6 +2024,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testgetBranchParentId function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testgetBranchParentId () {
@@ -1996,6 +2051,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testassignUserToBranch function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testassignUserToBranch () {
@@ -2026,6 +2082,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testcreateBranch function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testcreateBranch () {
@@ -2063,6 +2120,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
      * testcreateBranchCustomError function.
      *
      * @access public
+     * @internal param array $parameters
      */
 
     public function testcreateBranchCustomError () {

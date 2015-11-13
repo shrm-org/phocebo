@@ -1282,7 +1282,7 @@ class phocebo {
      
      */
 
-    public function enrollUserInCourse ($parameters) {
+    static public function enrollUserInCourse ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
