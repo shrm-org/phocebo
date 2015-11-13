@@ -833,7 +833,7 @@ class phocebo {
             }
      */
      
-    public function getUserGroups ( $parameters ) {
+    static public function getUserGroups ( $parameters ) {
 
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
