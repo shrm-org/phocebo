@@ -117,7 +117,7 @@ class phocebo {
            
        }
        
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
  
     }
 
@@ -215,7 +215,7 @@ class phocebo {
            
        }
        
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
  
     }
     
@@ -281,7 +281,7 @@ class phocebo {
            
        }
        
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
  
     }
     
@@ -349,7 +349,7 @@ class phocebo {
            
        }
        
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
  
     }
     
@@ -464,7 +464,7 @@ class phocebo {
            
        }
 
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
     
@@ -543,7 +543,7 @@ class phocebo {
            
        }
 
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -641,7 +641,7 @@ class phocebo {
            
        }
 
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -703,7 +703,7 @@ class phocebo {
 
        } 
            
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -805,7 +805,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
     
@@ -872,7 +872,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
     
@@ -947,7 +947,7 @@ class phocebo {
            
         }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
     
@@ -1028,7 +1028,7 @@ class phocebo {
            
        }
       
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
        
     }
     
@@ -1102,7 +1102,7 @@ class phocebo {
            
        }
 
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -1157,7 +1157,7 @@ class phocebo {
            
        }
        
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
  
     }
     
@@ -1197,7 +1197,7 @@ class phocebo {
 
        } 
            
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -1252,7 +1252,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
     
@@ -1346,7 +1346,7 @@ class phocebo {
            
         }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -1440,7 +1440,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -1533,7 +1533,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -1609,7 +1609,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -1691,7 +1691,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -1777,7 +1777,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -1838,7 +1838,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -1906,7 +1906,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -2043,7 +2043,7 @@ class phocebo {
            }           
        }
 
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -2174,7 +2174,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -2292,7 +2292,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
     
@@ -2428,7 +2428,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
     
@@ -2506,7 +2506,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
     
@@ -2594,7 +2594,7 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
@@ -2662,13 +2662,13 @@ class phocebo {
            
        }
         
-       return( self::jsonSHRM ( $json_array ) );
+       return( self::normalizeParams ( $json_array ) );
         
     }
 
 
     /**
-     * jsonSHRM function.
+     * normalizeParams function.
      *
      * Pass JSON array to ensure all variables are returned with consistent names.
      * 
@@ -2681,7 +2681,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
      
-    public function jsonSHRM ( $json_array ) { 
+    public function normalizeParams ( $json_array ) {
         
         $attributes = array (
             
