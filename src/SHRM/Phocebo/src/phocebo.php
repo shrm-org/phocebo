@@ -17,7 +17,7 @@ namespace SHRM\Phocebo;
 /**
  * phocebo class.
  *
- * The hởcebo class is to manage the calls from the internal application Embark
+ * The Phởcebo class is to manage the calls from the internal application Embark
  * to the Docbeo API. This class will make the call and return a SHRM standard
  * JSON file for Embark to process. Programming logic will remain with Embark.
  * 
@@ -1664,7 +1664,7 @@ class phocebo {
            );
      
            $response = self::call ( $action, $data_params );
-           
+
            $json_array = json_decode( $response, true );
            
            if ( false == $json_array['success']) {
@@ -2828,14 +2828,30 @@ class phocebo {
 
      * @todo fix encoding to create branch, issue with translation	 
         array(3) {
-          ["code"]=>
-          string(7) "Testing"
-          ["translation"]=>
-          string(34) "{"english":"Test Branch Creation"}"
-          ["id_parent"]=>
-          string(1) "0"
+
+          ["code"] => string(7) "Testing"
+
+          ["translation"] => string(34) "{"english":"Test Branch Creation"}"
+
+          ["id_parent"] => string(1) "0"
+
         }
 
+         array(3) {
+
+            ["code"] => string(7) "Testing"
+
+            ["translation"] =>  array(1) {
+
+               ["english"] => string(20) "Test Branch Creation"
+            }
+
+            ["id_parent"] => string(1) "0"
+        }
+
+     *
+     *
+     *
 	 */
 
     static public function call ( $action, $data_params ) {
@@ -2843,20 +2859,26 @@ class phocebo {
 		$curl = curl_init();
 
     	if ( array_key_exists('translation', $data_params ) ) { // { english: 'First Node' }
-        	
-        	$translation = '{';
-        	
-        	foreach ($data_params['translation'] as $lang => $branchName) {
-            	
-            	$translation .= $lang . ": '" . $branchName . "'"; 
-            	
-        	}
-        	
-        	$translation .= '}';
-        	
-        	$data_params['translation']  = $translation;
-        	
-        	var_dump($data_params);
+
+            var_dump($data_params);
+
+//            $codice['sha1'] = sha1 ( implode( ',', $data_params ) . ',' . SECRET );
+//
+//            var_dump($codice);
+
+//        	$translation = '{';
+//
+//        	foreach ($data_params['translation'] as $lang => $branchName) {
+//
+//            	$translation .= $lang . ": '" . $branchName . "'";
+//
+//        	}
+//
+//        	$translation .= '}';
+//
+//        	$data_params['translation']  = $translation;
+//
+//        	var_dump($data_params);
         	
 
     	}
@@ -2888,6 +2910,12 @@ class phocebo {
 		curl_setopt_array ( $curl, $opt );
 		
 		$output = curl_exec ( $curl );
+
+//        if ( array_key_exists('translation', $data_params ) ) { // { english: 'First Node' }
+//
+//            var_dump($output);
+//
+//        }
 		
 		curl_close ( $curl );
 		

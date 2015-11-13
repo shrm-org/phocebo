@@ -69,21 +69,43 @@ if (file_exists(INI)) {
 } else die( "\nERROR: Phởcebo ingredients are missing (.env) \n\n");
 
 
+/**
+ * EnvironmentVariablesTest class.
+ */
+
 class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
-    
+
+    /**
+     * testEnvironmentSettingsLoaded function.
+     *
+     * @access public
+     */
+
     public function testEnvironmentSettingsLoaded() {
         
         global $settings;
 
         $this->assertArrayHasKey("docebo", $settings, "Environment settings not loaded");
 
-    }    
+    }
+
+    /**
+     * testURLisNotBlank function.
+     *
+     * @access public
+     */
 
     public function testURLisNotBlank() {
               
         $this->assertNotEquals(URL, "URL", "Missing Docebo URL");
 
-    }    
+    }
+
+    /**
+     * testURLisValid function.
+     *
+     * @access public
+     */
 
     public function testURLisValid() {
         
@@ -101,17 +123,35 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * testKEYisNotBlank function.
+     *
+     * @access public
+     */
+
     public function testKEYisNotBlank() {
               
         $this->assertNotEquals(KEY, "KEY", "Missing Docebo public key");
 
-    }    
+    }
+
+    /**
+     * testSECRETisNotBlank function.
+     *
+     * @access public
+     */
 
     public function testSECRETisNotBlank() {
               
         $this->assertNotEquals(SECRET, "SECRET", "Missing Docebo secret key");
 
-    }    
+    }
+
+    /**
+     * testSSOisNotBlank function.
+     *
+     * @access public
+     */
 
     public function testSSOisNotBlank() {
               
@@ -121,8 +161,19 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     
 }
 
+/**
+ * testphoceboCooking class.
+ */
+
+
 class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
+
+    /**
+     * testGetHashParametersExist function.
+     *
+     * @access public
+     */
 
     public function testGetHashParametersExist() {
         
@@ -139,9 +190,8 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
      *
      * @access public
      */
-    public function testGetHashsha1String40() {
 
-        $sha1_len = 0;
+    public function testGetHashsha1String40() {
 
         $params = array ( 'userid', 'also_check_as_email' );
 
@@ -153,6 +203,12 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
     }
 
+
+    /**
+     * testResponseIsJSONString function.
+     *
+     * @access public
+     */
 
     public function testResponseIsJSONString() {
 
@@ -178,6 +234,10 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
 
 }
+
+/**
+ * testphoceboDiner class.
+ */
 
 class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
@@ -276,11 +336,8 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testdoceboIdCustomErrors function.
      *
      * @access public
-     * @param mixed $checkAttribute
-     * @param mixed $errorMessage
-     *
+     * @param array $parameters
      * @dataProvider providerTesttestdoceboIdCustomErrors
-     *
      */
 
     public function testdoceboIdCustomErrors ( $parameters ) {
@@ -290,6 +347,12 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         $this->assertEquals( $responseObj->error, '400', 'JSON response should be reporting error 400' );
 
     }
+
+    /**
+     * providerTesttestdoceboIdCustomErrors function.
+     *
+     * @access public
+     */
 
     public function providerTesttestdoceboIdCustomErrors() {
 
@@ -440,7 +503,6 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * @access public
      */
 
-
     public function testaddUserCustomErrorsJSONformatlastName ( ) {
 
         $parameters = array (
@@ -503,12 +565,8 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testaddUserCustomErrors function.
      *
      * @access public
-     * @param mixed $checkAttribute
-     * @param mixed $errorMessage
-     * @return void
-     *
+     * @param array $parameters
      * @dataProvider providerTesttestaddUserCustomErrors
-     *
      */
 
     public function testaddUserCustomErrors ( $parameters ) {
@@ -518,6 +576,12 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
     }
+
+    /**
+     * providerTesttestaddUserCustomErrors function.
+     *
+     * @access public
+     */
 
     public function providerTesttestaddUserCustomErrors() {
 
@@ -606,11 +670,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testdeleteUserDoesntExist () {
 
-        $parameters = array (
-
-            'doceboId'                 => '10101',
-
-        );
+        $parameters = array ( 'doceboId' => '10101' );
 
         $responseObj = phocebo::deleteUser( $parameters );
 
@@ -634,11 +694,8 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testdeleteUserValid () {
 
-        $parameters = array (
-
-            'doceboId'                 => '12370',
-
-        );
+        /** @var array $parameters */
+        $parameters = array ( 'doceboId'  => '12370' );
 
 /*
         $responseObj = phocebo::deleteUser( $parameters );
@@ -661,6 +718,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      *
      * @access public
      * @dataProvider providerTesttesteditUserCustomErrors
+     * @param $parameters
      */
 
     public function testeditUserCustomErrors ( $parameters ) {
@@ -678,6 +736,12 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
     }
+
+    /**
+     * providerTesttesteditUserCustomErrors function.
+     *
+     * @access public
+     */
 
     public function providerTesttesteditUserCustomErrors() {
 
@@ -698,6 +762,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
      * testeditUserCustomServerErrors function.
      *
      * @access public
+     * @param $parameters
      * @dataProvider providerTesttesteditUser
      */
 
@@ -715,6 +780,12 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         $this->assertObjectNotHasAttribute( 'idst', $responseObj, 'Object response should not have attribute idst');
 
     }
+
+    /**
+     * providerTesttesteditUser function.
+     *
+     * @access public
+     */
 
     public function providerTesttesteditUser() {
 
@@ -891,7 +962,11 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     }
 
-
+    /**
+     * testgetUserGroupsCustomErrors function.
+     *
+     * @access public
+     */
 
     public function testgetUserGroupsCustomErrors () {
 
@@ -915,6 +990,11 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testgetUserGroupsCustomErrors function.
+     *
+     * @access public
+     */
 
     public function testgetUserGroupsValid () {
 
@@ -940,6 +1020,12 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testloggedinUserCustomError function.
+     *
+     * @access public
+     */
+
     public function testloggedinUserCustomError () {
 
         $parameters = array (
@@ -962,6 +1048,12 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testloggedinUserValid function.
+     *
+     * @access public
+     */
+
     public function testloggedinUserValid () {
 
         $parameters = array (
@@ -979,6 +1071,12 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute( 'loggedIn', $responseObj, "Object response missing attribute loggedIn" );
 
     }
+
+    /**
+     * testloggedinUserInValid function.
+     *
+     * @access public
+     */
 
     public function testloggedinUserInValid () {
 
@@ -1172,6 +1270,10 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 }
 
 
+/**
+ * testphoceboCourse class.
+ */
+
 class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
 
@@ -1217,6 +1319,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * testlistCourses function.
+     *
+     * @access public
+     */
+
     public function testlistCourses () {
 
         $responseObj = phocebo::listCourses();
@@ -1227,6 +1335,11 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testlistUsersCourses function.
+     *
+     * @access public
+     */
 
     public function testlistUsersCourses () {
 
@@ -1238,6 +1351,11 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testenrollUserInCourseCustomErrors function.
+     *
+     * @access public
+     */
 
     public function testenrollUserInCourseCustomErrors () {
 
@@ -1283,6 +1401,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testenrollUserInCourse function.
+     *
+     * @access public
+     */
+
     public function testenrollUserInCourse () {
 
         $parameters = array (
@@ -1313,6 +1437,11 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testunenrollUserInCourse function.
+     *
+     * @access public
+     */
 
     public function testunenrollUserInCourse () {
 
@@ -1333,6 +1462,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
     }
+
+    /**
+     * testunenrollUserInCourseError function.
+     *
+     * @access public
+     */
 
     public function testunenrollUserInCourseError () {
 
@@ -1357,6 +1492,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
 
     }
+
+    /**
+     * testunenrollUserInCourseCustomError function.
+     *
+     * @access public
+     */
 
     public function testunenrollUserInCourseCustomError () {
 
@@ -1407,6 +1548,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * testlistUserCourses function.
+     *
+     * @access public
+     */
+
     public function testlistUserCourses () {
 
         $parameters = array (
@@ -1415,13 +1562,13 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        phocebo::enrollUserInCourse( array (
+        phocebo::enrollUserInCourse( [
 
             'doceboId' => '12339',
 
             'courseCode'    => '14-06'
 
-        ) );
+        ]);
 
         $responseObj = phocebo::listUserCourses($parameters);
 
@@ -1437,6 +1584,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+
+    /**
+     * testlistUserCoursesNoCourse function.
+     *
+     * @access public
+     */
 
     public function testlistUserCoursesNoCourse () {
 
@@ -1462,15 +1615,21 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
-
+    /**
+     * upgradeUserToPowerUser function.
+     *
+     * @access public
+     */
 
     public function upgradeUserToPowerUser () {
 
+        /** @var object $branchObj */
+        $branchObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ) );
 
+        /** @var object $userObj */
         $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
 
 //        var_dump($userObj);
-
 
         $parameters = array (
 
@@ -1493,6 +1652,11 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * testgetBranchbyCodeValid function.
+     *
+     * @access public
+     */
 
     public function testgetBranchbyCodeValid () {
 
@@ -1578,6 +1742,11 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testgetBranchbyCodeInValid function.
+     *
+     * @access public
+     */
 
     public function testgetBranchbyCodeInValid () {
 
@@ -1598,6 +1767,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         $this->assertNull ( $responseObj->branchId,  'Parameter "branchId" should be NULL' );
 
     }
+
+    /**
+     * testgetBranchbyCodeCustomErrors function.
+     *
+     * @access public
+     */
 
     public function testgetBranchbyCodeCustomErrors () {
 
@@ -1620,6 +1795,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
     }
+
+    /**
+     * testgetBranchInfo function.
+     *
+     * @access public
+     */
 
     public function testgetBranchInfo () {
 
@@ -1707,6 +1888,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testgetBranchbyInfoInValid function.
+     *
+     * @access public
+     */
+
     public function testgetBranchbyInfoInValid () {
 
         $parameters = array (
@@ -1726,6 +1913,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
 
     }
+
+    /**
+     * testgetBranchbyInfoCustomErrors function.
+     *
+     * @access public
+     */
 
     public function testgetBranchbyInfoCustomErrors () {
 
@@ -1749,6 +1942,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testgetBranchChildren function.
+     *
+     * @access public
+     */
+
     public function testgetBranchChildren () {
 
         $parameters = array (
@@ -1766,6 +1965,12 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute( 'children', $responseObj, 'Object response missing attribute "children"');
 
     }
+
+    /**
+     * testgetBranchParentId function.
+     *
+     * @access public
+     */
 
     public function testgetBranchParentId () {
 
@@ -1787,6 +1992,11 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testassignUserToBranch function.
+     *
+     * @access public
+     */
 
     public function testassignUserToBranch () {
 
@@ -1812,9 +2022,15 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testcreateBranch function.
+     *
+     * @access public
+     */
+
     public function testcreateBranch () {
 
-//
+
 //        $branchObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ) );
 //
 //        $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
@@ -1834,19 +2050,20 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 //
 //        $responseObj = phocebo::createBranch( $parameters );
 //
-//        var_dump($responseObj);
-//
-//
-//
-//
 //        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 //
 //        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 //
 //        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
-//
+
 
     }
+
+    /**
+     * testcreateBranchCustomError function.
+     *
+     * @access public
+     */
 
     public function testcreateBranchCustomError () {
 
