@@ -1998,7 +1998,7 @@ class phocebo {
               ["translation"] => array(0) {
                   
               }
-              
+
               ["success"] => bool(true)
             }
 

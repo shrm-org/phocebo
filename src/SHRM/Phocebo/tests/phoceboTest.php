@@ -36,43 +36,37 @@ string(26) "Invalid user specification"
 
 define('INI', '.env');
 
-define( 'URL', 'http://shrmprodecs.docebosaas.com');
-define( 'KEY', 'Xb*vT36kluVBuyR_Xs_rRB8Y');
-define( 'SECRET', 'OOsIk3!g*CIx0m1O7yjItI8ufzm4BU_1XiwF');
-define( 'SSO', 'sso');
 
 
+if (file_exists(INI)) {
 
-//if (file_exists(INI)) {
-//
-//    $settings = parse_ini_file (INI, true);
-//
-//    /**
-//     * @const URL Docebo URL
-//     */
-//
-//    define('URL', $settings['docebo']['URL']);
-//
-//    /**
-//     * @const KEY Docebo public Key
-//     */
-//
-//    define('KEY', $settings['docebo']['KEY']);
-//
-//    /**
-//     * @const SECRET Docebo secret Key
-//     */
-//
-//    define('SECRET', $settings['docebo']['SECRET']);
-//
-//    /**
-//     * @const SSO - Future SSO
-//     */
-//
-//    define('SSO', $settings['docebo']['SSO']);
-//
-//} else die( "\nERROR: Phởcebo ingredients are missing (.env) \n\n");
+    $settings = parse_ini_file (INI, true);
 
+    /**
+     * @const URL Docebo URL
+     */
+
+    define('URL', $settings['docebo']['URL']);
+
+    /**
+     * @const KEY Docebo public Key
+     */
+
+    define('KEY', $settings['docebo']['KEY']);
+
+    /**
+     * @const SECRET Docebo secret Key
+     */
+
+    define('SECRET', $settings['docebo']['SECRET']);
+
+    /**
+     * @const SSO - Future SSO
+     */
+
+    define('SSO', $settings['docebo']['SSO']);
+
+} else die( "\nERROR: Phởcebo ingredients are missing (.env) \n\n");
 
 
 class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
@@ -102,7 +96,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertTrue($URLisValid, "The Docebo URL is invalid");
 
-        echo 'URL : ' . ($URLisValid) . "\n";
+//        echo 'URL : ' . ($URLisValid) . "\n";
 
     }
 
@@ -206,7 +200,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
 
-         var_dump($responseObj);
+//         var_dump($responseObj);
 
     }
 
@@ -1475,7 +1469,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
 
-        var_dump($userObj);
+//        var_dump($userObj);
 
 
         $parameters = array (
