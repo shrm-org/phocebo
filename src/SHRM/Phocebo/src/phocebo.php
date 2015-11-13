@@ -2681,7 +2681,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
      
-    public function normalizeParams ( $json_array ) {
+    static public function normalizeParams ( $json_array ) {
         
         $attributes = array (
             
