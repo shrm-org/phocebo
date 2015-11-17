@@ -75,38 +75,6 @@ if (file_exists(INI)) {
 
 class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
-    public function testcreateBranch () {
-
-
-        $branchObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ) );
-
-        $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
-
-
-        $parameters = array (
-
-            'branchCode' => 'Testing',
-
-            'parentBranchId' => '0',
-
-            'branchName'    => 'Test2'
-
-
-        );
-
-
-        $responseObj = phocebo::createBranch( $parameters );
-
-        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
-
-        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-
-        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
-
-    }
-
-
-
     /**
      * testEnvironmentSettingsLoaded function.
      *
@@ -2119,23 +2087,15 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     public function testcreateBranch () {
 
-
-//        $branchObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ) );
-//
-//        $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
-//
-//
 //        $parameters = array (
 //
-//            'branchCode' => 'Testing',
+//            'branchCode' => 'Testing Branch Name as Code',
 //
 //            'parentBranchId' => '0',
 //
-//            'branchName'    => 'Test Branch Creation'
-//
+//            'branchName'    => 'Testing Branch Name as Code'
 //
 //        );
-//
 //
 //        $responseObj = phocebo::createBranch( $parameters );
 //
@@ -2143,8 +2103,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 //
 //        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 //
-//        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
-
+//        $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
 
     }
 
@@ -2157,7 +2116,6 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     public function testcreateBranchCustomError () {
 
-/*
         $parameters = array (
 
             'nobranchCode'    => 'TEST',
@@ -2224,7 +2182,6 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
 
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
-*/
 
     }    
 

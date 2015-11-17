@@ -1622,6 +1622,15 @@ class phocebo {
      * @access public
      * @param array $parameters
      * @return object
+     *
+     *       (stdClass) {
+     *
+     *           ["success"] =>  bool(true)
+     *
+     *           ["branchId"] => string(2) "60"
+     *
+     *       }
+     *
      * @todo create tests
      * @todo test $responseObj has expected attributes from server when valid 
      * @todo test $responseObj does not have attributes (such as idst)
@@ -1646,18 +1655,12 @@ class phocebo {
        } else {
 
            $action = '/orgchart/createNode';
-           
-           $translation = array (
-               
-               'english' => $parameters['branchName'],
-               
-           );
-       
+
            $data_params = array (
         
                'code'                => $parameters['branchCode'],
                
-               'translation'         => 'translation[english]=test2',
+               'translation[english]'=> $parameters['branchName'],
 
                'id_parent'           => $parameters['parentBranchId'],
     	
