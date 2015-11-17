@@ -2087,21 +2087,21 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     public function testcreateBranch () {
 
-        $parameters = array (
-
-            'parentBranchId' => '0',
-
-            'branchName'    => 'Testing Branch Name as Code'
-
-        );
-
-        $responseObj = phocebo::createBranch( $parameters );
-
-        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
-
-        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-
-        $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
+//        $parameters = array (
+//
+//            'parentBranchId' => '0',
+//
+//            'branchName'    => 'Testing Branch Name as Code'
+//
+//        );
+//
+//        $responseObj = phocebo::createBranch( $parameters );
+//
+//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+//
+//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+//
+//        $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
 
     }
 
@@ -2117,7 +2117,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 //        $parameters = array (
 //
 //            'nobranchCode'    => 'TEST',
-//
+//L
 //            'parentBranchId'    => '0',
 //
 //            'branchName'    => 'Test Branch Creation'
