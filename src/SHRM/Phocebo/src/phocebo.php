@@ -1657,7 +1657,7 @@ class phocebo {
         
                'code'                => $parameters['branchCode'],
                
-               'translation'         => $translation,
+               'translation'         => 'translation[english]=test2',
 
                'id_parent'           => $parameters['parentBranchId'],
     	
@@ -2765,11 +2765,37 @@ class phocebo {
 
         /** @var array $data_params */
 
+        $codice = array( 'sha1' => '', 'x_auth' => '' );
+
         if ( !empty ( $data_params ) ) {
-        	
-    		$codice = array( 'sha1' => '', 'x_auth' => '' );
-    		
-    		$codice['sha1'] = sha1 ( implode( ',', $data_params ) . ',' . SECRET );
+
+//            if ( array_key_exists('translation', $data_params ) ) { // { english: 'First Node' }
+//
+//                echo "before\n";
+//
+//                var_dump($data_params);
+//
+//                $translation = 'translation[english]=';
+//
+//                foreach ($data_params['translation'] as $lang => $branchName) {
+//
+//                    $translation .= $branchName;
+//
+//                }
+//
+//                unset($data_params['translation']);
+//
+//                $data_params['translation']  = $translation;
+//
+//                echo "after\n";
+//
+//                var_dump($data_params);
+//
+//
+//            }
+
+
+            $codice['sha1'] = sha1 ( implode( ',', $data_params ) . ',' . SECRET );
     		
     		$codice['x_auth'] = base64_encode ( KEY . ':' . $codice['sha1'] );
     		  		
@@ -2858,34 +2884,34 @@ class phocebo {
     	
 		$curl = curl_init();
 
-    	if ( array_key_exists('translation', $data_params ) ) { // { english: 'First Node' }
-
-            var_dump($data_params);
-
-//            $codice['sha1'] = sha1 ( implode( ',', $data_params ) . ',' . SECRET );
-//
-//            var_dump($codice);
-
-//        	$translation = '{';
-//
-//        	foreach ($data_params['translation'] as $lang => $branchName) {
-//
-//            	$translation .= $lang . ": '" . $branchName . "'";
-//
-//        	}
-//
-//        	$translation .= '}';
-//
-//        	$data_params['translation']  = $translation;
-//
-//        	var_dump($data_params);
-        	
-
-    	}
-        	
 		$hash_info = self::getHash ( $data_params );
 
 		$http_header = self::getDefaultHeader ( $hash_info['x_auth'] );
+
+//        if ( array_key_exists('translation', $data_params ) ) { // { english: 'First Node' }
+//
+//            echo "before\n";
+//
+//            var_dump($data_params);
+//
+//            $translation = 'translation[english]=';
+//
+//            foreach ($data_params['translation'] as $lang => $branchName) {
+//
+//                $translation .= $branchName;
+//
+//            }
+//
+//            unset($data_params['translation']);
+//
+//            $data_params['translation']  = $translation;
+//
+//            echo "after\n";
+//
+//            var_dump($data_params);
+//
+//
+//        }
 
 		$opt = array (
     		
@@ -2906,16 +2932,16 @@ class phocebo {
 			CURLOPT_SSL_VERIFYHOST => false,
 			
 		);
-		
+
 		curl_setopt_array ( $curl, $opt );
-		
+
 		$output = curl_exec ( $curl );
 
-//        if ( array_key_exists('translation', $data_params ) ) { // { english: 'First Node' }
-//
-//            var_dump($output);
-//
-//        }
+        if ( array_key_exists('translation', $data_params ) ) { // { english: 'First Node' }
+
+            var_dump($output);
+
+        }
 		
 		curl_close ( $curl );
 		
