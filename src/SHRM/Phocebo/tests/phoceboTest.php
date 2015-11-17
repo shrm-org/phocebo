@@ -2087,23 +2087,21 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     public function testcreateBranch () {
 
-//        $parameters = array (
-//
-//            'branchCode' => 'Testing Branch Name as Code',
-//
-//            'parentBranchId' => '0',
-//
-//            'branchName'    => 'Testing Branch Name as Code'
-//
-//        );
-//
-//        $responseObj = phocebo::createBranch( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-//
-//        $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
+        $parameters = array (
+
+            'parentBranchId' => '0',
+
+            'branchName'    => 'Testing Branch Name as Code'
+
+        );
+
+        $responseObj = phocebo::createBranch( $parameters );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
 
     }
 
@@ -2116,72 +2114,72 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     public function testcreateBranchCustomError () {
 
-        $parameters = array (
-
-            'nobranchCode'    => 'TEST',
-
-            'parentBranchId'    => '0',
-
-            'branchName'    => 'Test Branch Creation'
-
-
-        );
-
-        $responseObj = phocebo::createBranch($parameters);
-
-        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-
-        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-
-        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-
-        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-
-        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
-
-        $parameters = array (
-
-            'branchCode'    => 'TEST',
-
-            'nobranchName'    => 'Test Branch Creation',
-
-            'parentBranchId'    => 'Parent Branch ID'
-
-        );
-
-        $responseObj = phocebo::createBranch($parameters);
-
-        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-
-        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-
-        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-
-        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-
-        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
-
-        $parameters = array (
-
-            'branchCode'    => 'TEST',
-
-            'branchName'    => 'Test Branch Creation',
-
-            'noparentBranchId'    => 'Parent Branch ID'
-
-        );
-
-        $responseObj = phocebo::createBranch($parameters);
-
-        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-
-        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-
-        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-
-        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-
-        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+//        $parameters = array (
+//
+//            'nobranchCode'    => 'TEST',
+//
+//            'parentBranchId'    => '0',
+//
+//            'branchName'    => 'Test Branch Creation'
+//
+//
+//        );
+//
+//        $responseObj = phocebo::createBranch($parameters);
+//
+//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+//
+//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+//
+//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+//
+//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+//
+//        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+//
+//        $parameters = array (
+//
+//            'branchCode'    => 'TEST',
+//
+//            'nobranchName'    => 'Test Branch Creation',
+//
+//            'parentBranchId'    => 'Parent Branch ID'
+//
+//        );
+//
+//        $responseObj = phocebo::createBranch($parameters);
+//
+//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+//
+//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+//
+//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+//
+//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+//
+//        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+//
+//        $parameters = array (
+//
+//            'branchCode'    => 'TEST',
+//
+//            'branchName'    => 'Test Branch Creation',
+//
+//            'noparentBranchId'    => 'Parent Branch ID'
+//
+//        );
+//
+//        $responseObj = phocebo::createBranch($parameters);
+//
+//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+//
+//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+//
+//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+//
+//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+//
+//        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
     }    
 

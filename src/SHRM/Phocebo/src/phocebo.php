@@ -1640,13 +1640,9 @@ class phocebo {
 
     static public function createBranch ($parameters) {
         
-       if ( !array_key_exists( 'branchCode', $parameters) ) {
+       if ( !array_key_exists( 'branchName', $parameters) ) {
            
-           $json_array = self::dataError ( 'branchCode', 'Required parameter "branchCode" missing: alphanumeric code for the branch');
-           
-       } elseif ( !array_key_exists( 'branchName', $parameters) ) {
-           
-           $json_array = self::dataError ( 'branchName', 'Required parameter array for "branchName" missing');
+           $json_array = self::dataError ( 'branchName', 'Required parameter "branchName" missing: alphanumeric name for the branch');
 
        } elseif ( !array_key_exists( 'parentBranchId', $parameters) ) {
            
@@ -1654,22 +1650,46 @@ class phocebo {
 
        } else {
 
-           $action = '/orgchart/createNode';
+           $responseobj = self::getBranchbyCode( array ( 'branchCode' => $parameters['branchName'] ) );
 
-           $data_params = array (
-        
-               'code'                => $parameters['branchCode'],
-               
-               'translation[english]'=> $parameters['branchName'],
+           if (true == $responseobj->success) {
 
-               'id_parent'           => $parameters['parentBranchId'],
-    	
-           );
-     
-           $response = self::call ( $action, $data_params );
+               echo "branch already created " . $responseobj->branchId . "\n";
 
-           $json_array = json_decode( $response, true );
-           
+               $json_array = array (
+
+                   'success' => false,
+
+                   'error' => '400',
+
+                   'message' => "Branch already exists with that name",
+
+                   'branchId' => $responseobj->branchId
+
+               );
+
+
+           } else {
+
+               $action = '/orgchart/createNode';
+
+               $data_params = array (
+
+                   'code'                => $parameters['branchName'],
+
+                   'translation[english]'=> $parameters['branchName'],
+
+                   'id_parent'           => $parameters['parentBranchId'],
+
+               );
+
+               $response = self::call ( $action, $data_params );
+
+               $json_array = json_decode( $response, true );
+
+           }
+
+
            if ( false == $json_array['success']) {
     
                if ('401' == $json_array['error']) {
