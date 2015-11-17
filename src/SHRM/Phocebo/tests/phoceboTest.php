@@ -75,6 +75,38 @@ if (file_exists(INI)) {
 
 class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
+    public function testcreateBranch () {
+
+
+        $branchObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ) );
+
+        $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+
+
+        $parameters = array (
+
+            'branchCode' => 'Testing',
+
+            'parentBranchId' => '0',
+
+            'branchName'    => 'Test2'
+
+
+        );
+
+
+        $responseObj = phocebo::createBranch( $parameters );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
+
+    }
+
+
+
     /**
      * testEnvironmentSettingsLoaded function.
      *
