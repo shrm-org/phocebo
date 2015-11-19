@@ -23,7 +23,7 @@ namespace SHRM\Phocebo;
  * 
  * @package Phởcebo
  * @author Patricia Walton <patricia.walton@shrm.org>
- * @version 0.0.9
+ * @version 0.1.1
  * @license MIT
  * @copyright 2015 SHRM
  * @link https://doceboapi.docebosaas.com/api/docs
@@ -38,7 +38,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
      * @param array $parameters
 
@@ -360,7 +360,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
      * @param array $parameters
      
@@ -474,7 +474,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
      * @param array $parameters
      * @return object
@@ -554,7 +554,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
      * @param array $parameters
      * @return object
@@ -651,7 +651,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
      * @return object
      *
@@ -714,7 +714,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
      * @static
      * @param array $parameters
@@ -957,7 +957,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
      * @param array $parameters
      * @return object
@@ -1040,7 +1040,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
      * @param array $parameters
      * @return object 
@@ -1644,13 +1644,17 @@ class phocebo {
            
            $json_array = self::dataError ( 'branchName', 'Required parameter "branchName" missing: alphanumeric name for the branch');
 
-       } elseif ( !array_key_exists( 'parentBranchId', $parameters) ) {
+       } elseif ( !array_key_exists( 'branchCode', $parameters) ) {
            
+           $json_array = self::dataError ( 'branchCode', 'Required parameter "branchCode" missing');
+
+       } elseif ( !array_key_exists( 'parentBranchId', $parameters) ) {
+
            $json_array = self::dataError ( 'parentBranchId', 'Required parameter "parentBranchId" missing');
 
        } else {
 
-           $responseobj = self::getBranchbyCode( array ( 'branchCode' => $parameters['branchName'] ) );
+           $responseobj = self::getBranchbyCode( array ( 'branchCode' => $parameters['branchCode'] ) );
 
            if (true == $responseobj->success) {
 
@@ -1660,7 +1664,7 @@ class phocebo {
 
                    'success' => false,
 
-                   'error' => '400',
+                   'error' => '201',
 
                    'message' => "Branch already exists with that name",
 
@@ -1675,7 +1679,7 @@ class phocebo {
 
                $data_params = array (
 
-                   'code'                => $parameters['branchName'],
+                   'code'                => $parameters['branchCode'],
 
                    'translation[english]'=> $parameters['branchName'],
 
@@ -2777,7 +2781,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
      * @param array $data_params
      * @return array $codice hash value for x_auth
@@ -2838,7 +2842,7 @@ class phocebo {
 	 * 
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
 	 * @param array $x_auth
 	 *
@@ -2868,7 +2872,7 @@ class phocebo {
 	 * 
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.9
+     * @version 0.1.1
      * @access public
 	 * @param mixed $action Docebo API Call
 	 * @param mixed $data_params parameters to send

@@ -2118,6 +2118,8 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 //
 //            'branchName'    => 'Testing Branch Name as Code'
 //
+//            'branchCode'    => 'www.branch.code'
+
 //        );
 //
 //        $responseObj = $this->phocebo->createBranch( $parameters );
