@@ -23,7 +23,7 @@ namespace SHRM\Phocebo;
  * 
  * @package Phởcebo
  * @author Patricia Walton <patricia.walton@shrm.org>
- * @version 0.0.8
+ * @version 0.0.9
  * @license MIT
  * @copyright 2015 SHRM
  * @link https://doceboapi.docebosaas.com/api/docs
@@ -38,7 +38,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
      * @param array $parameters
 
@@ -67,7 +67,7 @@ class phocebo {
      */
      
      
-    static public function getdoceboId ( $parameters ) {
+    public function getdoceboId ( $parameters ) {
         
        if ( !array_key_exists( 'email', $parameters ) ) {
            
@@ -159,7 +159,7 @@ class phocebo {
      */
      
      
-    static public function authenticateUser ( $parameters ) {
+    public function authenticateUser ( $parameters ) {
         
        if ( array_key_exists( 'doceboId', $parameters) ) {
            
@@ -238,7 +238,7 @@ class phocebo {
      * @todo test $responseObj does not have attributes (such as idst)    
      */
 
-    static public function getToken ( $parameters ) {
+    public function getToken ( $parameters ) {
         
        if ( !array_key_exists( 'username', $parameters ) ) {
            
@@ -299,7 +299,7 @@ class phocebo {
      * @todo test $responseObj does not have attributes (such as idst)    
      */
 
-    static public function checkToken ( $parameters ) {
+    public function checkToken ( $parameters ) {
         
        if ( !array_key_exists( 'doceboId', $parameters ) ) {
            
@@ -360,7 +360,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
      * @param array $parameters
      
@@ -388,7 +388,7 @@ class phocebo {
      * @todo add phake mocking for addUser testing
      */
      
-    static public function addUser ( $parameters ) {
+    public function addUser ( $parameters ) {
            
         if ( !array_key_exists( 'firstName', $parameters) ) {
            
@@ -474,7 +474,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
      * @param array $parameters
      * @return object
@@ -499,7 +499,7 @@ class phocebo {
      * @todo add phake mocking to test deleteUser
      */
      
-    static public function deleteUser ( $parameters ) {
+    public function deleteUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -554,7 +554,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
      * @param array $parameters
      * @return object
@@ -571,7 +571,7 @@ class phocebo {
      
      */
      
-    static public function editUser ( $parameters ) {
+    public function editUser ( $parameters ) {
         
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -651,7 +651,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
      * @return object
      *
@@ -678,7 +678,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
      
-    static public function getUserFields ( ) {
+    public function getUserFields ( ) {
         
         $action = '/user/fields';
         
@@ -714,7 +714,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
      * @static
      * @param array $parameters
@@ -766,7 +766,7 @@ class phocebo {
      * @todo add Phake to mock calls
      */
      
-    static public function getUserProfile ( $parameters ) {
+    public function getUserProfile ( $parameters ) {
 
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -833,7 +833,7 @@ class phocebo {
             }
      */
      
-    static public function getUserGroups ( $parameters ) {
+    public function getUserGroups ( $parameters ) {
 
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -899,7 +899,7 @@ class phocebo {
 
      */
      
-    static public function loggedinUser ( $parameters ) {
+    public function loggedinUser ( $parameters ) {
 
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -957,7 +957,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
      * @param array $parameters
      * @return object
@@ -982,7 +982,7 @@ class phocebo {
      * @todo follow up on unenroll_deactivated
      */
      
-    static public function suspendUser ( $parameters ) {
+    public function suspendUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
             
@@ -1040,7 +1040,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
      * @param array $parameters
      * @return object 
@@ -1056,7 +1056,7 @@ class phocebo {
      
      */
      
-    static public function unsuspendUser ( $parameters ) {
+    public function unsuspendUser ( $parameters ) {
            
         if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1119,7 +1119,7 @@ class phocebo {
      * @todo test $responseObj has expected attributes from server when invalid 
      */
 
-    static public function userCourses ( $parameters) {
+    public function userCourses ( $parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1173,7 +1173,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    static public function listCourses () {
+    public function listCourses () {
         
        $action = '/course/listCourses';
    
@@ -1214,7 +1214,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    static public function listUsersCourses ($parameters) {
+    public function listUsersCourses ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1282,7 +1282,7 @@ class phocebo {
      
      */
 
-    static public function enrollUserInCourse ($parameters) {
+    public function enrollUserInCourse ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1376,7 +1376,7 @@ class phocebo {
      
      */
 
-    static public function unenrollUserInCourse ($parameters) {
+    public function unenrollUserInCourse ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1494,7 +1494,7 @@ class phocebo {
      *
      */
 
-    static public function listUserCourses ( $parameters ) {
+    public function listUserCourses ( $parameters ) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1550,7 +1550,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    static public function subscribeWithCode ($parameters) {
+    public function subscribeWithCode ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -1638,7 +1638,7 @@ class phocebo {
      * @todo how to get list of orgchart/node/branch IDs
      */
 
-    static public function createBranch ($parameters) {
+    public function createBranch ($parameters) {
         
        if ( !array_key_exists( 'branchName', $parameters) ) {
            
@@ -1732,7 +1732,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    static public function updateBranch ($parameters) {
+    public function updateBranch ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -1817,7 +1817,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    static public function deleteBranch ($parameters) {
+    public function deleteBranch ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -2029,7 +2029,7 @@ class phocebo {
                  
      */
 
-    static public function getBranchbyCode ($parameters) {
+    public function getBranchbyCode ($parameters) {
         
        if ( !array_key_exists( 'branchCode', $parameters) ) {
            
@@ -2153,7 +2153,7 @@ class phocebo {
             
      */
 
-    static public function getBranchInfo ($parameters) {
+    public function getBranchInfo ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -2407,7 +2407,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    static public function getBranchParentId ($parameters) {
+    public function getBranchParentId ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -2479,7 +2479,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    static public function assignUserToBranch ($parameters) {
+    public function assignUserToBranch ($parameters) {
         
        if ( !array_key_exists( 'branchId', $parameters) ) {
            
@@ -2635,7 +2635,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    static public function downgradeUserFromPowerUser ($parameters) {
+    public function downgradeUserFromPowerUser ($parameters) {
         
        if ( !array_key_exists( 'doceboId', $parameters) ) {
            
@@ -2704,7 +2704,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
      
-    static public function normalizeParams ( $json_array ) {
+    public function normalizeParams ( $json_array ) {
         
         $attributes = array (
             
@@ -2763,7 +2763,7 @@ class phocebo {
      
      */
 
-    static private function dataError ( $attribute, $message) {
+    private function dataError ( $attribute, $message) {
         
        $json_array = array ('success' => false, 'error' => '400', 'message' => "$attribute: $message");
        
@@ -2777,14 +2777,14 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
      * @param array $data_params
      * @return array $codice hash value for x_auth
      *
      */
 	 
-	static public function getHash( $data_params ) {
+	public function getHash( $data_params ) {
 
         /** @var array $data_params */
 
@@ -2838,7 +2838,7 @@ class phocebo {
 	 * 
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
 	 * @param array $x_auth
 	 *
@@ -2846,7 +2846,7 @@ class phocebo {
 	 *
 	 */
 
-    static public function getDefaultHeader( $x_auth ) {
+    public function getDefaultHeader( $x_auth ) {
     	
 		$host = parse_url ( URL, PHP_URL_HOST );
 		
@@ -2868,7 +2868,7 @@ class phocebo {
 	 * 
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.0.8
+     * @version 0.0.9
      * @access public
 	 * @param mixed $action Docebo API Call
 	 * @param mixed $data_params parameters to send
@@ -2903,7 +2903,7 @@ class phocebo {
      *
 	 */
 
-    static public function call ( $action, $data_params ) {
+    public function call ( $action, $data_params ) {
     	
 		$curl = curl_init();
 

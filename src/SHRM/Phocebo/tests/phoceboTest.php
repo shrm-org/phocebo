@@ -16,6 +16,8 @@ namespace SHRM\Phocebo\Tests;
 
 use SHRM\Phocebo\phocebo;
 
+$phocebo = new phocebo();
+
 
 /**
  * Phởcebo Recipe File
@@ -74,6 +76,12 @@ if (file_exists(INI)) {
  */
 
 class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
+
+    public function __construct ( ) {
+
+        $this->phocebo = new phocebo();
+
+    }
 
     /**
      * testEnvironmentSettingsLoaded function.
@@ -153,7 +161,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testSSOisNotBlank() {
               
-        $this->assertNotEquals(SSO, "SSO", "Missing Docebo SSO");
+//        $this->assertNotEquals(SSO, "SSO", "Missing Docebo SSO");
 
     } 
     
@@ -166,6 +174,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
+    public function __construct ( ) {
+
+        $this->phocebo = new phocebo();
+
+    }
 
     /**
      * testGetHashParametersExist function.
@@ -179,7 +192,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
         
         $params = array ( 'userid', 'also_check_as_email' );
         
-        $codice = phocebo::getHash($params);
+        $codice = $this->phocebo->getHash($params);
 
         $this->assertNotEmpty($codice, "GetHash returned a Null Value");
 
@@ -198,7 +211,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
         $params = array ( 'userid', 'also_check_as_email' );
 
-        $codice = phocebo::getHash($params);
+        $codice = $this->phocebo->getHash($params);
 
         $sha1_len = strlen ($codice['sha1']);
 
@@ -229,7 +242,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $response = phocebo::call($action, $data_params);
+        $response = $this->phocebo->call($action, $data_params);
 
         $json_error = 'JSON_ERROR_NONE';
 
@@ -247,6 +260,12 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
 class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
+    public function __construct ( ) {
+
+        $this->phocebo = new phocebo();
+
+    }
+
     /**
      * testdoceboId function.
      *
@@ -261,10 +280,10 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboId ( $email, $checkAttribute, $errorMessage ) {
 
-        $responseObj = phocebo::getdoceboId ( array( 'email' => $email ) );
-
-        $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
-
+//        $responseObj = $this->phocebo->getdoceboId ( array( 'email' => $email ) );
+//
+//        $this->assertObjectHasAttribute( $checkAttribute, $responseObj, $errorMessage);
+//
 //         var_dump($responseObj);
 
     }
@@ -300,7 +319,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboIdObj ( ) {
 
-        $responseObj = phocebo::getdoceboId ( array ( 'email' => 'test@shrm.org') );
+        $responseObj = $this->phocebo->getdoceboId ( array ( 'email' => 'test@shrm.org') );
 
         $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'doceboId not in $responseObj');
 
@@ -323,7 +342,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboIdCustomErrorsJSONformat ( ) {
 
-        $responseObj = phocebo::getdoceboId( array( 'noemail' => 'test@shrm.org') );
+        $responseObj = $this->phocebo->getdoceboId( array( 'noemail' => 'test@shrm.org') );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -346,7 +365,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboIdCustomErrors ( $parameters ) {
 
-        $responseObj = phocebo::getdoceboId( $parameters );
+        $responseObj = $this->phocebo->getdoceboId( $parameters );
 
         $this->assertEquals( $responseObj->error, '400', 'JSON response should be reporting error 400' );
 
@@ -382,7 +401,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         $parameters = array( 'username' => 'test@shrm.org', 'password' => 'password' );
 
-        $responseObj = phocebo::authenticateUser ( $parameters );
+        $responseObj = $this->phocebo->authenticateUser ( $parameters );
 
         $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'Object missing attribute success');
 
@@ -407,7 +426,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testauthenticateUserInvalid ( $parameters ) {
 
-        $responseObj = phocebo::authenticateUser ( $parameters );
+        $responseObj = $this->phocebo->authenticateUser ( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -451,7 +470,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testauthenticateUserInvalidJSONMessage400 ( $parameters ) {
 
-        $responseObj = phocebo::authenticateUser ( $parameters );
+        $responseObj = $this->phocebo->authenticateUser ( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -499,7 +518,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::addUser( $parameters );
+        $responseObj = $this->phocebo->addUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -529,7 +548,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::addUser( $parameters );
+        $responseObj = $this->phocebo->addUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -560,7 +579,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::addUser( $parameters );
+        $responseObj = $this->phocebo->addUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -587,7 +606,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testaddUserCustomErrors ( $parameters ) {
 
-        $responseObj = phocebo::addUser ( $parameters );
+        $responseObj = $this->phocebo->addUser ( $parameters );
 
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
@@ -634,7 +653,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         );
 
 /*
-        $responseObj = phocebo::addUser ( $parameters );
+        $responseObj = $this->phocebo->addUser ( $parameters );
 
         var_dump ($responseObj);
 
@@ -666,7 +685,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::deleteUser( $parameters );
+        $responseObj = $this->phocebo->deleteUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -691,7 +710,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         $parameters = array ( 'doceboId' => '10101' );
 
-        $responseObj = phocebo::deleteUser( $parameters );
+        $responseObj = $this->phocebo->deleteUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -718,7 +737,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
         $parameters = array ( 'doceboId'  => '12370' );
 
 /*
-        $responseObj = phocebo::deleteUser( $parameters );
+        $responseObj = $this->phocebo->deleteUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -743,7 +762,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testeditUserCustomErrors ( $parameters ) {
 
-        $responseObj = phocebo::editUser ( $parameters );
+        $responseObj = $this->phocebo->editUser ( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -788,7 +807,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
     public function testeditUser ( $parameters ) {
 
-        $responseObj = phocebo::editUser ( $parameters );
+        $responseObj = $this->phocebo->editUser ( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
 
@@ -863,7 +882,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         */
 
-        $responseObj = phocebo::getUserFields( );
+        $responseObj = $this->phocebo->getUserFields( );
 
         $this->assertObjectHasAttribute( 'fields', $responseObj, "Object response missing attribute fields" );
 
@@ -893,7 +912,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getUserProfile( $parameters );
+        $responseObj = $this->phocebo->getUserProfile( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -922,7 +941,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getUserProfile( $parameters );
+        $responseObj = $this->phocebo->getUserProfile( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -972,7 +991,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getUserProfile( $parameters );
+        $responseObj = $this->phocebo->getUserProfile( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -999,7 +1018,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getUserGroups( $parameters );
+        $responseObj = $this->phocebo->getUserGroups( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1028,7 +1047,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getUserGroups( $parameters );
+        $responseObj = $this->phocebo->getUserGroups( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1059,7 +1078,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::loggedinUser( $parameters );
+        $responseObj = $this->phocebo->loggedinUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1088,7 +1107,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::loggedinUser( $parameters );
+        $responseObj = $this->phocebo->loggedinUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1113,7 +1132,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::loggedinUser( $parameters );
+        $responseObj = $this->phocebo->loggedinUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1142,7 +1161,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::suspendUser( $parameters );
+        $responseObj = $this->phocebo->suspendUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1171,7 +1190,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::suspendUser( $parameters );
+        $responseObj = $this->phocebo->suspendUser( $parameters );
 
         $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'Object response missing attribute doceboId');
 
@@ -1200,7 +1219,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::suspendUser( $parameters );
+        $responseObj = $this->phocebo->suspendUser( $parameters );
 
         $this->assertFalse ( $responseObj->success,  'Success message should be flase' );
 
@@ -1230,7 +1249,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::unsuspendUser( $parameters );
+        $responseObj = $this->phocebo->unsuspendUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1260,7 +1279,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::unsuspendUser( $parameters );
+        $responseObj = $this->phocebo->unsuspendUser( $parameters );
 
         $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'Object response missing attribute doceboId');
 
@@ -1287,7 +1306,7 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::unsuspendUser( $parameters );
+        $responseObj = $this->phocebo->unsuspendUser( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1309,6 +1328,12 @@ class testphoceboDiner extends \PHPUnit_Framework_TestCase {
 
 class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
+    public function __construct ( ) {
+
+        $this->phocebo = new phocebo();
+
+    }
+
     /**
      * testuserCoursesCustomErrorNoDoceboId function.
      *
@@ -1320,7 +1345,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         $parameters = array ('nodoceboId' => '10101');
 
-        $responseObj = phocebo::userCourses( $parameters );
+        $responseObj = $this->phocebo->userCourses( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1346,7 +1371,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         $parameters = array ('doceboId' => '12339');
 
-        $responseObj = phocebo::userCourses( $parameters );
+        $responseObj = $this->phocebo->userCourses( $parameters );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1365,7 +1390,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     public function testlistCourses () {
 
-        $responseObj = phocebo::listCourses();
+        $responseObj = $this->phocebo->listCourses();
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1384,7 +1409,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         $parameters = array ('doceboId' => '12339');
 
-        $responseObj = phocebo::listUsersCourses( $parameters );
+        $responseObj = $this->phocebo->listUsersCourses( $parameters );
 
         $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
@@ -1407,7 +1432,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::enrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1427,7 +1452,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::enrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1458,15 +1483,15 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        phocebo::unenrollUserInCourse($parameters);
+        $this->phocebo->unenrollUserInCourse($parameters);
 
-        $responseObj = phocebo::enrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
         $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
-        $responseObj = phocebo::enrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -1495,9 +1520,9 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::enrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
 
-        $responseObj = phocebo::unenrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->unenrollUserInCourse($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -1522,9 +1547,9 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::enrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
 
-        $responseObj = phocebo::unenrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->unenrollUserInCourse($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -1553,9 +1578,9 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::enrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
 
-        $responseObj = phocebo::unenrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->unenrollUserInCourse($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1575,9 +1600,9 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::enrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
 
-        $responseObj = phocebo::unenrollUserInCourse($parameters);
+        $responseObj = $this->phocebo->unenrollUserInCourse($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1607,7 +1632,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        phocebo::enrollUserInCourse( [
+        $this->phocebo->enrollUserInCourse( [
 
             'doceboId' => '12339',
 
@@ -1615,7 +1640,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         ]);
 
-        $responseObj = phocebo::listUserCourses($parameters);
+        $responseObj = $this->phocebo->listUserCourses($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -1645,7 +1670,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        phocebo::unenrollUserInCourse( array (
+        $this->phocebo->unenrollUserInCourse( array (
 
             'doceboId' => '12339',
 
@@ -1653,7 +1678,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         ) );
 
-        $responseObj = phocebo::listUserCourses($parameters);
+        $responseObj = $this->phocebo->listUserCourses($parameters);
 
 //         var_dump($response);
 
@@ -1671,10 +1696,10 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
     public function upgradeUserToPowerUser () {
 
         /** @var object $branchObj */
-        $branchObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ) );
+        $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => 'test' ) );
 
         /** @var object $userObj */
-        $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
 
 //        var_dump($userObj);
 
@@ -1687,7 +1712,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         );
 
 /*
-        $responseObj = phocebo::upgradeUserToPowerUser($parameters);
+        $responseObj = $this->phocebo->upgradeUserToPowerUser($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
@@ -1714,7 +1739,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getBranchbyCode($parameters);
+        $responseObj = $this->phocebo->getBranchbyCode($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -1805,7 +1830,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getBranchbyCode($parameters);
+        $responseObj = $this->phocebo->getBranchbyCode($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -1832,7 +1857,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getBranchbyCode($parameters);
+        $responseObj = $this->phocebo->getBranchbyCode($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1861,7 +1886,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getBranchInfo($parameters);
+        $responseObj = $this->phocebo->getBranchInfo($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -1954,7 +1979,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getBranchInfo($parameters);
+        $responseObj = $this->phocebo->getBranchInfo($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -1981,7 +2006,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getBranchInfo($parameters);
+        $responseObj = $this->phocebo->getBranchInfo($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -2010,7 +2035,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getBranchChildren($parameters);
+        $responseObj = $this->phocebo->getBranchChildren($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
@@ -2029,7 +2054,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     public function testgetBranchParentId () {
 
-        $testObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ));
+        $testObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => 'test' ));
 
         $parameters = array (
 
@@ -2037,7 +2062,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::getBranchParentId($parameters);
+        $responseObj = $this->phocebo->getBranchParentId($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
@@ -2056,9 +2081,9 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
     public function testassignUserToBranch () {
 
-        $branchObj = phocebo::getBranchbyCode( array ( 'branchCode' => 'test' ) );
+        $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => 'test' ) );
 
-        $userObj = phocebo::getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
 
         $parameters = array (
 
@@ -2068,7 +2093,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = phocebo::assignUserToBranch($parameters);
+        $responseObj = $this->phocebo->assignUserToBranch($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
@@ -2095,7 +2120,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 //
 //        );
 //
-//        $responseObj = phocebo::createBranch( $parameters );
+//        $responseObj = $this->phocebo->createBranch( $parameters );
 //
 //        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 //
@@ -2125,7 +2150,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 //
 //        );
 //
-//        $responseObj = phocebo::createBranch($parameters);
+//        $responseObj = $this->phocebo->createBranch($parameters);
 //
 //        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 //
@@ -2147,7 +2172,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 //
 //        );
 //
-//        $responseObj = phocebo::createBranch($parameters);
+//        $responseObj = $this->phocebo->createBranch($parameters);
 //
 //        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 //
@@ -2169,7 +2194,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 //
 //        );
 //
-//        $responseObj = phocebo::createBranch($parameters);
+//        $responseObj = $this->phocebo->createBranch($parameters);
 //
 //        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 //
