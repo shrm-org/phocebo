@@ -4,7 +4,4 @@
 *.dat
 .idea
 *.lock
-
 *.lock
-
-composer.lock

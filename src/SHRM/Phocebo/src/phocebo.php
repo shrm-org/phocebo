@@ -23,13 +23,33 @@ namespace SHRM\Phocebo;
  * 
  * @package Phởcebo
  * @author Patricia Walton <patricia.walton@shrm.org>
- * @version 0.1.1
+ * @version 0.1.2
  * @license MIT
  * @copyright 2015 SHRM
  * @link https://doceboapi.docebosaas.com/api/docs
  */
  
 class phocebo {
+
+    private $settings;
+
+    private $url;
+
+    private $key;
+
+    private $secret;
+
+    private $sso;
+
+    function __construct($settings) {
+
+        foreach($settings as $key => $value) {
+
+            $this->$key = $value;
+
+        }
+
+    }
 
     /**
      * getdoceboId function.
@@ -38,7 +58,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
      * @param array $parameters
 
@@ -360,7 +380,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
      * @param array $parameters
      
@@ -474,7 +494,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
      * @param array $parameters
      * @return object
@@ -554,7 +574,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
      * @param array $parameters
      * @return object
@@ -651,7 +671,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
      * @return object
      *
@@ -714,7 +734,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
      * @static
      * @param array $parameters
@@ -957,7 +977,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
      * @param array $parameters
      * @return object
@@ -1040,7 +1060,7 @@ class phocebo {
      * 
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
      * @param array $parameters
      * @return object 
@@ -2781,7 +2801,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
      * @param array $data_params
      * @return array $codice hash value for x_auth
@@ -2822,9 +2842,9 @@ class phocebo {
 //            }
 
 
-            $codice['sha1'] = sha1 ( implode( ',', $data_params ) . ',' . SECRET );
+            $codice['sha1'] = sha1 ( implode( ',', $data_params ) . ',' . $this->secret );
     		
-    		$codice['x_auth'] = base64_encode ( KEY . ':' . $codice['sha1'] );
+    		$codice['x_auth'] = base64_encode ( $this->key . ':' . $codice['sha1'] );
     		  		
     		return $codice;
     		
@@ -2842,7 +2862,7 @@ class phocebo {
 	 * 
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
 	 * @param array $x_auth
 	 *
@@ -2852,7 +2872,7 @@ class phocebo {
 
     public function getDefaultHeader( $x_auth ) {
     	
-		$host = parse_url ( URL, PHP_URL_HOST );
+		$host = parse_url ( $this->url, PHP_URL_HOST );
 		
  		return array (
 			
@@ -2872,7 +2892,7 @@ class phocebo {
 	 * 
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.1
+     * @version 0.1.2
      * @access public
 	 * @param mixed $action Docebo API Call
 	 * @param mixed $data_params parameters to send
@@ -2942,7 +2962,7 @@ class phocebo {
 
 		$opt = array (
     		
-			CURLOPT_URL => URL . '/api/' . $action,
+			CURLOPT_URL => $this->url . '/api/' . $action,
 			
 			CURLOPT_RETURNTRANSFER => 1,
 			
