@@ -2304,6 +2304,8 @@ class phocebo {
 
     public function call ( $action, $data_params, $error_messages ) {
 
+        $error_messages['500'] = 'Internal server error';
+
         $curl = curl_init();
 
         try {
@@ -2334,10 +2336,27 @@ class phocebo {
 
             if ($output == FALSE) {
 
-                throw new \Exception(sprintf("curl failed!\n * url: %s\n * header: %s\n * data:%s\n",
-                                             $opt[CURLOPT_URL],
-                                             json_encode($opt[CURLOPT_HTTPHEADER]),
-                                             json_encode($opt[CURLOPT_POSTFIELDS])));
+                $output = [
+
+                    'success' => false,
+
+                    'error' => strval(curl_getinfo($curl, CURLINFO_HTTP_CODE)),
+
+                ];
+
+                if (array_key_exists($output['error'], $error_messages) == true) {
+
+                    $output['message'] = $error_messages[$output['error']];
+
+                } else  {
+
+                    throw new \Exception(sprintf("curl failed!\n * %d - %s\n * header: %s\n * data:%s\n",
+                                                 curl_getinfo($curl, CURLINFO_HTTP_CODE),
+                                                 $opt[CURLOPT_URL],
+                                                 json_encode($opt[CURLOPT_HTTPHEADER]),
+                                                 json_encode($opt[CURLOPT_POSTFIELDS])));
+
+                };
 
             } else {
 
@@ -2351,24 +2370,29 @@ class phocebo {
 
                     if (array_key_exists('error', $output) == true) {
 
-                        $error_messages['500'] = 'Internal server error';
+                        if (array_key_exists($output['error'], $error_messages) == true) {
 
-                        $output['message'] = $error_messages[$output['error']] || sprintf('Unknown error: %s', $output['error']);
+                            $output['message'] = $error_messages[$output['error']];
+
+                        };
 
                     };
 
                     if ($output['message'] == null) {
 
-                        $output['message'] = "Unknown error.";
+                        throw new \Exception(sprintf("curl failed!\n * %d - %s\n * header: %s\n * data:%s\n",
+                                                     curl_getinfo($curl, CURLINFO_HTTP_CODE),
+                                                     $opt[CURLOPT_URL],
+                                                     json_encode($opt[CURLOPT_HTTPHEADER]),
+                                                     json_encode($opt[CURLOPT_POSTFIELDS])));
 
                     };
 
                 };
 
-                $output = self::normalizeParams ( $output );
+            };
 
-            }
-
+            $output = self::normalizeParams ( $output );
 
         } finally {
 
