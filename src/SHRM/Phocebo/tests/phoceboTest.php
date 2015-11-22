@@ -1,5 +1,5 @@
 <?php
-    
+
 /**
  * Phởcebo PHPUnit Tests.
  *
@@ -8,10 +8,10 @@
  * @author Patricia Walton <patricia.walton@shrm.org>
  * @license MIT
  * @copyright 2015 SHRM
- * 
- */  
+ *
+ */
 
-    
+
 namespace SHRM\Phocebo\Tests;
 
 use SHRM\Phocebo\phocebo;
@@ -31,7 +31,7 @@ string(26) "Invalid user specification"
 }
 
  */
- 
+
 
 define('INI', '.env');
 
@@ -104,7 +104,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
      */
 
     public function testURLisNotBlank() {
-              
+
         $this->assertNotEquals(URL, "URL", "Missing Docebo URL");
 
     }
@@ -116,11 +116,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
      */
 
     public function testURLisValid() {
-        
+
         $URLisValid = true;
-        
+
         if (filter_var( URL, FILTER_VALIDATE_URL) === FALSE) {
-            
+
             $URLisValid = false;
         }
 
@@ -136,7 +136,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
      */
 
     public function testKEYisNotBlank() {
-              
+
         $this->assertNotEquals(KEY, "KEY", "Missing Docebo public key");
 
     }
@@ -148,7 +148,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
      */
 
     public function testSECRETisNotBlank() {
-              
+
         $this->assertNotEquals(SECRET, "SECRET", "Missing Docebo secret key");
 
     }
@@ -160,11 +160,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
      */
 
     public function testSSOisNotBlank() {
-              
+
 //        $this->assertNotEquals(SSO, "SSO", "Missing Docebo SSO");
 
-    } 
-    
+    }
+
 }
 
 
@@ -192,9 +192,9 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
      */
 
     public function testGetHashParametersExist() {
-        
+
         $params = array ( 'userid', 'also_check_as_email' );
-        
+
         $codice = $this->phocebo->getHash($params);
 
         $this->assertNotEmpty($codice, "GetHash returned a Null Value");
@@ -224,7 +224,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testResponseIsJSONString function.
+     * testResponseIsAnObject function.
      *
      * @access public
      * @internal param string $action
@@ -233,7 +233,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
      * @internal param string $json_error
      */
 
-    public function testResponseIsJSONString() {
+    public function testResponseIsAnObject() {
 
         $action = '/user/checkUsername';
 
@@ -245,13 +245,9 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $response = $this->phocebo->call($action, $data_params);
+        $response = $this->phocebo->call($action, $data_params, []);
 
-        $json_error = 'JSON_ERROR_NONE';
-
-        $json_error = json_decode($response);
-
-        $this->assertNotEquals($json_error, 'JSON_ERROR_NONE', "Not a JSON Response");
+        $this->assertEquals($response->success, true);
 
     }
 
@@ -2215,7 +2211,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 //
 //        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
-    }    
+    }
 
 }
 

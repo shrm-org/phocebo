@@ -3,7 +3,7 @@
     "type" : "library",
     "description": "Delicious PHP wrapper for Docebo API",
     "license": "MIT",
-    "version" :  "0.1.2",
+    "version" :  "0.2.0",
     "authors": [
         {
             "name": "Patricia Walton",
@@ -18,7 +18,6 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "^6.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
