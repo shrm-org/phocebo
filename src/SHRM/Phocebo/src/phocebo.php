@@ -23,7 +23,7 @@ namespace SHRM\Phocebo;
  *
  * @package Phởcebo
  * @author Patricia Walton <patricia.walton@shrm.org>
- * @version 0.1.2
+ * @version 0.2.2
  * @license MIT
  * @copyright 2015 SHRM
  * @link https://doceboapi.docebosaas.com/api/docs
@@ -58,7 +58,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @param array $parameters
 
@@ -308,7 +308,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @param array $parameters
 
@@ -394,7 +394,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @param array $parameters
      * @return object
@@ -454,7 +454,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @param array $parameters
      * @return object
@@ -531,7 +531,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @return object
      *
@@ -579,7 +579,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @static
      * @param array $parameters
@@ -772,7 +772,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @param array $parameters
      * @return object
@@ -835,7 +835,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @param array $parameters
      * @return object
@@ -943,45 +943,6 @@ class phocebo {
         );
 
         return self::call ( $action, $data_params, [] );
-
-    }
-
-
-    /**
-     * listUsersCourses function.
-     *
-     * @access public
-     * @param array $parameters
-     * @return object
-     * @todo test $responseObj has expected attributes from server when valid
-     * @todo test $responseObj does not have attributes (such as idst)
-     * @todo test $responseObj has expected attributes from server when invalid
-     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
-     */
-
-    public function listUsersCourses ($parameters) {
-
-        if ( !array_key_exists( 'doceboId', $parameters) ) {
-
-            return( self::dataError ( 'doceboId', 'Parameter doceboId missing') );
-
-        };
-
-        $action = '/course/listEnrolledCourses';
-
-        $data_params = array (
-
-            'id_user'                 => $parameters['doceboId'],
-
-        );
-
-        $error_messages = [
-
-            '401' => 'Internal server error',
-
-        ];
-
-        return self::call ( $action, $data_params, $error_messages );
 
     }
 
@@ -2105,6 +2066,18 @@ class phocebo {
 
     public function normalizeParams ( $json_array ) {
 
+        if ( isset($json_array[0]) ) {
+
+            $normalizeJson['success'] = $json_array['success'];
+
+            unset($json_array['success']);
+
+            $normalizeJson['list'] = $json_array;
+
+            $json_array = $normalizeJson;
+
+        }
+
         $attributes = array (
 
             'id_user' => 'doceboId',
@@ -2176,7 +2149,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @param array $data_params
      * @return array $codice hash value for x_auth
@@ -2237,7 +2210,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @param array $x_auth
      *
@@ -2267,7 +2240,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.1.2
+     * @version 0.2.2
      * @access public
      * @param mixed $action Docebo API Call
      * @param mixed $data_params parameters to send
@@ -2391,6 +2364,14 @@ class phocebo {
                 };
 
             };
+
+            if ( $action == '/course/listCourses') {
+
+//                var_dump($output);
+//
+//                echo 'LIST COURSES';
+
+            }
 
             $output = self::normalizeParams ( $output );
 
