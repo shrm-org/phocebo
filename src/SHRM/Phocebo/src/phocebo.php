@@ -1558,8 +1558,11 @@ class phocebo {
 
         ];
 
-        return self::call ( $action, $data_params, $error_messages );
-
+        $res = self::call ( $action, $data_params, $error_messages );
+        if ($res->branchId == null){
+            $res->success = false;
+        };
+        return $res;
     }
 
     /**

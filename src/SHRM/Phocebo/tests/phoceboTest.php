@@ -1838,7 +1838,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
-        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+        $this->assertFalse ( $responseObj->success,  'Success message should be true' );
 
         $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
 
