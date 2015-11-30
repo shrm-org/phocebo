@@ -3,7 +3,7 @@
     "type" : "library",
     "description": "Delicious PHP wrapper for Docebo API",
     "license": "MIT",
-    "version" :  "0.2.3",
+    "version" :  "0.2.4",
     "authors": [
         {
             "name": "Patricia Walton",
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SHRM\\Phocebo\\": "src/SHRM/phocebo/src",
+            "SHRM\\Phocebo\\": "src/SHRM/Phocebo/src/",
             "SHRM\\Phocebo\\Tests\\":  "tests/"
         }
     },
