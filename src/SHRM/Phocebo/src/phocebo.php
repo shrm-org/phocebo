@@ -23,7 +23,7 @@ namespace SHRM\Phocebo;
  *
  * @package Phởcebo
  * @author Patricia Walton <patricia.walton@shrm.org>
- * @version 0.2.2
+ * @version 0.2.5
  * @license MIT
  * @copyright 2015 SHRM
  * @link https://doceboapi.docebosaas.com/api/docs
@@ -58,7 +58,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @param array $parameters
 
@@ -308,7 +308,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @param array $parameters
 
@@ -394,7 +394,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @param array $parameters
      * @return object
@@ -454,7 +454,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @param array $parameters
      * @return object
@@ -531,7 +531,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @return object
      *
@@ -579,7 +579,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @static
      * @param array $parameters
@@ -666,19 +666,28 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            (stdClass) (2) {
-              ["results"]=>
-              (stdClass) (2) {
-                ["groups"]=>
-                array(0) {
-                }
-                ["folders"]=>
-                array(0) {
-                }
-              }
-              ["success"]=>
-              bool(true)
-            }
+     *       object(stdClass) (2) {
+     *
+     *          ["results"] => object(stdClass) (2) {
+     *
+     *              ["groups"] =>  array(1) {
+     *
+     *                  [0] => string(4) "CFGI"
+     *
+     *               }
+     *
+     *              ["folders"] => array(1) {
+     *
+     *                  [0] => string(23) "root/http://www.att.com"
+     *
+     *              }
+     *
+     *          }
+     *
+     *         ["success"] => bool(true)
+     *
+     *       }
+     *
      */
 
     public function getUserGroups ( $parameters ) {
@@ -772,7 +781,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @param array $parameters
      * @return object
@@ -835,7 +844,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @param array $parameters
      * @return object
@@ -1932,7 +1941,7 @@ class phocebo {
 
             'id_org'                => $parameters['branchId'],
 
-            'user_ids'                => $parameters['ids'],
+            'user_ids'              => $parameters['ids'],
 
         );
 
@@ -2101,21 +2110,48 @@ class phocebo {
 
             'id_org' => 'branchId',
 
-            'assigned_users' => 'assignedUsers'
+            'assigned_users' => 'assignedUsers',
 
         );
 
         foreach ( $attributes as $old => $new) {
 
-            if ( array_key_exists ($old, $json_array) ) {
+            if ( array_key_exists ( $old, $json_array ) ) {
 
                $json_array[$new] = $json_array[$old];
 
-               unset($json_array[$old]);
+               unset( $json_array[$old] );
 
             }
 
         }
+
+        if ( array_key_exists ( 'results', $json_array ) ) {
+
+            if ( array_key_exists ( 'folders', $json_array['results'] ) ) {
+
+                $json_array['branchIds'] = $json_array['results']['folders'];
+
+                unset( $json_array['results']['folders'] );
+
+            }
+
+            if ( array_key_exists ( 'groups', $json_array['results'] ) ) {
+
+                $json_array['groupIds'] = $json_array['results']['groups'];
+
+                unset( $json_array['results']['groups'] );
+
+            }
+
+            if ( 0 == count($json_array['results']) ) {
+
+                unset( $json_array['results'] );
+
+            }
+
+        }
+
 
        return( json_decode ( json_encode ( $json_array ), FALSE ) );
 
@@ -2152,7 +2188,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @param array $data_params
      * @return array $codice hash value for x_auth
@@ -2213,7 +2249,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @param array $x_auth
      *
@@ -2243,7 +2279,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.2
+     * @version 0.2.5
      * @access public
      * @param mixed $action Docebo API Call
      * @param mixed $data_params parameters to send

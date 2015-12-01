@@ -257,15 +257,16 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
  * testphoceboDiner class.
  */
 
-//class testphoceboDiner extends \PHPUnit_Framework_TestCase {
-//
-//    public function __construct ( $settings ) {
-//
-//        global $GLOBALS;
-//
-//        $this->phocebo = new phocebo( $GLOBALS['settings'] );
-//
-//    }
+class testphoceboDiner extends \PHPUnit_Framework_TestCase {
+
+    public function __construct (  ) {
+
+        global $settings;
+
+        $this->phocebo = new phocebo( $GLOBALS['settings']['docebo'] );
+
+    }
+
 //
 //    /**
 //     * testdoceboId function.
@@ -1004,13 +1005,13 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 //
 //    }
 //
-//    /**
-//     * testgetUserGroupsCustomErrors function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
+    /**
+     * testgetUserGroupsCustomErrors function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
 //    public function testgetUserGroupsCustomErrors () {
 //
 //        $parameters = array (
@@ -1032,15 +1033,25 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 //        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 //
 //    }
-//
-//    /**
-//     * testgetUserGroupsCustomErrors function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
+
+    /**
+     * testgetUserGroupsCustomErrors function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
 //    public function testgetUserGroupsValid () {
+//
+//        $parameters = array (
+//
+//            'doceboId'                 => '12339',
+//
+//        );
+//
+//        $responseObj = $this->phocebo->getUserProfile( $parameters );
+//
+//        var_dump($responseObj);
 //
 //        $parameters = array (
 //
@@ -1050,11 +1061,15 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 //
 //        $responseObj = $this->phocebo->getUserGroups( $parameters );
 //
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+//        var_dump($responseObj);
+//
+//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"' );
 //
 //        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 //
-//        $this->assertObjectHasAttribute( 'results', $responseObj, "Object response missing attribute results" );
+//        $this->assertObjectHasAttribute( 'groupIds', $responseObj, 'Object response missing attribute "groupIds"' );
+//
+//        $this->assertObjectHasAttribute( 'branchIds', $responseObj, 'Object response missing attribute "branchIds"' );
 //
 //        $results = $responseObj->results;
 //
@@ -1063,6 +1078,8 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 //        $this->assertObjectHasAttribute( 'folders', $results, "Object response results missing attribute folders" );
 //
 //    }
+
+
 //
 //    /**
 //     * testloggedinUserCustomError function.
@@ -1320,7 +1337,7 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 //    }
 //
 //
-//}
+}
 
 
 /**
