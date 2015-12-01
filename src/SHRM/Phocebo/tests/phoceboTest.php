@@ -2110,7 +2110,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
             'branchId' => $branchObj->branchId,
 
-            'ids'   => $userObj->doceboId
+            'doceboIds'   => $userObj->doceboId
 
         );
 
