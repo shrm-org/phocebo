@@ -251,21 +251,6 @@ class testphoceboCooking extends \PHPUnit_Framework_TestCase {
 
     }
 
-}
-
-/**
- * testphoceboDiner class.
- */
-
-class testphoceboDiner extends \PHPUnit_Framework_TestCase {
-
-    public function __construct (  ) {
-
-        global $settings;
-
-        $this->phocebo = new phocebo( $GLOBALS['settings']['docebo'] );
-
-    }
 
 //
 //    /**
@@ -2104,7 +2089,7 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
 
         $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => 'test' ) );
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'vdasic@gmail.com' ) );
 
         $parameters = array (
 
@@ -2115,6 +2100,8 @@ class testphoceboCourse extends \PHPUnit_Framework_TestCase {
         );
 
         $responseObj = $this->phocebo->assignUserToBranch($parameters);
+
+        var_dump($responseObj);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
