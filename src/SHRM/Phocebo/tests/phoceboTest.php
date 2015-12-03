@@ -2250,6 +2250,32 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     }
 
+    public function testassignUserToGroup () {
+
+        $groupId = $this->phocebo->getGroupId(array ( 'groupName'    => 'Power User' ) );
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'blixt@marvel.com' ) );
+
+        $parameters = array (
+
+            'groupId' => $groupId,
+
+            'doceboId'   => $userObj->doceboId
+
+        );
+
+        $responseObj = $this->phocebo->assignUserToGroup($parameters);
+
+        var_dump($responseObj);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
+
+    }
+
 }
 
 ?>

@@ -2204,6 +2204,61 @@ class phocebo {
 
     public function assignUserToGroup ($parameters) {
 
+        var_dump($parameters);
+
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+
+            return (self::dataError ('doceboId', 'Parameter "doceboId" missing'));
+
+        } elseif ( !array_key_exists( 'groupId', $parameters) ) {
+
+                return( self::dataError ( 'groupId', 'Parameter "groupId" missing') );
+
+        };
+
+        $action = '/group/assign';
+
+        $data_params = array (
+
+            'id_group'                => $parameters['groupId'],
+
+            'id_user'                => $parameters['doceboId'],
+
+        );
+
+        $error_messages = [
+
+            '201' => 'Missing mandatory params',
+
+            '202' => 'Invalid group ID provided ' . $parameters['groupId'],
+
+            '203' => 'Invalid user ID provided ' . $parameters['doceboId'],
+
+            '205' => "User " . $parameters['doceboId'] . " already assigned to this group",
+
+            '500' => 'Internal server error',
+
+        ];
+
+        return self::call ( $action, $data_params, $error_messages );
+
+    }
+
+    /**
+     * removeUserFromGroup function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+     * @todo create tests
+     * @todo test $responseObj has expected attributes from server when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj has expected attributes from server when invalid
+     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     */
+
+    public function removeUserFromGroup ($parameters) {
+
         if ( !array_key_exists( 'doceboId', $parameters) ) {
 
             return( self::dataError ( 'doceboId', 'Parameter "doceboId" missing: Docebo ID of an existing non Power User account') );
