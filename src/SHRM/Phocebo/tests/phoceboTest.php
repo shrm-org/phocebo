@@ -2223,14 +2223,32 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $responseObj = $this->phocebo->listGroups();
 
-        var_dump($responseObj);
-
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
         $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
     }
 
+
+    /**
+     * testassignUserToBranch function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testgetGroupId () {
+
+        $parameters = array (
+
+            'groupName'    => 'Power User',
+
+        );
+
+        $response = $this->phocebo->getGroupId($parameters);
+
+
+    }
 
 }
 

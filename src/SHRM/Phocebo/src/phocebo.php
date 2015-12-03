@@ -2154,6 +2154,40 @@ class phocebo {
 
     }
 
+    /**
+     * assignUserToGroup function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+     * @todo create tests
+     * @todo test $responseObj has expected attributes from server when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj has expected attributes from server when invalid
+     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     */
+
+    public function getGroupId ($parameters) {
+
+        if ( !array_key_exists( 'groupName', $parameters) ) {
+
+            return( self::dataError ( 'groupName', 'Parameter "groupName" missing' ) );
+
+        };
+
+        $groupsObj = self::listGroups();
+
+        $groupArray = json_decode(json_encode ( $groupsObj ), true);
+
+        if ( true == $groupArray['success']) {
+
+            $groupId = $groupArray[$parameters['groupName']]['id'];
+
+        }
+
+        return $groupId;
+
+    }
 
     /**
      * assignUserToGroup function.
@@ -2297,8 +2331,6 @@ class phocebo {
             $groups = $json_array['groups'];
 
             foreach ($groups as $key => $group) {
-
-                var_dump($group);
 
                 $json_array[$group['name']]['id'] = $group['id_group'];
 
