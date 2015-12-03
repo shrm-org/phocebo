@@ -374,7 +374,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $responseObj = $this->phocebo->addUser ( $parameters );
 
-        var_dump($responseObj);
+//        var_dump($responseObj);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute "success"' );
 
@@ -1629,7 +1629,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $responseObj = $this->phocebo->listUserCourses($parameters);
 
-        var_dump($responseObj);
+//        var_dump($responseObj);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
@@ -2212,7 +2212,26 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     }
 
-}
+    /**
+     * testassignUserToBranch function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
 
+    public function testlistGroups () {
+
+        $responseObj = $this->phocebo->listGroups();
+
+        var_dump($responseObj);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+    }
+
+
+}
 
 ?>

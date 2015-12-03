@@ -2061,6 +2061,146 @@ class phocebo {
 
     }
 
+    /**
+     * listGroups function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+     *
+            (stdClass) {
+     *
+                ["groups"] => array(5) {
+
+     *              [0] => object(stdClass) (3) {
+
+     *                  ["id_group"] => string(6) "122660"
+
+     *                  ["name"] => string(10) "SHRM Admin"
+
+     *                  ["description"] => string(0) ""
+                    }
+     *
+                   [1] => object(stdClass) (3) {
+     *
+                       ["id_group"] => string(6) "122671"
+     *
+     *                 ["name"] => string(10) "Power User"
+     *
+     *                 ["description"] => string(0) ""
+     *
+     *              }
+     *
+                   [2] => object(stdClass) (3) {
+     *
+                       ["id_group"] => string(6) "122672"
+     *
+     *                 ["name"] => string(12) "SHRM Learner"
+     *
+     *                 ["description"] => string(0) ""
+     *
+                    }
+     *
+                   [3] => object(stdClass) (3) {
+     *
+     *                  ["id_group"] => string(6) "122700"
+     *
+     *                  ["name"] => string(4) "CFGI"
+     *
+     *                  ["description"] => string(0) ""
+     *
+     *              }
+     *
+     *             [4] => object(stdClass) (3) {
+     *
+     *                  ["id_group"] => string(6) "122712"
+     *
+     *                  ["name"] => string(22) "eLearning Subscription"
+     *
+     *                  ["description"] => string(0) ""
+     *
+     *              }
+     *
+     *          }
+     *
+     *         ["success"] => bool(true)
+     *
+     *      }
+     *
+     * @todo create tests
+     * @todo test $responseObj has expected attributes from server when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj has expected attributes from server when invalid
+     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     */
+
+    public function listGroups () {
+
+        $action = '/group/listGroups';
+
+        $data_params = array (
+
+            'category'                 => null,
+
+        );
+
+        $error_messages = [
+
+            '500' => 'Internal server error',
+
+        ];
+
+        return self::call ( $action, $data_params, $error_messages );
+
+    }
+
+
+    /**
+     * assignUserToGroup function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+     * @todo create tests
+     * @todo test $responseObj has expected attributes from server when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj has expected attributes from server when invalid
+     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     */
+
+    public function assignUserToGroup ($parameters) {
+
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+
+            return( self::dataError ( 'doceboId', 'Parameter "doceboId" missing: Docebo ID of an existing non Power User account') );
+
+        };
+
+        $action = '/group/assign';
+
+        $data_params = array (
+
+            'id_user'                => $parameters['doceboId'],
+
+        );
+
+        $error_messages = [
+
+            '201' => 'Missing mandatory params',
+
+            '202' => 'Invalid group ID provided',
+
+            '203' => 'Invalid user ID provided',
+
+            '205' => 'User already assigned to this group',
+
+            '500' => 'Internal server error',
+
+        ];
+
+        return self::call ( $action, $data_params, $error_messages );
+
+    }
 
     /**
      * normalizeParams function.
@@ -2152,6 +2292,23 @@ class phocebo {
 
         }
 
+        if ( array_key_exists ( 'groups', $json_array ) ) {
+
+            $groups = $json_array['groups'];
+
+            foreach ($groups as $key => $group) {
+
+                var_dump($group);
+
+                $json_array[$group['name']]['id'] = $group['id_group'];
+
+                $json_array[$group['name']]['description'] = $group['description'];
+
+            }
+
+            unset($json_array['groups']);
+
+        }
 
        return( json_decode ( json_encode ( $json_array ), FALSE ) );
 
@@ -2202,32 +2359,6 @@ class phocebo {
         $codice = array( 'sha1' => '', 'x_auth' => '' );
 
         if ( !empty ( $data_params ) ) {
-
-//            if ( array_key_exists('translation', $data_params ) ) { // { english: 'First Node' }
-//
-//                echo "before\n";
-//
-//                var_dump($data_params);
-//
-//                $translation = 'translation[english]=';
-//
-//                foreach ($data_params['translation'] as $lang => $branchName) {
-//
-//                    $translation .= $branchName;
-//
-//                }
-//
-//                unset($data_params['translation']);
-//
-//                $data_params['translation']  = $translation;
-//
-//                echo "after\n";
-//
-//                var_dump($data_params);
-//
-//
-//            }
-
 
             $codice['sha1'] = sha1 ( implode( ',', $data_params ) . ',' . $this->secret );
 
