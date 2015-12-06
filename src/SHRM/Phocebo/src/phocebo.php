@@ -23,7 +23,7 @@ namespace SHRM\Phocebo;
  *
  * @package Phởcebo
  * @author Patricia Walton <patricia.walton@shrm.org>
- * @version 0.2.9
+ * @version 0.3.0
  * @license MIT
  * @copyright 2015 SHRM
  * @link https://doceboapi.docebosaas.com/api/docs
@@ -58,7 +58,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @param array $parameters
 
@@ -308,7 +308,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @param array $parameters
 
@@ -394,7 +394,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @param array $parameters
      * @return object
@@ -454,7 +454,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @param array $parameters
      * @return object
@@ -531,7 +531,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @return object
      *
@@ -579,7 +579,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @static
      * @param array $parameters
@@ -781,7 +781,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @param array $parameters
      * @return object
@@ -844,7 +844,7 @@ class phocebo {
      *
      * @package Phởcebo Diner
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @param array $parameters
      * @return object
@@ -2432,7 +2432,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @param array $data_params
      * @return array $codice hash value for x_auth
@@ -2467,7 +2467,7 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @param array $x_auth
      *
@@ -2497,37 +2497,36 @@ class phocebo {
      *
      * @package Phởcebo Cooking
      * @author Patricia Walton <patricia.walton@shrm.org>
-     * @version 0.2.9
+     * @version 0.3.0
      * @access public
      * @param mixed $action Docebo API Call
      * @param mixed $data_params parameters to send
      *
+     * @param $error_messages
      * @return array $output JSON formatted response
-
+     * @throws \Exception
      * @todo fix encoding to create branch, issue with translation
-        array(3) {
-
-          ["code"] => string(7) "Testing"
-
-          ["translation"] => string(34) "{"english":"Test Branch Creation"}"
-
-          ["id_parent"] => string(1) "0"
-
-        }
-
-         array(3) {
-
-            ["code"] => string(7) "Testing"
-
-            ["translation"] =>  array(1) {
-
-               ["english"] => string(20) "Test Branch Creation"
-            }
-
-            ["id_parent"] => string(1) "0"
-        }
-
+     * array(3) {
      *
+     * ["code"] => string(7) "Testing"
+     *
+     * ["translation"] => string(34) "{"english":"Test Branch Creation"}"
+     *
+     * ["id_parent"] => string(1) "0"
+     *
+     * }
+     *
+     * array(3) {
+     *
+     * ["code"] => string(7) "Testing"
+     *
+     * ["translation"] =>  array(1) {
+     *
+     * ["english"] => string(20) "Test Branch Creation"
+     * }
+     *
+     * ["id_parent"] => string(1) "0"
+     * }
      *
      *
      */
@@ -2621,14 +2620,6 @@ class phocebo {
                 };
 
             };
-
-            if ( $action == '/course/listCourses') {
-
-//                var_dump($output);
-//
-//                echo 'LIST COURSES';
-
-            }
 
             $output = self::normalizeParams ( $output );
 
