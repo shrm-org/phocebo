@@ -364,6 +364,8 @@ class phocebo {
 
             'email'                  => $parameters['email'],
 
+            'password'               => $parameters['password'],
+
             'valid'                  => true,
 
             'role'                   => 'student',
