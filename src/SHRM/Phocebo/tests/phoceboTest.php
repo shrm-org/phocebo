@@ -1669,6 +1669,8 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'branchId' => $branchObj->branchId,
 
+            'profileName' => 'Corporate Power User',
+
             'ids'   => $userObj->doceboId
 
         );
@@ -2186,7 +2188,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testassignUserToBranch function.
+     * testlistGroups function.
      *
      * @access public
      * @internal param array $parameters
@@ -2247,6 +2249,49 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
 
     }
+
+    /**
+     * testlistProfiles function.
+     *
+     * @access public
+     * @internal param array $parameters
+     * @todo expand tests for poweruser profiles list
+     */
+
+    public function testlistProfiles () {
+
+        $responseObj = $this->phocebo->listProfiles();
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+    }
+
+    /**
+     * testgetProfileId function.
+     *
+     * @access public
+     * @internal param array $parameters
+     * @todo expand tests for poweruser profiles list
+     * 122713
+     */
+
+    public function testgetProfileId () {
+
+        $parameters = array (
+
+            'profileName' => 'Corporate Power User'
+
+        );
+
+        $response = $this->phocebo->getProfileId($parameters);
+
+        $this->assertStringMatchesFormat('%d', $response);
+
+    }
+
+
 
 }
 

@@ -1979,11 +1979,11 @@ class phocebo {
 
             return( self::dataError ( 'doceboId', 'Parameter "doceboId" missing: Docebo ID of an existing non Power User account') );
 
-/*
+
        } elseif ( !array_key_exists( 'profileName', $parameters) ) {
 
            $json_array = self::dataError ( 'profileName', 'Parameter "profileName" missing: Power User profile name to be assigned');
-
+/*
        } elseif ( !array_key_exists( 'branchIds', $parameters) ) {
 
            $json_array = self::dataError ( 'branchIds', 'Parameter "branchIds" missing: comma separated list of Branch Ids');
@@ -2206,8 +2206,6 @@ class phocebo {
 
     public function assignUserToGroup ($parameters) {
 
-        var_dump($parameters);
-
         if ( !array_key_exists( 'doceboId', $parameters) ) {
 
             return (self::dataError ('doceboId', 'Parameter "doceboId" missing'));
@@ -2292,6 +2290,147 @@ class phocebo {
         return self::call ( $action, $data_params, $error_messages );
 
     }
+
+    /**
+     * listProfiles function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+
+    ["profiles"] =>
+    array(1) {
+    [0]=>
+    object(stdClass)#6761 (2) {
+    ["id"]=>
+    string(6) "122713"
+    ["name"]=>
+    string(20) "Corporate Power User"
+    }
+    }
+    ["success"]=>
+    bool(true)
+     *
+     * @todo create tests
+     * @todo test $responseObj has expected attributes from server when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj has expected attributes from server when invalid
+     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     */
+
+    public function listProfiles () {
+
+        $action = '/poweruser/listProfiles';
+
+        $data_params = array (
+
+            'category'                 => null,
+
+        );
+
+        $error_messages = [
+
+            '500' => 'Internal server error',
+
+        ];
+
+        return self::call ( $action, $data_params, $error_messages );
+
+    }
+
+
+    /**
+     * getProfileId function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+     * @todo create tests
+     * @todo test $responseObj has expected attributes from server when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj has expected attributes from server when invalid
+     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     */
+
+    public function getProfileId ($parameters) {
+
+        if ( !array_key_exists( 'profileName', $parameters) ) {
+
+            return( self::dataError ( 'profileName', 'Parameter "profileName" missing') );
+
+        };
+
+        $profilesObj = self::listProfiles();
+
+        $profileArray = json_decode(json_encode ( $profilesObj ), true);
+
+        var_dump($profileArray);
+
+        if ( true == $profileArray['success']) {
+
+            $profileId = $profileArray[$parameters['profileName']];
+
+        }
+
+        return $profileId;
+
+    }
+
+    /**
+     * assignUserToProfile function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+     * @todo create tests
+     * @todo test $responseObj has expected attributes from server when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj has expected attributes from server when invalid
+     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     */
+
+    public function assignUserToProfile ($parameters) {
+
+        var_dump($parameters);
+
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+
+            return (self::dataError ('doceboId', 'Parameter "doceboId" missing'));
+
+        } elseif ( !array_key_exists( 'groupId', $parameters) ) {
+
+            return( self::dataError ( 'groupId', 'Parameter "groupId" missing') );
+
+        };
+
+        $action = '/group/assign';
+
+        $data_params = array (
+
+            'id_user'                => $parameters['doceboId'],
+
+            'id_user'                => $parameters['doceboId'],
+
+        );
+
+        $error_messages = [
+
+            '201' => 'Missing mandatory params',
+
+            '202' => 'Invalid group ID provided ' . $parameters['groupId'],
+
+            '203' => 'Invalid user ID provided ' . $parameters['doceboId'],
+
+            '205' => "User " . $parameters['doceboId'] . " already assigned to this group",
+
+            '500' => 'Internal server error',
+
+        ];
+
+        return self::call ( $action, $data_params, $error_messages );
+
+    }
+
 
     /**
      * normalizeParams function.
@@ -2396,6 +2535,20 @@ class phocebo {
             }
 
             unset($json_array['groups']);
+
+        }
+
+        if ( array_key_exists ( 'profiles', $json_array ) ) {
+
+            $profiles = $json_array['profiles'];
+
+            foreach ($profiles as $key => $profile) {
+
+                $json_array[$profile['name']] = $profile['id'];
+
+            }
+
+            unset($json_array['profiles']);
 
         }
 
