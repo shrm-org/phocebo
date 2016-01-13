@@ -1257,7 +1257,7 @@ class phocebo {
 
         if (true == $responseobj->success) {
 
-            echo "branch already created " . $responseobj->branchId . "\n";
+//            echo "branch already created " . $responseobj->branchId . "\n";
 
             $json_array = array (
 
@@ -2364,7 +2364,7 @@ class phocebo {
 
         $profileArray = json_decode(json_encode ( $profilesObj ), true);
 
-        var_dump($profileArray);
+//        var_dump($profileArray);
 
         if ( true == $profileArray['success']) {
 
@@ -2391,7 +2391,7 @@ class phocebo {
 
     public function assignUserToProfile ($parameters) {
 
-        var_dump($parameters);
+//        var_dump($parameters);
 
         if ( !array_key_exists( 'doceboId', $parameters) ) {
 
