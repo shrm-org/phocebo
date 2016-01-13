@@ -1757,7 +1757,7 @@ class phocebo {
 
      */
 
-    public function getBranchChildren ($parameters) {
+    public function getBranchChildren($parameters) {
 
         if ( !array_key_exists( 'branchId', $parameters) ) {
 
@@ -1873,7 +1873,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function getBranchParentId ($parameters) {
+    public function getBranchParentId($parameters) {
 
         if ( !array_key_exists( 'branchId', $parameters) ) {
 
@@ -2033,7 +2033,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function downgradeUserFromPowerUser ($parameters) {
+    public function downgradeUserFromPowerUser($parameters) {
 
         if ( !array_key_exists( 'doceboId', $parameters) ) {
 
@@ -2157,7 +2157,7 @@ class phocebo {
     }
 
     /**
-     * assignUserToGroup function.
+     * getGroupId function.
      *
      * @access public
      * @param array $parameters
@@ -2169,7 +2169,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function getGroupId ($parameters) {
+    public function getGroupId($parameters) {
 
         if ( !array_key_exists( 'groupName', $parameters) ) {
 
@@ -2204,7 +2204,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function assignUserToGroup ($parameters) {
+    public function assignUserToGroup($parameters) {
 
         if ( !array_key_exists( 'doceboId', $parameters) ) {
 
