@@ -694,9 +694,9 @@ class phocebo {
 
     public function getUserGroups ( $parameters ) {
 
-        if ( !array_key_exists( 'doceboId', $parameters) ) {
+        if ( !array_key_exists( 'email', $parameters) ) {
 
-            return( self::dataError ( 'doceboId', 'Parameter doceboId missing') );
+            return( self::dataError ( 'email', 'Parameter doceboId missing') );
 
         };
 
@@ -704,7 +704,7 @@ class phocebo {
 
         $data_params = array (
 
-            'id_user'                 => $parameters['doceboId'],
+            'email'                 => $parameters['email'],
 
         );
 
@@ -1321,20 +1321,6 @@ class phocebo {
 
             return( self::dataError ( 'branchId', 'Parameter branchId missing') );
 
-/*
-       } elseif ( !array_key_exists( 'code', $parameters) ) {
-
-           $json_array = self::dataError ( 'code', 'Parameter code missing: alphanumeric code for the node');
-
-       } elseif ( !array_key_exists( 'branchName', $parameters) ) {
-
-           $json_array = self::dataError ( 'branchName', 'Parameter array for branchName missing');
-
-       } elseif ( !array_key_exists( 'parentId', $parameters) ) {
-
-           $json_array = self::dataError ( 'parentId', 'Parameter parentId missing');
-*/
-
         };
 
         $action = '/orgchart/updateNode';
@@ -1570,9 +1556,13 @@ class phocebo {
         ];
 
         $res = self::call ( $action, $data_params, $error_messages );
-        if ($res->branchId == null){
+
+        if ( $res->branchId == null ) {
+
             $res->success = false;
+
         };
+
         return $res;
     }
 
@@ -2019,6 +2009,61 @@ class phocebo {
 
     }
 
+    /**
+     * assignCoursesToPowerUser function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+     * @todo create tests
+     * @todo test $responseObj has expected attributes from server when valid
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj has expected attributes from server when invalid
+     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     */
+
+    public function assignCoursesToPowerUser ($parameters) {
+
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+
+            return( self::dataError ( 'doceboId', 'Parameter "doceboId" missing: Docebo ID of an existing non Power User account') );
+
+        } elseif ( !array_key_exists( 'items', $parameters) ) {
+
+            return( self::dataError ( 'items', 'Parameter "items" missing') );
+
+        };
+
+        $action = '/poweruser/assignCourses';
+
+        $data_params = array (
+
+            'id_user'                => $parameters['doceboId'],
+
+            'items[course_code]'                  => $parameters['items'],
+
+        );
+
+        $error_messages = [
+
+            '401' => 'Power User app is not enabled in Docebo',
+
+            '402' => 'Missing or invalid required parameter "doceboId"',
+
+            '403' => 'User is not a power user',
+
+            '404' => 'Invalid Item',
+
+            '405' => 'Curricula App not Enabled',
+
+            '500' => 'Internal server error',
+
+        ];
+
+        return self::call ( $action, $data_params, $error_messages );
+
+    }
+
 
     /**
      * downgradeUserToPowerUser function.
@@ -2245,7 +2290,7 @@ class phocebo {
     }
 
     /**
-     * removeUserFromGroup function.
+     * unassignUserFromGroup function.
      *
      * @access public
      * @param array $parameters
@@ -2257,17 +2302,23 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function removeUserFromGroup ($parameters) {
+    public function unassignUserFromGroup($parameters) {
 
         if ( !array_key_exists( 'doceboId', $parameters) ) {
 
-            return( self::dataError ( 'doceboId', 'Parameter "doceboId" missing: Docebo ID of an existing non Power User account') );
+            return (self::dataError ('doceboId', 'Parameter "doceboId" missing'));
+
+        } elseif ( !array_key_exists( 'groupId', $parameters) ) {
+
+            return( self::dataError ( 'groupId', 'Parameter "groupId" missing') );
 
         };
 
-        $action = '/group/assign';
+        $action = '/group/unassign';
 
         $data_params = array (
+
+            'id_group'                => $parameters['groupId'],
 
             'id_user'                => $parameters['doceboId'],
 
@@ -2277,11 +2328,11 @@ class phocebo {
 
             '201' => 'Missing mandatory params',
 
-            '202' => 'Invalid group ID provided',
+            '202' => 'Invalid group ID provided ' . $parameters['groupId'],
 
-            '203' => 'Invalid user ID provided',
+            '203' => 'Invalid user ID provided ' . $parameters['doceboId'],
 
-            '205' => 'User already assigned to this group',
+            '205' => "User " . $parameters['doceboId'] . " in not assigned to this group",
 
             '500' => 'Internal server error',
 
@@ -2363,8 +2414,6 @@ class phocebo {
         $profilesObj = self::listProfiles();
 
         $profileArray = json_decode(json_encode ( $profilesObj ), true);
-
-//        var_dump($profileArray);
 
         if ( true == $profileArray['success']) {
 

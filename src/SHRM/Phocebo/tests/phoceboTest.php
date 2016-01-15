@@ -54,6 +54,32 @@ if (file_exists(INI)) {
 
     define('SSO', $settings['docebo']['sso']);
 
+    define('TEST_ACCOUNT', $settings['docebo']['test_account']);
+
+    define('TEST_PASSWORD', $settings['docebo']['test_password']);
+
+    define('TEST_ADMIN_ACCT', $settings['docebo']['test_admin_account']);
+
+    define('TEST_ADMIN_PASSWORD', $settings['docebo']['test_admin_password']);
+
+    define('TEST_POWER_USER', $settings['docebo']['test_power_user']);
+
+    define('TEST_POWER_USER_PASSWORD', $settings['docebo']['test_power_user_password']);
+
+    define('TEST_COURSE_CODE', $settings['docebo']['test_course_code']);
+
+    define('ROOT_BRANCH', $settings['docebo']['root_branch_code']);
+
+    define('USER_ADDED_FIELD', $settings['docebo']['test_added_field']);
+
+    define('TEST_GROUP', $settings['docebo']['test_group_name']);
+
+    define('TEST_BRANCH', $settings['docebo']['test_branch_name']);
+
+    define('TEST_POWER_USER_PROFILE', $settings['docebo']['test_power_user_profile']);
+
+    define('TEST_BRANCH_CREATE', $settings['docebo']['test_branch_create']);
+
 } else die( "\nERROR: Phởcebo ingredients are missing (.env) \n\n");
 
 
@@ -213,7 +239,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'lastName'                  => 'Account',
 
-            'email'                     => 'test@example.org'
+            'email'                     => TEST_ACCOUNT
 
         );
 
@@ -243,7 +269,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'firstName'                 => 'Test',
 
-            'email'                     => 'test@example.org'
+            'email'                     => TEST_ACCOUNT
 
         );
 
@@ -304,7 +330,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testaddUserCustomErrors ( ) {
 
-        $responseObj = $this->phocebo->addUser ( array ( 'nofirstName' => 'Test', 'nolastName' => 'Account', 'noemail' => 'test@shrm.org' ) );
+        $responseObj = $this->phocebo->addUser ( array ( 'nofirstName' => 'Test', 'nolastName' => 'Account', 'noemail' => TEST_ACCOUNT ) );
 
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
@@ -312,7 +338,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
-        $responseObj = $this->phocebo->addUser ( array ( 'firstName' => 'Test', 'lastName' => 'Account', 'noemail' => 'test@shrm.org' ) );
+        $responseObj = $this->phocebo->addUser ( array ( 'firstName' => 'Test', 'lastName' => 'Account', 'noemail' => TEST_ACCOUNT ) );
 
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
@@ -329,7 +355,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $parameters = array (
 
-            'email'                     => 'test@shrm.org'
+            'email'                     => TEST_ACCOUNT
 
         );
 
@@ -341,6 +367,8 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             $this->phocebo->deleteUser( $parameters );
 
+            sleep(1);
+
         }
 
         $parameters = array (
@@ -349,9 +377,10 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'lastName'                  => 'User',
 
-            'email'                     => 'test@shrm.org',
+            'email'                     => TEST_ACCOUNT,
 
-            'password'                  => 'password'
+            'password'                  => TEST_PASSWORD,
+
 
         );
 
@@ -384,7 +413,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $data_params = array (
 
-            'userid' => 'test@shrm.org',
+            'userid' => TEST_ACCOUNT,
 
         	'also_check_as_email' => true,
 
@@ -408,7 +437,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboId ( ) {
 
-        $responseObj = $this->phocebo->getdoceboId ( array( 'email' => 'test@shrm.org' ) );
+        $responseObj = $this->phocebo->getdoceboId ( array( 'email' => TEST_ACCOUNT ) );
 
         $this->assertObjectHasAttribute( 'email', $responseObj, 'doceboId is valid but not reporting as valid');
 
@@ -428,7 +457,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboIdObj ( ) {
 
-        $responseObj = $this->phocebo->getdoceboId ( array ( 'email' => 'test@shrm.org') );
+        $responseObj = $this->phocebo->getdoceboId ( array ( 'email' => TEST_ACCOUNT) );
 
         $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'The attribute "doceboId" not in "$responseObj"');
 
@@ -451,7 +480,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboIdCustomErrorsJSONformat ( ) {
 
-        $responseObj = $this->phocebo->getdoceboId( array( 'noemail' => 'test@shrm.org') );
+        $responseObj = $this->phocebo->getdoceboId( array( 'noemail' => TEST_ACCOUNT) );
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute "success"');
 
@@ -472,7 +501,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testdoceboIdCustomErrors ( ) {
 
-        $responseObj = $this->phocebo->getdoceboId( array( 'noemail' => 'test@shrm.org') );
+        $responseObj = $this->phocebo->getdoceboId( array( 'noemail' => TEST_ACCOUNT) );
 
         $this->assertEquals( $responseObj->error, '400', 'JSON response should be reporting error 400' );
 
@@ -492,19 +521,19 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testauthenticateUserValid ( ) {
 
-//        $parameters = array( 'username' => 'test@shrm.org', 'password' => 'password' );
-//
-//        $responseObj = $this->phocebo->authenticateUser ( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'Object missing attribute "success"');
-//
-//        $this->assertObjectNotHasAttribute( 'idst', $responseObj, 'Object response should not have attribute idst');
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-//
-//        $this->assertObjectHasAttribute( 'token', $responseObj, 'Object missing attribute token');
+        $parameters = array( 'username' => TEST_ACCOUNT, 'password' => TEST_PASSWORD );
+
+        $responseObj = $this->phocebo->authenticateUser ( $parameters );
+
+        $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'Object missing attribute "success"');
+
+        $this->assertObjectNotHasAttribute( 'idst', $responseObj, 'Object response should not have attribute idst');
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object missing attribute success');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'token', $responseObj, 'Object missing attribute token');
 
 
     }
@@ -535,11 +564,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         return array (
 
-            'no username' =>  array( 'parameters' => array ('username' => '', 'password' => 'password' ) ),
+            'no username' =>  array( 'parameters' => array ('username' => '', 'password' => TEST_PASSWORD ) ),
 
-            'no password' =>  array( 'parameters' => array( 'username' => 'test@shrm.org', 'password' => '' ) ),
+            'no password' =>  array( 'parameters' => array( 'username' => TEST_ACCOUNT, 'password' => '' ) ),
 
-            'invalid username' =>  array( 'parameters' =>  array ( 'username' => 'notest@shrm.org', 'password' => 'password' ) ),
+            'invalid username' =>  array( 'parameters' =>  array ( 'username' => 'notest@shrm.org', 'password' => TEST_PASSWORD ) ),
 
             'invalid username no password' =>  array( 'parameters' => array ('username' => 'notest@shrm.org', 'password' => '' ) ),
 
@@ -580,9 +609,9 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             array ( array( 'doceboId' => '11111' ) ),
 
-            array ( array( 'username' => '', 'password' => 'password' ) ),
+            array ( array( 'username' => '', 'password' => TEST_PASSWORD ) ),
 
-            array ( array( 'username' => 'test@shrm.org', 'password' => '' ) ),
+            array ( array( 'username' => TEST_ACCOUNT, 'password' => '' ) ),
 
         );
 
@@ -652,9 +681,10 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testdeleteUserValid () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         /** @var array $parameters */
+
         $parameters = array ( 'doceboId'  => $userObj->doceboId );
 
         $responseObj = $this->phocebo->deleteUser( $parameters );
@@ -673,13 +703,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'lastName'                  => 'Account',
 
-            'email'                     => 'test@shrm.org',
+            'email'                     => TEST_ACCOUNT,
 
-            'password'                  => 'password'
+            'password'                  => TEST_PASSWORD
 
         );
 
-        $responseObj = $this->phocebo->addUser ( $parameters );
+        $this->phocebo->addUser ( $parameters );
 
     }
 
@@ -737,7 +767,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testeditUserEmail ( ) {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $responseObj = $this->phocebo->editUser ( array ( 'doceboId' => $userObj->doceboId, 'email' => 'test2@shrm.org') );
 
@@ -749,7 +779,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertObjectNotHasAttribute( 'idst', $responseObj, 'Object response should not have attribute idst');
 
-        $responseObj = $this->phocebo->editUser ( array ( 'doceboId' => $userObj->doceboId, 'email' => 'test@shrm.org') );
+        $this->phocebo->editUser ( array ( 'doceboId' => $userObj->doceboId, 'email' => TEST_ACCOUNT) );
 
     }
 
@@ -764,7 +794,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testeditUser ( $parameters ) {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters['doceboId'] =  $userObj->doceboId;
 
@@ -804,9 +834,9 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             array ( array ( 'firstName' => 'Test', 'lastName' => 'Account') ),
 
-            array ( array ( 'password' => 'password') ),
+            array ( array ( 'password' => TEST_PASSWORD) ),
 
-            array ( array ( 'email' => 'test@shrm.org') ),
+            array ( array ( 'email' => TEST_ACCOUNT) ),
 
             array ( array ( 'valid' => true) ),
 
@@ -826,21 +856,25 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
      * @access public
      */
 
-//    public function testgetUserFields () {
-//
-//        $responseObj = $this->phocebo->getUserFields( );
-//
-//        $this->assertObjectHasAttribute( 'fields', $responseObj, "Object response missing attribute fields" );
-//
-//        $fields = $responseObj->fields;
-//
-//        $this->assertObjectHasAttribute( 'id', $fields['0'], "Object response missing attribute id" );
-//
-//        $this->assertObjectHasAttribute( 'name', $fields['0'], "Object response missing attribute name" );
-//
-//        $this->assertEquals ($fields['0']->name, 'Job Role', 'User Fields in Docebo does not have Job Role' );
-//
-//    }
+    public function testgetUserFields () {
+
+        if (NULL != USER_ADDED_FIELD) {
+
+            $responseObj = $this->phocebo->getUserFields( );
+
+            $this->assertObjectHasAttribute( 'fields', $responseObj, "Object response missing attribute fields" );
+
+            $fields = $responseObj->fields;
+
+            $this->assertObjectHasAttribute( 'id', $fields['0'], "Object response missing attribute id" );
+
+            $this->assertObjectHasAttribute( 'name', $fields['0'], "Object response missing attribute name" );
+
+            $this->assertEquals ($fields['0']->name, USER_ADDED_FIELD, 'User Fields in Docebo does not have Job Role' );
+
+        }
+
+    }
 
 
     /**
@@ -881,7 +915,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testgetUserProfileValid () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
@@ -989,85 +1023,99 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testgetUserGroupsValid () {
 
-//        $parameters = array (
-//
-//            'doceboId'                 => '12339',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->getUserProfile( $parameters );
-//
-//        var_dump($responseObj);
-//
-//        $parameters = array (
-//
-//            'doceboId'                 => '12339',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->getUserGroups( $parameters );
-//
-//        var_dump($responseObj);
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"' );
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-//
-//        $this->assertObjectHasAttribute( 'groupIds', $responseObj, 'Object response missing attribute "groupIds"' );
-//
-//        $this->assertObjectHasAttribute( 'branchIds', $responseObj, 'Object response missing attribute "branchIds"' );
-//
-//        $results = $responseObj->results;
-//
-//        $this->assertObjectHasAttribute( 'groups', $results, "Object response results missing attribute groups" );
-//
-//        $this->assertObjectHasAttribute( 'folders', $results, "Object response results missing attribute folders" );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $groupObj = $this->phocebo->listGroups();
+
+        $array = (array) $groupObj;
+
+        $learnerGroupObj = $array[TEST_GROUP];
+
+        $parameters = array (
+
+            'doceboId'               => $userObj->doceboId,
+
+            'groupId'                => $learnerGroupObj->id
+
+        );
+
+        $this->phocebo->assignUserToGroup( $parameters );
+
+        $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => TEST_BRANCH ) );
+
+        $parameters = array (
+
+            'doceboIds'               => $userObj->doceboId,
+
+            'branchId'                => $branchObj->branchId
+
+        );
+
+        $this->phocebo->assignUserToBranch( $parameters );
+
+        $parameters = array (
+
+            'email'                 => TEST_ACCOUNT,
+
+        );
+
+        $responseObj = $this->phocebo->getUserGroups( $parameters );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"' );
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'groupIds', $responseObj, 'Object response missing attribute "groupIds"' );
+
+        $this->assertObjectHasAttribute( 'branchIds', $responseObj, 'Object response missing attribute "branchIds"' );
 
     }
 
 
-//
-//    /**
-//     * testloggedinUserCustomError function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
-//    public function testloggedinUserCustomError () {
+
+    /**
+     * testloggedinUserCustomError function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testloggedinUserCustomError () {
+
+        $parameters = array (
+
+            'nodoceboId'                 => '10101',
+
+        );
+
+        $responseObj = $this->phocebo->loggedinUser( $parameters );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }
+
+    /**
+     * testloggedinUserValid function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testloggedinUserValid () {
+
+//        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 //
 //        $parameters = array (
 //
-//            'nodoceboId'                 => '10101',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->loggedinUser( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-//
-//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-//
-//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-//
-//        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
-//
-//    }
-//
-//    /**
-//     * testloggedinUserValid function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
-//    public function testloggedinUserValid () {
-//
-//        $parameters = array (
-//
-//            'doceboId'                 => '12339',
+//            'doceboId'                 => $userObj->doceboId,
 //
 //        );
 //
@@ -1078,213 +1126,217 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 //        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 //
 //        $this->assertObjectHasAttribute( 'loggedIn', $responseObj, "Object response missing attribute loggedIn" );
-//
-//    }
-//
-//    /**
-//     * testloggedinUserInValid function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
-//    public function testloggedinUserInValid () {
-//
-//        $parameters = array (
-//
-//            'doceboId'                 => '10101',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->loggedinUser( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-//
-//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-//
-//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-//
-//        $this->assertEquals ( $responseObj->error, '201', 'Object response should be reporting error 201' );
-//
-//    }
-//
-//    /**
-//     * testsuspendUseCustomErrors function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
-//    public function testsuspendUseCustomErrors () {
-//
-//        $parameters = array (
-//
-//            'nodoceboId'                 => '',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->suspendUser( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-//
-//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-//
-//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-//
-//        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
-//
-//    }
-//
-//    /**
-//     * testsuspendUserValidUser function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
-//    public function testsuspendUserValidUser () {
-//
-//        $parameters = array (
-//
-//            'doceboId'                 => '12339',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->suspendUser( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'Object response missing attribute doceboId');
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-//
-//        $this->assertObjectNotHasAttribute( 'idst', $responseObj, 'Object response should not have attribute idst');
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-//
-//    }
-//
-//    /**
-//     * testsuspendUserInValidUser function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
-//    public function testsuspendUserInValidUser () {
-//
-//        $parameters = array (
-//
-//            'doceboId'                 => '10101',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->suspendUser( $parameters );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be flase' );
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-//
-//        $this->assertObjectHasAttribute( 'error', $responseObj, 'Object response missing attribute error');
-//
-//        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute message');
-//
-//
-//    }
-//
-//    /**
-//     * testunsuspendUseCustomErrors function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
-//    public function testunsuspendUseCustomErrors () {
-//
-//        $parameters = array (
-//
-//            'nodoceboId'                 => '',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->unsuspendUser( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-//
-//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-//
-//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-//
-//        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
-//
-//    }
-//
-//
-//    /**
-//     * testunsuspendUserValidUser function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
-//    public function testunsuspendUserValidUser () {
-//
-//        $parameters = array (
-//
-//            'doceboId'                 => '12339',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->unsuspendUser( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'Object response missing attribute doceboId');
-//
-//        $this->assertObjectNotHasAttribute( 'idst', $responseObj, 'Object response should not have attribute idst');
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-//
-//    }
-//
-//    /**
-//     * testunsuspendUserInValidUser function.
-//     *
-//     * @access public
-//     * @internal param array $parameters
-//     */
-//
-//    public function testunsuspendUserInValidUser () {
-//
-//        $parameters = array (
-//
-//            'doceboId'                 => '10101',
-//
-//        );
-//
-//        $responseObj = $this->phocebo->unsuspendUser( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-//
-//        $this->assertObjectHasAttribute( 'error', $responseObj, 'Object response missing attribute error');
-//
-//        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute message');
-//
-//    }
-//
-//
+
+    }
+
+    /**
+     * testloggedinUserInValid function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testloggedinUserInValid () {
+
+        $parameters = array (
+
+            'doceboId'                 => '10101',
+
+        );
+
+        $responseObj = $this->phocebo->loggedinUser( $parameters );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '201', 'Object response should be reporting error 201' );
+
+    }
+
+    /**
+     * testsuspendUseCustomErrors function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testsuspendUseCustomErrors () {
+
+        $parameters = array (
+
+            'nodoceboId'                 => '',
+
+        );
+
+        $responseObj = $this->phocebo->suspendUser( $parameters );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }
+
+    /**
+     * testsuspendUserValidUser function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testsuspendUserValidUser () {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'doceboId'                 => $userObj->doceboId,
+
+        );
+
+        $responseObj = $this->phocebo->suspendUser( $parameters );
+
+        $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'Object response missing attribute doceboId');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectNotHasAttribute( 'idst', $responseObj, 'Object response should not have attribute idst');
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->phocebo->unsuspendUser( $parameters );
+
+    }
+
+    /**
+     * testsuspendUserInValidUser function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testsuspendUserInValidUser () {
+
+        $parameters = array (
+
+            'doceboId'                 => '10101',
+
+        );
+
+        $responseObj = $this->phocebo->suspendUser( $parameters );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be flase' );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, 'Object response missing attribute error');
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute message');
 
 
+    }
+
+    /**
+     * testunsuspendUseCustomErrors function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testunsuspendUseCustomErrors () {
+
+        $parameters = array (
+
+            'nodoceboId'                 => '',
+
+        );
+
+        $responseObj = $this->phocebo->unsuspendUser( $parameters );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }
+
+
+    /**
+     * testunsuspendUserValidUser function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testunsuspendUserValidUser () {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'doceboId'                 => $userObj->doceboId,
+
+        );
+
+        $this->phocebo->suspendUser( $parameters );
+
+        $responseObj = $this->phocebo->unsuspendUser( $parameters );
+
+        $this->assertObjectHasAttribute( 'doceboId', $responseObj, 'Object response missing attribute doceboId');
+
+        $this->assertObjectNotHasAttribute( 'idst', $responseObj, 'Object response should not have attribute idst');
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+    }
+
+    /**
+     * testunsuspendUserInValidUser function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testunsuspendUserInValidUser () {
+
+        $parameters = array (
+
+            'doceboId'                 => '10101',
+
+        );
+
+        $responseObj = $this->phocebo->unsuspendUser( $parameters );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, 'Object response missing attribute error');
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute message');
+
+    }
 
     /**
      * testuserCoursesCustomErrorNoDoceboId function.
@@ -1319,18 +1371,28 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
      * @internal param array $parameters
      */
 
-//    public function testuserCoursesValid () {
-//
-//        $parameters = array ('doceboId' => '12339');
-//
-//        $responseObj = $this->phocebo->userCourses( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-//
-//
-//    }
+    public function testuserCoursesValid () {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'doceboId'      => $userObj->doceboId,
+
+            'courseCode'    => TEST_COURSE_CODE
+
+        );
+
+        $this->phocebo->enrollUserInCourse($parameters);
+
+        $responseObj = $this->phocebo->userCourses( array( 'doceboId' => $userObj->doceboId ) );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+
+    }
 
 
     /**
@@ -1359,7 +1421,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testlistUsersCourses () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $responseObj = $this->phocebo->listUserCourses( array ('doceboId' => $userObj->doceboId) );
 
@@ -1376,13 +1438,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testenrollUserInCourseCustomErrors () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
             'nodoceboId'      => $userObj->doceboId,
 
-            'courseCode'    => 'ELC-CS-208'
+            'courseCode'    => TEST_COURSE_CODE
 
         );
 
@@ -1398,13 +1460,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
             'doceboId'      => $userObj->doceboId,
 
-            'nocourseCode'    => 'ELC-CS-208'
+            'nocourseCode'    => TEST_COURSE_CODE
 
         );
 
@@ -1431,13 +1493,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testenrollUserInCourse () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
             'doceboId'      => $userObj->doceboId,
 
-            'courseCode'    => 'EL-NVX-101'
+            'courseCode'    => TEST_COURSE_CODE
 
         );
 
@@ -1470,13 +1532,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testunenrollUserInCourse () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
             'doceboId'      => $userObj->doceboId,
 
-            'courseCode'    => 'EL-NVX-101'
+            'courseCode'    => TEST_COURSE_CODE
 
         );
 
@@ -1499,13 +1561,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testunenrollUserInCourseError () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
             'doceboId'      => $userObj->doceboId,
 
-            'courseCode'    => 'ELC-CS-208'
+            'courseCode'    => TEST_COURSE_CODE
 
         );
 
@@ -1530,13 +1592,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testunenrollUserInCourseCustomError () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
             'nodoceboId'      => $userObj->doceboId,
 
-            'courseCode'    => 'ELC-CS-208'
+            'courseCode'    => TEST_COURSE_CODE
 
         );
 
@@ -1558,7 +1620,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'doceboId'      => $userObj->doceboId,
 
-            'nocourseCode'    => 'ELC-CS-208'
+            'nocourseCode'    => TEST_COURSE_CODE
 
         );
 
@@ -1590,29 +1652,49 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testlistUserCourses () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
             'doceboId'      => $userObj->doceboId,
 
-            'courseCode'    => 'EL-NVX-101'
+            'courseCode'    => TEST_COURSE_CODE
 
         );
 
-//        $this->phocebo->enrollUserInCourse($parameters);
-//
-//        $responseObj = $this->phocebo->listUserCourses($parameters);
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+        $this->phocebo->enrollUserInCourse($parameters);
 
-//        $this->assertInternalType( 'object', $responseObj->{'0'}, 'Object does not contain an object about course information');
+        $responseObj = $this->phocebo->listUserCourses($parameters);
 
-//        $this->assertObjectHasAttribute( 'course_info', $responseObj->{'0'}, 'Object response missing attribute "course_info"');
-//
-//        $this->assertGreaterThanOrEqual ( '1' , count($responseObj), 'Object should have more than 1 element' );
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'list', $responseObj, 'Object response missing attribute "list"');
+
+        $list = $responseObj->list;
+
+        $course_info = $list[0];
+
+        $this->assertObjectHasAttribute( 'course_id', $course_info->course_info, 'Object response missing attribute "course_id"');
+
+        $this->assertObjectHasAttribute( 'code', $course_info->course_info, 'Object response missing attribute "code"');
+
+        $this->assertObjectHasAttribute( 'course_name', $course_info->course_info, 'Object response missing attribute "course_name"');
+
+        $this->assertObjectHasAttribute( 'credits', $course_info->course_info, 'Object response missing attribute "credits"');
+
+        $this->assertObjectHasAttribute( 'total_time', $course_info->course_info, 'Object response missing attribute "total_time"');
+
+        $this->assertObjectHasAttribute( 'enrollment_date', $course_info->course_info, 'Object response missing attribute "enrollment_date"');
+
+        $this->assertObjectHasAttribute( 'completion_date', $course_info->course_info, 'Object response missing attribute "completion_date"');
+
+        $this->assertObjectHasAttribute( 'first_access_date', $course_info->course_info, 'Object response missing attribute "first_access_date"');
+
+        $this->assertObjectHasAttribute( 'score', $course_info->course_info, 'Object response missing attribute "score"');
+
+        $this->assertObjectHasAttribute( 'status', $course_info->course_info, 'Object response missing attribute "status"');
 
     }
 
@@ -1626,27 +1708,31 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testlistUserCoursesNoCourse () {
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'doceboId'      => $userObj->doceboId,
+
+            'courseCode'    => TEST_COURSE_CODE
+
+        );
+
+        $this->phocebo->enrollUserInCourse($parameters);
 
         $this->phocebo->unenrollUserInCourse( array (
 
             'doceboId' => $userObj->doceboId,
 
-            'courseCode'    => 'ELC-CS-208'
+            'courseCode'    => TEST_COURSE_CODE
 
         ) );
 
-        $parameters = array (
+        $responseObj = $this->phocebo->listUserCourses( array ('doceboId' => $userObj->doceboId ) );
 
-            'doceboId' => $userObj->doceboId,
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
-        );
-
-//        $responseObj = $this->phocebo->listUserCourses($parameters);
-
-//        var_dump($responseObj);
-
-//        $this->assertNull ( $responseObj, 'Object should be null - User is not enrolled in any course' );
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
     }
 
@@ -1660,22 +1746,21 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     public function upgradeUserToPowerUser () {
 
         /** @var object $branchObj */
-        $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => 'test' ) );
+        $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => TEST_BRANCH ) );
 
         /** @var object $userObj */
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'test@shrm.org' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
             'branchId' => $branchObj->branchId,
 
-            'profileName' => 'Power User',
+            'profileName' => TEST_POWER_USER_PROFILE,
 
             'ids'   => $userObj->doceboId
 
         );
 
-/*
         $responseObj = $this->phocebo->upgradeUserToPowerUser($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
@@ -1683,10 +1768,114 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
         $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
-*/
+
+        $this->phocebo->downgradeUserFromPowerUser( array(  'doceboId' => $userObj->doceboId ));
 
     }
 
+
+    /**
+     * testassignCoursesToPowerUserNotPowerUser function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testassignCoursesToPowerUserNotPowerUser () {
+
+        /** @var object $userObj */
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $this->phocebo->downgradeUserFromPowerUser( array(  'doceboId' => $userObj->doceboId ));
+
+        $parameters = array (
+
+            'doceboId'   => $userObj->doceboId,
+
+            'items' => TEST_COURSE_CODE
+
+        );
+
+        $responseObj = $this->phocebo->assignCoursesToPowerUser($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertFalse( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute "success"');
+
+
+    }
+
+    /**
+     * testassignCoursesToPowerUserCustomErrors function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testassignCoursesToPowerUserCustomErrors () {
+
+        /** @var object $userObj */
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_POWER_USER ) );
+
+        $parameters = array (
+
+            'items' => TEST_COURSE_CODE
+
+        );
+
+        $responseObj = $this->phocebo->assignCoursesToPowerUser($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute "success"');
+
+        $parameters = array (
+
+            'doceboId'   => $userObj->doceboId,
+
+        );
+
+        $responseObj = $this->phocebo->assignCoursesToPowerUser($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute "success"');
+
+    }
+
+    /**
+     * testassignCoursesToPowerUser function.
+     *
+     * @access public
+     * @internal param array $parameters
+     */
+
+    public function testassignCoursesToPowerUser () {
+
+        /** @var object $userObj */
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_POWER_USER ) );
+
+        $parameters = array (
+
+            'doceboId'   => $userObj->doceboId,
+
+            'items' => TEST_COURSE_CODE
+
+        );
+
+        $responseObj = $this->phocebo->assignCoursesToPowerUser($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+    }
 
     /**
      * testgetBranchbyCodeValid function.
@@ -1700,7 +1889,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $parameters = array (
 
-            'branchCode' => 'root',
+            'branchCode' => ROOT_BRANCH,
 
         );
 
@@ -2023,15 +2212,15 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'parentBranchId' => '0',
 
-            'branchName'    => 'Marvel',
+            'branchName'    => TEST_BRANCH_CREATE,
 
-            'branchCode'    => 'marvel.com'
+            'branchCode'    => TEST_BRANCH_CREATE
 
         );
 
-        $responseObj = $this->phocebo->createBranch( $parameters );
+        $this->phocebo->createBranch( $parameters );
 
-        $testObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => 'marvel.com' ));
+        $testObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => TEST_BRANCH_CREATE ));
 
         $parameters = array (
 
@@ -2056,11 +2245,24 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
      * @internal param array $parameters
      */
 
+
     public function testassignUserToBranch () {
 
-        $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => 'marvel.com' ) );
+        $parameters = array (
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'blixt@marvel.com' ) );
+            'parentBranchId' => '0',
+
+            'branchName'    => TEST_BRANCH_CREATE,
+
+            'branchCode'    => TEST_BRANCH_CREATE
+
+        );
+
+        $this->phocebo->createBranch( $parameters );
+
+        $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => TEST_BRANCH_CREATE ) );
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
@@ -2089,23 +2291,29 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testcreateBranch () {
 
-//        $parameters = array (
-//
-//            'parentBranchId' => '0',
-//
-//            'branchName'    => 'Testing Branch Name as Code'
-//
-//            'branchCode'    => 'www.branch.code'
+        $branchObj = $this->phocebo->getBranchbyCode( array ('branchCode' => TEST_BRANCH_CREATE ) );
 
-//        );
-//
-//        $responseObj = $this->phocebo->createBranch( $parameters );
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-//
-//        $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
+        $this->phocebo->deleteBranch( array ('branchId' => $branchObj->branchId ) );
+
+        $parameters = array (
+
+            'parentBranchId' => '0',
+
+            'branchName'    => TEST_BRANCH_CREATE,
+
+            'branchCode'    => TEST_BRANCH_CREATE
+
+        );
+
+        $responseObj = $this->phocebo->createBranch( $parameters );
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
+
+        $this->phocebo->deleteBranch( array ('branchId' => $responseObj->branchId ) );
 
     }
 
@@ -2118,72 +2326,71 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testcreateBranchCustomError () {
 
-//        $parameters = array (
-//
-//            'nobranchCode'    => 'TEST',
-//L
-//            'parentBranchId'    => '0',
-//
-//            'branchName'    => 'Test Branch Creation'
-//
-//
-//        );
-//
-//        $responseObj = $this->phocebo->createBranch($parameters);
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-//
-//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-//
-//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-//
-//        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
-//
-//        $parameters = array (
-//
-//            'branchCode'    => 'TEST',
-//
-//            'nobranchName'    => 'Test Branch Creation',
-//
-//            'parentBranchId'    => 'Parent Branch ID'
-//
-//        );
-//
-//        $responseObj = $this->phocebo->createBranch($parameters);
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-//
-//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-//
-//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-//
-//        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
-//
-//        $parameters = array (
-//
-//            'branchCode'    => 'TEST',
-//
-//            'branchName'    => 'Test Branch Creation',
-//
-//            'noparentBranchId'    => 'Parent Branch ID'
-//
-//        );
-//
-//        $responseObj = $this->phocebo->createBranch($parameters);
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
-//
-//        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
-//
-//        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
-//
-//        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
-//
-//        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+        $parameters = array (
+
+            'nobranchCode'    => TEST_BRANCH_CREATE,
+
+            'parentBranchId'    => '0',
+
+            'branchName'    => TEST_BRANCH_CREATE
+
+        );
+
+        $responseObj = $this->phocebo->createBranch($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"' );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+        $parameters = array (
+
+            'branchCode'    => TEST_BRANCH_CREATE,
+
+            'nobranchName'    => 'Test Branch Creation',
+
+            'parentBranchId'    => 'Parent Branch ID'
+
+        );
+
+        $responseObj = $this->phocebo->createBranch($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+        $parameters = array (
+
+            'branchCode'    => TEST_BRANCH_CREATE,
+
+            'branchName'    => 'Test Branch Creation',
+
+            'noparentBranchId'    => 'Parent Branch ID'
+
+        );
+
+        $responseObj = $this->phocebo->createBranch($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
 
     }
 
@@ -2216,7 +2423,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $parameters = array (
 
-            'groupName'    => 'Power User',
+            'groupName'    => TEST_GROUP,
 
         );
 
@@ -2228,9 +2435,9 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     public function testassignUserToGroup () {
 
-        $groupId = $this->phocebo->getGroupId(array ( 'groupName'    => 'Power User' ) );
+        $groupId = $this->phocebo->getGroupId(array ( 'groupName' => TEST_GROUP ) );
 
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => 'blixt@marvel.com' ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
         $parameters = array (
 
@@ -2240,13 +2447,15 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         );
 
-//        $responseObj = $this->phocebo->assignUserToGroup($parameters);
-//
-//        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
-//
-//        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
-//
-//        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
+        $this->phocebo->unassignUserFromGroup($parameters);
+
+        $responseObj = $this->phocebo->assignUserToGroup($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->phocebo->unassignUserFromGroup($parameters);
 
     }
 
@@ -2281,13 +2490,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $parameters = array (
 
-            'profileName' => 'Power User'
+            'profileName' => TEST_POWER_USER_PROFILE
 
         );
 
-//        $response = $this->phocebo->getProfileId($parameters);
+        $response = $this->phocebo->getProfileId($parameters);
 
-//        $this->assertStringMatchesFormat('%d', $response);
+        $this->assertStringMatchesFormat('%d', $response);
 
     }
 
