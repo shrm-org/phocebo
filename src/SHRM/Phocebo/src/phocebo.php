@@ -2010,7 +2010,7 @@ class phocebo {
     }
 
     /**
-     * assignCoursesToPowerUser function.
+     * assignCourseToPowerUser function.
      *
      * @access public
      * @param array $parameters
@@ -2022,7 +2022,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function assignCoursesToPowerUser ($parameters) {
+    public function assignCourseToPowerUser ($parameters) {
 
         if ( !array_key_exists( 'doceboId', $parameters) ) {
 

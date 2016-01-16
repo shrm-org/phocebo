@@ -1775,13 +1775,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testassignCoursesToPowerUserNotPowerUser function.
+     * testassignCourseToPowerUserNotPowerUser function.
      *
      * @access public
      * @internal param array $parameters
      */
 
-    public function testassignCoursesToPowerUserNotPowerUser () {
+    public function testassignCourseToPowerUserNotPowerUser () {
 
         /** @var object $userObj */
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
@@ -1796,7 +1796,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = $this->phocebo->assignCoursesToPowerUser($parameters);
+        $responseObj = $this->phocebo->assignCourseToPowerUser($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
@@ -1808,13 +1808,13 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testassignCoursesToPowerUserCustomErrors function.
+     * testassignCourseToPowerUserCustomErrors function.
      *
      * @access public
      * @internal param array $parameters
      */
 
-    public function testassignCoursesToPowerUserCustomErrors () {
+    public function testassignCourseToPowerUserCustomErrors () {
 
         /** @var object $userObj */
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_POWER_USER ) );
@@ -1825,7 +1825,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = $this->phocebo->assignCoursesToPowerUser($parameters);
+        $responseObj = $this->phocebo->assignCourseToPowerUser($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
@@ -1839,7 +1839,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = $this->phocebo->assignCoursesToPowerUser($parameters);
+        $responseObj = $this->phocebo->assignCourseToPowerUser($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
@@ -1856,7 +1856,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
      * @internal param array $parameters
      */
 
-    public function testassignCoursesToPowerUser () {
+    public function testassignCourseToPowerUser () {
 
         /** @var object $userObj */
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_POWER_USER ) );
@@ -1869,7 +1869,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         );
 
-        $responseObj = $this->phocebo->assignCoursesToPowerUser($parameters);
+        $responseObj = $this->phocebo->assignCourseToPowerUser($parameters);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
