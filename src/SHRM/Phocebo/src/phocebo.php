@@ -2028,9 +2028,9 @@ class phocebo {
 
             return( self::dataError ( 'doceboId', 'Parameter "doceboId" missing: Docebo ID of an existing non Power User account') );
 
-        } elseif ( !array_key_exists( 'items', $parameters) ) {
+        } elseif ( !array_key_exists( 'courseCode', $parameters) ) {
 
-            return( self::dataError ( 'items', 'Parameter "items" missing') );
+            return( self::dataError ( 'courseCode', 'Parameter "courseCode" missing') );
 
         };
 
@@ -2040,7 +2040,7 @@ class phocebo {
 
             'id_user'                => $parameters['doceboId'],
 
-            'items[course_code]'                  => $parameters['items'],
+            'items[course_code]'                  => $parameters['courseCode'],
 
         );
 

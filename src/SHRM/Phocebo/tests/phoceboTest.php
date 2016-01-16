@@ -1792,7 +1792,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'doceboId'   => $userObj->doceboId,
 
-            'items' => TEST_COURSE_CODE
+            'courseCode' => TEST_COURSE_CODE
 
         );
 
@@ -1821,7 +1821,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $parameters = array (
 
-            'items' => TEST_COURSE_CODE
+            'courseCode' => TEST_COURSE_CODE
 
         );
 
@@ -1865,7 +1865,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'doceboId'   => $userObj->doceboId,
 
-            'items' => TEST_COURSE_CODE
+            'courseCode' => TEST_COURSE_CODE
 
         );
 
