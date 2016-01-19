@@ -1973,11 +1973,10 @@ class phocebo {
        } elseif ( !array_key_exists( 'profileName', $parameters) ) {
 
            $json_array = self::dataError ( 'profileName', 'Parameter "profileName" missing: Power User profile name to be assigned');
-/*
+
        } elseif ( !array_key_exists( 'branchIds', $parameters) ) {
 
            $json_array = self::dataError ( 'branchIds', 'Parameter "branchIds" missing: comma separated list of Branch Ids');
-*/
 
         };
 
