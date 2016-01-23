@@ -1557,13 +1557,8 @@ class phocebo {
 
         $res = self::call ( $action, $data_params, $error_messages );
 
-        if ( $res->branchId == null ) {
+        return self::call ( $action, $data_params, $error_messages );
 
-            $res->success = false;
-
-        };
-
-        return $res;
     }
 
     /**
