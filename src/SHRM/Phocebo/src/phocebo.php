@@ -1255,9 +1255,7 @@ class phocebo {
 
         $responseobj = self::getBranchbyCode( array ( 'branchCode' => $parameters['branchCode'] ) );
 
-        if (true == $responseobj->success) {
-
-//            echo "branch already created " . $responseobj->branchId . "\n";
+        if (true == $responseobj->success && $responseobj->branchId != null) {
 
             $json_array = array (
 
