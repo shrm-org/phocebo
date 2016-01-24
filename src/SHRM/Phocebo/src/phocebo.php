@@ -2541,7 +2541,7 @@ class phocebo {
 
             if ( array_key_exists ( 'folders', $json_array['results'] ) ) {
 
-                $json_array['branchIds'] = $json_array['results']['folders'];
+                $json_array['branches'] = $json_array['results']['folders'];
 
                 unset( $json_array['results']['folders'] );
 
@@ -2549,7 +2549,7 @@ class phocebo {
 
             if ( array_key_exists ( 'groups', $json_array['results'] ) ) {
 
-                $json_array['groupIds'] = $json_array['results']['groups'];
+                $json_array['groups'] = $json_array['results']['groups'];
 
                 unset( $json_array['results']['groups'] );
 

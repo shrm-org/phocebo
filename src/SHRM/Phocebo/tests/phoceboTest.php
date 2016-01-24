@@ -1065,9 +1065,9 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
-        $this->assertObjectHasAttribute( 'groupIds', $responseObj, 'Object response missing attribute "groupIds"' );
+        $this->assertObjectHasAttribute( 'groups', $responseObj, 'Object response missing attribute "groups"' );
 
-        $this->assertObjectHasAttribute( 'branchIds', $responseObj, 'Object response missing attribute "branchIds"' );
+        $this->assertObjectHasAttribute( 'branches', $responseObj, 'Object response missing attribute "branches"' );
 
     }
 
@@ -1988,7 +1988,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute success');
 
-        $this->assertFalse ( $responseObj->success,  'Success message should be true' );
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
         $this->assertObjectHasAttribute( 'branchId', $responseObj, 'Object response missing attribute "branchId"');
 
