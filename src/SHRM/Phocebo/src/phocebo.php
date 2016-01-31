@@ -1934,7 +1934,7 @@ class phocebo {
 
             '401' => 'Missing or invalid required parameter "branchId"',
 
-            '402' => 'Missing or invalid required list of branchIds',
+            '402' => 'Missing or invalid required list of "doceboIds',
 
         ];
 
