@@ -9,6 +9,14 @@
  * @license MIT
  * @copyright 2015 SHRM
  *
+ * Run All Tests
+ *     ./vendor/bin/phpunit
+ * Run Single Test
+ *     ./vendor/bin/phpunit --filter testupgradeUserToPowerUser src/SHRM/Phocebo/tests/phoceboTest.php
+ *
+ * Run Test with Results in HTML
+ * ./vendor/bin/phpunit src/SHRM/Phocebo/tests/phoceboTest.php --testdox-html  src/SHRM/Phocebo/tests/test_results.html
+ *
  */
 
 
@@ -85,10 +93,10 @@ if (file_exists(INI)) {
 
 
 /**
- * EnvironmentVariablesTest class.
+ * PhởceboTest class.
  */
 
-class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
+class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
 
     public function __construct ( $name = NULL, array $data = array(), $dataName = '' ) {
 
@@ -104,8 +112,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * testEnvironmentSettingsLoaded function.
-     *
-     * @access public
+     * @group Environment
      */
 
     public function testEnvironmentSettingsLoaded( ) {
@@ -117,24 +124,22 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testURLisNotBlank function.
-     *
-     * @access public
+     * testUrlIsNotBlank function.
+     * @group Environment
      */
 
-    public function testURLisNotBlank() {
+    public function testUrlIsNotBlank() {
 
         $this->assertNotEquals(URL, "URL", "Missing Docebo URL");
 
     }
 
     /**
-     * testURLisValid function.
-     *
-     * @access public
+     * testEnvironmentVariableUrlIsValid function.
+     * @group Environment
      */
 
-    public function testURLisValid() {
+    public function testEnvironmentVariableUrlIsValid() {
 
         $URLisValid = true;
 
@@ -149,50 +154,42 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testKEYisNotBlank function.
-     *
-     * @access public
+     * testEnvironmentVariableKeyIsNotBlank function.
+     * @group Environment
      */
 
-    public function testKEYisNotBlank() {
+    public function testEnvironmentVariableKeyIsNotBlank() {
 
         $this->assertNotEquals(KEY, "KEY", "Missing Docebo public key");
 
     }
 
     /**
-     * testSECRETisNotBlank function.
-     *
-     * @access public
+     * testEnvironmentVariableSecretIsNotBlank function.
+     * @group Environment
      */
 
-    public function testSECRETisNotBlank() {
+    public function testEnvironmentVariableSecretIsNotBlank() {
 
         $this->assertNotEquals(SECRET, "SECRET", "Missing Docebo secret key");
 
     }
 
     /**
-     * testSSOisNotBlank function.
-     *
-     * @access public
+     * testEnvironmentVariableSsoIsNotBlank function.
+     * @group Environment
      */
 
-    public function testSSOisNotBlank() {
+    public function testEnvironmentVariableSsoIsNotBlank() {
 
         $this->assertNotEquals(SSO, "SSO", "Missing Docebo SSO");
 
     }
 
 
-
-
     /**
      * testGetHashParametersExist function.
-     *
-     * @access public
-     * @internal param array $params
-     * @internal param array $codice
+     * @group Connection
      */
 
     public function testGetHashParametersExist() {
@@ -207,11 +204,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * testGetHashsha1String40 function.
-     *
-     * @access public
-     * @internal param array $params
-     * @internal param array $codice
-     * @internal param array $sha1_len
+     * @group Connection
      */
 
     public function testGetHashsha1String40() {
@@ -227,13 +220,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testaddUserCustomErrorsJSONformatfirstName function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testAddUserCustomErrorsJsonFormatFirstName function.
+     * @group Response
      */
 
-    public function testaddUserCustomErrorsJSONformatfirstName ( ) {
+    public function testAddUserCustomErrorsJsonFormatFirstName ( ) {
 
         $parameters = array (
 
@@ -255,15 +246,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     }
 
-
     /**
-     * testaddUserCustomErrorsJSONformatlastName function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testAddUserCustomErrorsJsonFormatLastName function.
+     * @group Response
      */
 
-    public function testaddUserCustomErrorsJSONformatlastName ( ) {
+    public function testAddUserCustomErrorsJsonFormatLastName ( ) {
 
         $parameters = array (
 
@@ -285,16 +273,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     }
 
-
-
     /**
-     * testaddUserCustomErrorsJSONformatemail function.
-     *
-     * @access public
+     * testAddUserCustomErrorsJsonFormatEmail function.
+     * @group Response
      */
 
-
-    public function testaddUserCustomErrorsJSONformatemail ( ) {
+    public function testAddUserCustomErrorsJsonFormatEmail ( ) {
 
         $parameters = array (
 
@@ -322,13 +306,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testaddUserCustomErrors function.
-     *
-     * @access public
-     * @param array $parameters
+     * testAddUserCustomErrors function.
+     * @group User
      */
 
-    public function testaddUserCustomErrors ( ) {
+    public function testAddUserCustomErrors ( ) {
 
         $responseObj = $this->phocebo->addUser ( array ( 'nofirstName' => 'Test', 'nolastName' => 'Account', 'noemail' => TEST_ACCOUNT ) );
 
@@ -345,13 +327,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testaddUser function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testAddUser function.
+     * @group User
      */
 
-    public function testaddUser () {
+    public function testAddUser () {
 
         $parameters = array (
 
@@ -399,12 +379,7 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * testResponseIsAnObject function.
-     *
-     * @access public
-     * @internal param string $action
-     * @internal param array $data_params
-     * @internal param string $response
-     * @internal param string $json_error
+     * @group Response
      */
 
     public function testResponseIsAnObject() {
@@ -426,20 +401,25 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
 
-
     /**
-     * testdoceboId function.
-     *
-     * Test if function is returning correct keys in object. Relies on testaddUser processing prior to testdoceboId
-     *
-     * @access public
+     * testValidDoceboid function.
+     * @group User
      */
 
-    public function testdoceboId ( ) {
+    public function testValidDoceboid ( ) {
 
         $responseObj = $this->phocebo->getdoceboId ( array( 'email' => TEST_ACCOUNT ) );
 
         $this->assertObjectHasAttribute( 'email', $responseObj, 'doceboId is valid but not reporting as valid');
+
+    }
+
+    /**
+     * testInalidDoceboid function.
+     * @group User
+     */
+
+    public function testInalidDoceboid ( ) {
 
         $responseObj = $this->phocebo->getdoceboId ( array( 'email' => 'someone@example.com' ) );
 
@@ -448,14 +428,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testdoceboIdObj function.
-     *
-     * @access public
-     *
+     * testValidDoceboidObject function.
+     * @group User
      */
 
-
-    public function testdoceboIdObj ( ) {
+    public function testValidDoceboidObject ( ) {
 
         $responseObj = $this->phocebo->getdoceboId ( array ( 'email' => TEST_ACCOUNT) );
 
@@ -472,13 +449,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testdoceboIdCustomErrorsJSONformat function.
-     *
-     * @access public
-     *
+     * testCustomErrorsJsonResponesFordoceboId function.
+     * @group User
      */
 
-    public function testdoceboIdCustomErrorsJSONformat ( ) {
+    public function testCustomErrorsJsonResponesFordoceboId ( ) {
 
         $responseObj = $this->phocebo->getdoceboId( array( 'noemail' => TEST_ACCOUNT) );
 
@@ -494,12 +469,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testdoceboIdCustomErrors function.
-     *
-     * @access public
+     * testInvalidDoceboidCustomErrors function.
+     * @group User
      */
 
-    public function testdoceboIdCustomErrors ( ) {
+    public function testInvalidDoceboidCustomErrors ( ) {
 
         $responseObj = $this->phocebo->getdoceboId( array( 'noemail' => TEST_ACCOUNT) );
 
@@ -513,13 +487,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testauthenticateUserValid function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidAuthenticateUser function.
+     * @group User
      */
 
-    public function testauthenticateUserValid ( ) {
+    public function testValidAuthenticateUser ( ) {
 
         $parameters = array( 'username' => TEST_ACCOUNT, 'password' => TEST_PASSWORD );
 
@@ -539,14 +511,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testauthenticateUserInvalid function.
-     *
-     * @access public
-     * @param array $parameters
+     * testInvalidAuthenticateUser function.
+     * @group User
      * @dataProvider authenticateUserInvalidProvider
      */
 
-    public function testauthenticateUserInvalid ( $parameters ) {
+    public function testInvalidAuthenticateUser ( $parameters ) {
 
         $responseObj = $this->phocebo->authenticateUser ( $parameters );
 
@@ -578,14 +548,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testauthenticateUserInvalidJSONMessage400 function.
-     *
-     * @access public
-     * @param array $parameters
+     * testInvalidMessagesForAuthenticateUser function.
+     * @group User
      * @dataProvider providerTesttestauthenticateUserInvalidJSONMessage400
      */
 
-    public function testauthenticateUserInvalidJSONMessage400 ( $parameters ) {
+    public function testInvalidMessagesForAuthenticateUser ( $parameters ) {
 
         $responseObj = $this->phocebo->authenticateUser ( $parameters );
 
@@ -599,8 +567,6 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * providerTesttestauthenticateUserInvalidJSONMessage400 function.
-     *
-     * @access public
      */
 
     public function providerTesttestauthenticateUserInvalidJSONMessage400() {
@@ -619,13 +585,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testdeleteUserCustomError function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorDeleteUser function.
+     * @group User
      */
 
-    public function testdeleteUserCustomError () {
+    public function testCustomErrorDeleteUser () {
 
         $parameters = array (
 
@@ -648,13 +612,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testdeleteUserDoesntExist function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testDeleteUserDoesntExist function.
+     * @group User
      */
 
-    public function testdeleteUserDoesntExist () {
+    public function testDeleteUserDoesntExist () {
 
         $parameters = array ( 'doceboId' => '10101' );
 
@@ -673,13 +635,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testdeleteUserValid function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testDeleteValidUser function.
+     * @group User
      */
 
-    public function testdeleteUserValid () {
+    public function testDeleteValidUser () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -715,14 +675,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testeditUserCustomErrors function.
-     *
-     * @access public
-     * @param $parameters
+     * testCustomErrorsWhenEditingUser function.
+     * @group User
      * @dataProvider providerTesttesteditUserCustomErrors
      */
 
-    public function testeditUserCustomErrors ( $parameters ) {
+    public function testCustomErrorsWhenEditingUser ( $parameters ) {
 
         $responseObj = $this->phocebo->editUser ( $parameters );
 
@@ -740,8 +698,6 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * providerTesttesteditUserCustomErrors function.
-     *
-     * @access public
      */
 
     public function providerTesttesteditUserCustomErrors() {
@@ -759,13 +715,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testeditUserCustomServerErrors function.
-     *
-     * @access public
-     * @param $parameters
+     * testEditUserEmail function.
+     * @group User
      */
 
-    public function testeditUserEmail ( ) {
+    public function testEditUserEmail ( ) {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -785,14 +739,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testeditUserCustomServerErrors function.
-     *
-     * @access public
-     * @param $parameters
+     * testEditUser function.
+     * @group User
      * @dataProvider providerTesttesteditUser
      */
 
-    public function testeditUser ( $parameters ) {
+    public function testEditUser ( $parameters ) {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -812,8 +764,6 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * providerTesttesteditUser function.
-     *
-     * @access public
      */
 
     public function providerTesttesteditUser() {
@@ -846,17 +796,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     }
 
-
-
-
-
     /**
-     * testgetUserFields function.
-     *
-     * @access public
+     * testGetUserFields function.
+     * @group User
      */
 
-    public function testgetUserFields () {
+    public function testGetUserFields () {
 
         if (NULL != USER_ADDED_FIELD) {
 
@@ -878,13 +823,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testgetUserProfileCustomErrors function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorsForGetUserProfile function.
+     * @group User
      */
 
-    public function testgetUserProfileCustomErrors () {
+    public function testCustomErrorsForGetUserProfile () {
 
         $parameters = array (
 
@@ -907,13 +850,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetUserProfileValid function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testGetValidUserProfile function.
+     * @group User
      */
 
-    public function testgetUserProfileValid () {
+    public function testGetValidUserProfile () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -959,13 +900,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testgetUserProfileInvalid function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testGetInvalidUserProfile function.
+     * @group User
      */
 
-    public function testgetUserProfileInvalid () {
+    public function testGetInvalidUserProfile () {
 
         $parameters = array (
 
@@ -986,13 +925,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetUserGroupsCustomErrors function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorsForGettingUserGroups function.
+     * @group User
      */
 
-    public function testgetUserGroupsCustomErrors () {
+    public function testCustomErrorsForGettingUserGroups () {
 
         $parameters = array (
 
@@ -1015,13 +952,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetUserGroupsCustomErrors function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testGettingValidUserGroups function.
+     * @group User
      */
 
-    public function testgetUserGroupsValid () {
+    public function testGettingValidUserGroups () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1074,13 +1009,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testloggedinUserCustomError function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorsForUserLoggedIn function.
+     * @group Access
      */
 
-    public function testloggedinUserCustomError () {
+    public function testCustomErrorsForUserLoggedIn () {
 
         $parameters = array (
 
@@ -1103,13 +1036,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testloggedinUserValid function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidLoggedInUserValid function.
+     * @group Access
+     * @todo Fix Tests
      */
 
-    public function testloggedinUserValid () {
+    public function testValidLoggedInUserValid () {
 
 //        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 //
@@ -1130,13 +1062,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testloggedinUserInValid function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testInvalidUserLoggedIn function.
+     * @group Access
      */
 
-    public function testloggedinUserInValid () {
+    public function testInvalidUserLoggedIn () {
 
         $parameters = array (
 
@@ -1159,13 +1089,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testsuspendUseCustomErrors function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorsSuspendUser function.
+     * @group User
      */
 
-    public function testsuspendUseCustomErrors () {
+    public function testCustomErrorsSuspendUser () {
 
         $parameters = array (
 
@@ -1188,13 +1116,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testsuspendUserValidUser function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidSuspendUser function.
+     * @group User
      */
 
-    public function testsuspendUserValidUser () {
+    public function testValidSuspendUser () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1221,13 +1147,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testsuspendUserInValidUser function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testInvalidSuspendUser function.
+     * @group User
      */
 
-    public function testsuspendUserInValidUser () {
+    public function testInvalidSuspendUser () {
 
         $parameters = array (
 
@@ -1251,13 +1175,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testunsuspendUseCustomErrors function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorsUnsuspendUser function.
+     * @group User
      */
 
-    public function testunsuspendUseCustomErrors () {
+    public function testCustomErrorsUnsuspendUser () {
 
         $parameters = array (
 
@@ -1281,13 +1203,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testunsuspendUserValidUser function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidUserUnsuspend function.
+     * @group User
      */
 
-    public function testunsuspendUserValidUser () {
+    public function testValidUserUnsuspend () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1312,13 +1232,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testunsuspendUserInValidUser function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testInvalidUnsuspendUser function.
+     * @group User
      */
 
-    public function testunsuspendUserInValidUser () {
+    public function testInvalidUnsuspendUser () {
 
         $parameters = array (
 
@@ -1339,13 +1257,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testuserCoursesCustomErrorNoDoceboId function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorNoDoceboidForUserCourses function.
+     * @group Course
      */
 
-    public function testuserCoursesCustomErrorNoDoceboId () {
+    public function testCustomErrorNoDoceboidForUserCourses () {
 
         $parameters = array ('nodoceboId' => '10101');
 
@@ -1365,13 +1281,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testuserCoursesValid function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidUserCourses function.
+     * @group Course
      */
 
-    public function testuserCoursesValid () {
+    public function testValidUserCourses () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1391,18 +1305,15 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
-
     }
 
 
     /**
-     * testlistCourses function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testListCourses function.
+     * @group Course
      */
 
-    public function testlistCourses () {
+    public function testListCourses () {
 
         $responseObj = $this->phocebo->listCourses();
 
@@ -1413,13 +1324,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testlistUsersCourses function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testListUsersCourses function.
+     * @group Course
      */
 
-    public function testlistUsersCourses () {
+    public function testListUsersCourses () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1430,13 +1339,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testenrollUserInCourseCustomErrors function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorsEnrollUserInCourse function.
+     * @group Course
      */
 
-    public function testenrollUserInCourseCustomErrors () {
+    public function testCustomErrorsEnrollUserInCourse () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1485,13 +1392,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testenrollUserInCourse function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testEnrollUserInCourse function.
+     * @group Course
      */
 
-    public function testenrollUserInCourse () {
+    public function testEnrollUserInCourse () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1524,13 +1429,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testunenrollUserInCourse function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testUnenrollUserInCourse function.
+     * @group Course
      */
 
-    public function testunenrollUserInCourse () {
+    public function testUnenrollUserInCourse () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1553,13 +1456,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testunenrollUserInCourseError function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testErrorWithUnenrollUserInCourse function.
+     * @group Course
      */
 
-    public function testunenrollUserInCourseError () {
+    public function testErrorWithUnenrollUserInCourse () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1584,13 +1485,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testunenrollUserInCourseCustomError function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorUnenrollUserInCourse function.
+     * @group Course
      */
 
-    public function testunenrollUserInCourseCustomError () {
+    public function testCustomErrorUnenrollUserInCourse () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1642,15 +1541,14 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testlistUserCourses function.
+     * testListUserCourses function.
+     * @group Course
      *
      * if this test fails check if test@shrm.org is a valid user and if the courseCode if valid
-     * @access public
-     * @internal param array $parameters
      * @todo fix reference to  $responseObj->{'0'}
      */
 
-    public function testlistUserCourses () {
+    public function testListUserCourses () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1700,13 +1598,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * testlistUserCoursesNoCourse function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testListUserWithNoCourse function.
+     * @group Course
      */
 
-    public function testlistUserCoursesNoCourse () {
+    public function testListUserWithNoCourse () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1737,19 +1633,37 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * upgradeUserToPowerUser function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testUpgradeUserToPowerUser function.
+     * @group PowerUser
      */
 
-    public function upgradeUserToPowerUser () {
+    public function testUpgradeUserToPowerUser () {
 
         /** @var object $branchObj */
         $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => TEST_BRANCH ) );
 
-        /** @var object $userObj */
-        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_POWER_USER ) );
+
+        if ( false == $userObj->success) {
+
+            $parameters = array (
+
+                'firstName'                 => 'Power User',
+
+                'lastName'                  => 'Account',
+
+                'email'                     => TEST_POWER_USER,
+
+                'password'                  => TEST_POWER_USER_PASSWORD
+
+            );
+
+            $this->phocebo->addUser( $parameters );
+
+            /** @var object $userObj */
+            $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_POWER_USER ) );
+
+        }
 
         $parameters = array (
 
@@ -1757,31 +1671,36 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
             'profileName' => TEST_POWER_USER_PROFILE,
 
-            'ids'   => $userObj->doceboId
+            'doceboId'   => $userObj->doceboId
 
         );
-
         $responseObj = $this->phocebo->upgradeUserToPowerUser($parameters);
+
+        if ( false == $responseObj->success) {
+
+            $testUser = $this->phocebo->downgradeUserFromPowerUser( array ( 'doceboId' => $userObj->doceboId));
+
+            if (true == $testUser->success) {
+
+                $responseObj = $this->phocebo->upgradeUserToPowerUser($parameters);
+
+            }
+
+        }
 
         $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
 
         $this->assertTrue ( $responseObj->success,  'Success message should be true' );
 
-        $this->assertObjectHasAttribute( 'assignedUsers', $responseObj, 'Object response missing attribute "assignedUsers"');
-
-        $this->phocebo->downgradeUserFromPowerUser( array(  'doceboId' => $userObj->doceboId ));
-
     }
 
 
     /**
-     * testassignCourseToPowerUserNotPowerUser function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testAssignCourseToPowerUserWhoIsNotPowerUser function.
+     * @group PowerUser
      */
 
-    public function testassignCourseToPowerUserNotPowerUser () {
+    public function testAssignCourseToPowerUserWhoIsNotPowerUser () {
 
         /** @var object $userObj */
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
@@ -1808,13 +1727,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testassignCourseToPowerUserCustomErrors function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorsForAssigningCourseToPowerUser function.
+     * @group PowerUser
      */
 
-    public function testassignCourseToPowerUserCustomErrors () {
+    public function testCustomErrorsForAssigningCourseToPowerUser () {
 
         /** @var object $userObj */
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_POWER_USER ) );
@@ -1850,13 +1767,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testassignCoursesToPowerUser function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testAssignCourseToPowerUser function.
+     * @group PowerUser
      */
 
-    public function testassignCourseToPowerUser () {
+    public function testAssignCourseToPowerUser () {
 
         /** @var object $userObj */
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_POWER_USER ) );
@@ -1878,14 +1793,14 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetBranchbyCodeValid function.
-     *
+     * testValidGetBranchByCode function.
+     * @group Branch
      * if this test fails check Docebo Root folder should have Org Chart Code as root and Name in English as root
      * @access public
      * @internal param array $parameters
      */
 
-    public function testgetBranchbyCodeValid () {
+    public function testValidGetBranchByCode () {
 
         $parameters = array (
 
@@ -1970,13 +1885,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetBranchbyCodeInValid function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testInvalidGetBranchbyCode function.
+     * @group Branch
      */
 
-    public function testgetBranchbyCodeInValid () {
+    public function testInvalidGetBranchbyCode () {
 
         $parameters = array (
 
@@ -1997,13 +1910,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetBranchbyCodeCustomErrors function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorsGetBranchbyCode function.
+     * @group Branch
      */
 
-    public function testgetBranchbyCodeCustomErrors () {
+    public function testCustomErrorsGetBranchbyCode () {
 
         $parameters = array (
 
@@ -2026,13 +1937,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetBranchInfo function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidGetBranchInformation function.
+     * @group Branch
      */
 
-    public function testgetBranchInfo () {
+    public function testValidGetBranchInformation () {
 
         $parameters = array (
 
@@ -2119,13 +2028,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetBranchbyInfoInValid function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testInvalidGetBranchbyInformation function.
+     * @group Branch
      */
 
-    public function testgetBranchbyInfoInValid () {
+    public function testInvalidGetBranchbyInformation () {
 
         $parameters = array (
 
@@ -2146,13 +2053,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetBranchbyInfoCustomErrors function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorsForGettingBranchInformation function.
+     * @group Branch
      */
 
-    public function testgetBranchbyInfoCustomErrors () {
+    public function testCustomErrorsForGettingBranchInformation () {
 
         $parameters = array (
 
@@ -2175,13 +2080,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetBranchChildren function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidGetBranchChildren function.
+     * @group Branch
+     * If this test fails, root branch in Docebo was always 0
      */
 
-    public function testgetBranchChildren () {
+    public function testValidGetBranchChildren () {
 
         $parameters = array (
 
@@ -2200,13 +2104,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetBranchParentId function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidGetBranchParentId function.
+     * @group Branch
      */
 
-    public function testgetBranchParentId () {
+    public function testValidGetBranchParentId () {
 
         $parameters = array (
 
@@ -2239,14 +2141,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testassignUserToBranch function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidUserAssignedToBranch function.
+     * @group Branch
      */
 
-
-    public function testassignUserToBranch () {
+    public function testValidUserAssignedToBranch () {
 
         $parameters = array (
 
@@ -2283,13 +2182,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testcreateBranch function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidCreateBranch function.
+     * @group Branch
      */
 
-    public function testcreateBranch () {
+    public function testValidCreateBranch () {
 
         $branchObj = $this->phocebo->getBranchbyCode( array ('branchCode' => TEST_BRANCH_CREATE ) );
 
@@ -2318,13 +2215,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testcreateBranchCustomError function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testCustomErrorForCreateBranch function.
+     * @group Branch
      */
 
-    public function testcreateBranchCustomError () {
+    public function testCustomErrorForCreateBranch () {
 
         $parameters = array (
 
@@ -2395,13 +2290,11 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testlistGroups function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testListGroupsInDocebo function.
+     * @group Groups
      */
 
-    public function testlistGroups () {
+    public function testListGroupsInDocebo () {
 
         $responseObj = $this->phocebo->listGroups();
 
@@ -2411,15 +2304,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     }
 
-
     /**
-     * testassignUserToBranch function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidGetGroupId function.
+     * @group Groups
      */
 
-    public function testgetGroupId () {
+    public function testValidGetGroupId () {
 
         $parameters = array (
 
@@ -2433,7 +2323,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
     }
 
-    public function testassignUserToGroup () {
+    /**
+     * testValidUserAssignedToGroup function.
+     * @group Groups
+     */
+
+    public function testValidUserAssignedToGroup () {
 
         $groupId = $this->phocebo->getGroupId(array ( 'groupName' => TEST_GROUP ) );
 
@@ -2460,14 +2355,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testlistProfiles function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidListProfiles function.
+     * @group Profiles
      * @todo expand tests for poweruser profiles list
      */
 
-    public function testlistProfiles () {
+    public function testValidListProfiles () {
 
         $responseObj = $this->phocebo->listProfiles();
 
@@ -2478,15 +2371,12 @@ class EnvironmentVariablesTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testgetProfileId function.
-     *
-     * @access public
-     * @internal param array $parameters
+     * testValidGetProfileId function.
+     * @group Profiles
      * @todo expand tests for poweruser profiles list
-     * 122713
      */
 
-    public function testgetProfileId () {
+    public function testValidGetProfileId () {
 
         $parameters = array (
 
