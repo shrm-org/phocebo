@@ -2439,9 +2439,17 @@ class phocebo {
 
         if ( true == $groupArray['success']) {
 
-            $groupId = $groupArray[$parameters['groupName']]['id'];
+            if ( array_key_exists($parameters['groupName'], $groupArray) ) {
 
-            return $groupId;
+                $groupId = $groupArray[$parameters['groupName']]['id'];
+
+                return $groupId;
+
+            } else {
+
+                return false;
+
+            }
 
         } else {
 
