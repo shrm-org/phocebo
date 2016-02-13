@@ -1458,7 +1458,12 @@ class phocebo {
 
                 'message' => "Branch already exists with that name",
 
-                'branchId' => $responseobj->branchId
+                'branchId' => $responseobj->branchId,
+
+                'branchCode' => $parameters['branchCode'],
+
+                'branchName' => $parameters['branchName']
+
 
             );
 
