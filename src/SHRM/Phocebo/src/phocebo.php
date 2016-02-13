@@ -2441,9 +2441,13 @@ class phocebo {
 
             $groupId = $groupArray[$parameters['groupName']]['id'];
 
+            return $groupId;
+
+        } else {
+
+            return false;
         }
 
-        return $groupId;
 
     }
 
