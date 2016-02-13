@@ -3,7 +3,7 @@
 /**
  * Phởcebo
  *
- * PHP Version 5.
+ * PHP Version 5.6
  *
  * @copyright 2015-2016 SHRM (http://www.shrm.org)
  * @license   http://www.opensource.org/licenses/mit-license.php
@@ -12,6 +12,7 @@
 
 
 namespace SHRM\Phocebo;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
@@ -97,7 +98,7 @@ class phocebo {
 
             return( self::dataError ( 'email', 'Required parameter "email": The username or email of a valid user in the LMS') );
 
-        };
+        }
 
         $action = '/user/checkUsername';
 
@@ -181,7 +182,7 @@ class phocebo {
 
             return(  self::dataError ( 'password', 'Parameter password is blank') );
 
-        };
+        }
 
 
         $action = '/user/authenticate';
@@ -233,7 +234,7 @@ class phocebo {
 
             return( self::dataError ( 'username', 'The username or email of a valid user in the LMS') );
 
-        };
+        }
 
         $action = '/user/getToken';
 
@@ -277,7 +278,7 @@ class phocebo {
 
             return( self::dataError ( 'username', 'The username or email of a valid user in the LMS') );
 
-        };
+        }
 
         $action = '/user/checkToken';
 
@@ -334,6 +335,7 @@ class phocebo {
      * @todo test $responseObj has each of the expected attributes when valid
      * @todo test $responseObj does not have attributes (such as idst)
      * @todo add phake mocking for addUser testing
+     * @todo is password mandatory?
      */
 
     public function addUser ( $parameters ) {
@@ -350,7 +352,7 @@ class phocebo {
 
             return( self::dataError ( 'email', 'Parameter email is missing') );
 
-        };
+        }
 
         $action = '/user/create';
 
@@ -427,7 +429,7 @@ class phocebo {
 
             return( self::dataError ( 'doceboId', 'Parameter doceboId is missing') );
 
-        };
+        }
 
         $action = '/user/delete';
 
@@ -487,7 +489,7 @@ class phocebo {
 
             return(  self::dataError ( 'email', 'The username or email of a valid user in the LMS') );
 
-        };
+        }
 
         $action = '/user/edit';
 
@@ -639,7 +641,7 @@ class phocebo {
 
             return( self::dataError ( 'doceboId', 'Parameter doceboId missing') );
 
-        };
+        }
 
         $action = '/user/profile';
 
@@ -667,7 +669,7 @@ class phocebo {
      * @access public
      * @param array $parameters
      * @return object
-
+     *
      *       object(stdClass) (2) {
      *
      *          ["results"] => object(stdClass) (2) {
@@ -696,9 +698,9 @@ class phocebo {
 
         if ( !array_key_exists( 'email', $parameters) ) {
 
-            return( self::dataError ( 'email', 'Parameter doceboId missing') );
+            return( self::dataError ( 'email', 'Parameter "email" missing') );
 
-        };
+        }
 
         $action = '/user/group_associations';
 
@@ -710,11 +712,17 @@ class phocebo {
 
         $error_messages = [
 
-            '201' => 'Invalid user specification',
+            '201'                   => 'Invalid user specification',
 
         ];
 
-        return self::call ( $action, $data_params, $error_messages );
+//        $resultsObj = self::call ( $action, $data_params, $error_messages );
+//
+//        var_dump($resultsObj);
+//
+//        exit;
+
+        return self::call ( $action, $data_params, $error_messages, 'Groups as List' );
 
     }
 
@@ -755,7 +763,7 @@ class phocebo {
 
             return( self::dataError ( 'username', 'The username or email of a valid user in the LMS') );
 
-        };
+        }
 
         $action = '/user/user_logged_in';
 
@@ -814,7 +822,7 @@ class phocebo {
 
             return( self::dataError ( 'doceboId', 'Parameter doceboId missing') );
 
-        };
+        }
 
         $action = '/user/suspend';
 
@@ -868,7 +876,7 @@ class phocebo {
 
             return( self::dataError ( 'doceboId', 'Parameter doceboId missing') );
 
-        };
+        }
 
         $action = '/user/unsuspend';
 
@@ -911,7 +919,7 @@ class phocebo {
 
             return( self::dataError ( 'doceboId', 'Parameter doceboId missing') );
 
-        };
+        }
 
         $action = '/user/userCourses';
 
@@ -981,6 +989,7 @@ class phocebo {
 
             }
 
+     * the enrollment validity start (in yyyy-MM-dd HH:mm:ss format, UTC timezone)
      */
 
     public function enrollUserInCourse ($parameters) {
@@ -1003,7 +1012,31 @@ class phocebo {
 
         (array_key_exists('courseId', $parameters) ?  $data_params['course_id'] = $parameters['courseId'] : '');
 
-        (array_key_exists('courseId', $parameters) ?  $data_params['course_id'] = $parameters['courseId'] : '');
+        if (array_key_exists('dateStart', $parameters ) ) {
+
+            if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateStart'] )) {
+
+                $data_params['date_begin_validity'] = $parameters['dateStart'];
+
+            } else {
+
+                return( self::dataError ( 'dateStart', 'Parameter "dateStart" must be in in yyyy-MM-dd HH:mm:ss format, UTC timezone') );
+            }
+
+        }
+
+        if (array_key_exists('dateEnd', $parameters ) ) {
+
+            if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateEnd'] )) {
+
+                $data_params['date_expire_validity'] = $parameters['dateEnd'];
+
+            } else {
+
+                return( self::dataError ( 'dateEnd', 'Parameter "dateEnd" must be in in yyyy-MM-dd HH:mm:ss format, UTC timezone') );
+            }
+
+        }
 
         $data_params['user_level'] = 'student';
 
@@ -1022,6 +1055,103 @@ class phocebo {
         return self::call ( $action, $data_params, $error_messages );
     }
 
+    /**
+     * updateEnrollment function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+
+    (stdClass) (1) {
+
+    ["success"] => bool(true)
+
+    }
+
+    (stdClass) (3) {
+
+    ["success"] => bool(false)
+
+    ["error"] => int(203)
+
+    ["message"] => string(35) "User already enrolled to the course"
+
+    }
+
+     * the enrollment validity start (in yyyy-MM-dd HH:mm:ss format, UTC timezone)
+     */
+
+    public function updateEnrollment ($parameters) {
+
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+
+            return( self::dataError ( 'doceboId', 'Required parameter "doceboId" missing: Docebo ID for the user to be enrolled in the course') );
+
+        } elseif ( !array_key_exists( 'courseCode', $parameters) )  {
+
+            return( self::dataError ( 'courseCode', 'Required parameter "courseCode" missing: Course code') );
+
+        }
+
+        $action = '/course/updateUserSubscription';
+
+        (array_key_exists('doceboId', $parameters) ?  $data_params['id_user'] = $parameters['doceboId'] : '');
+
+        (array_key_exists('courseCode', $parameters) ?  $data_params['course_code'] = $parameters['courseCode'] : '');
+
+        (array_key_exists('courseId', $parameters) ?  $data_params['course_id'] = $parameters['courseId'] : '');
+
+        (array_key_exists('userLevel', $parameters) ?  $data_params['user_level'] = $parameters['userLevel'] : '');
+
+        (array_key_exists('userStatus', $parameters) ?  $data_params['user_status'] = $parameters['userStatus'] : '');
+
+        if (array_key_exists('dateStart', $parameters ) ) {
+
+            if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateStart'] )) {
+
+                $data_params['date_begin_validity'] = $parameters['dateStart'] .  ' 00:00:00 UTC';
+
+            } else {
+
+                return( self::dataError ( 'dateStart', 'Parameter "dateStart" must be in in yyyy-MM-dd HH:mm:ss format, UTC timezone') );
+            }
+
+        }
+
+        if (array_key_exists('dateEnd', $parameters ) ) {
+
+            if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateEnd'] )) {
+
+                $data_params['date_expire_validity'] = $parameters['dateEnd'];
+
+            } else {
+
+                return( self::dataError ( 'dateEnd', 'Parameter "dateEnd" must be in in yyyy-MM-dd HH:mm:ss format, UTC timezone') );
+            }
+
+        }
+
+        var_dump($data_params);
+
+        $error_messages = [
+
+            '201' => 'Invalid specified user',
+
+            '202' => 'No updating info has been specified',
+
+            '203' => 'Invalid specified course',
+
+            '254' => 'Invalid enrollment',
+
+            '205' => 'Error while updating enrollment data',
+
+            '500' => 'Internal server error',
+
+        ];
+
+        return self::call ( $action, $data_params, $error_messages );
+    }
+
 
     /**
      * unenrollUserInCourse function.
@@ -1029,23 +1159,22 @@ class phocebo {
      * @access public
      * @param array $parameters
      * @return object
-
-        (stdClass) {
-
-          ["success"] => bool(true)
-
-        }
-
-        (stdClass) {
-
-          ["success"] => bool(false)
-
-          ["error"] => int(203)
-
-          ["message"] => string(35) "User already enrolled to the course"
-
-        }
-
+     *
+     *     (stdClass) {
+     *
+     *         ["success"] => bool(true)
+     *
+     *      }
+     *
+     *     (stdClass) {
+     *
+     *         ["success"] => bool(false)
+     *
+     *         ["error"] => int(203)
+     *
+     *         ["message"] => string(35) "User already enrolled to the course"
+     *
+     *     }
      */
 
     public function unenrollUserInCourse ($parameters) {
@@ -1058,7 +1187,71 @@ class phocebo {
 
             return( self::dataError ( 'courseCode', 'Required parameter "courseCode" missing') );
 
-        };
+        }
+
+        $action = '/course/deleteUserSubscription';
+
+        $data_params = array ();
+
+        (array_key_exists('doceboId', $parameters) ?  $data_params['id_user'] = $parameters['doceboId'] : '');
+
+        (array_key_exists('courseCode', $parameters) ?  $data_params['course_code'] = $parameters['courseCode'] : '');
+
+        (array_key_exists('courseId', $parameters) ?  $data_params['course_id'] = $parameters['courseId'] : '');
+
+        /** @var string $response */
+
+        $error_messages = [
+
+            '201' => 'Invalid parameters',
+
+            '202' => 'Invalid specified course',
+
+            '203' => 'User already enrolled to the course',
+
+            '204' => 'Error while enrolling user',
+
+        ];
+
+        return self::call ( $action, $data_params, $error_messages );
+
+    }
+
+    /**
+     * unenrollUserInCourse function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+     *
+     *     (stdClass) {
+     *
+     *        ["success"] => bool(true)
+     *
+     *     }
+     *
+     *     (stdClass) {
+     *
+     *        ["success"] => bool(false)
+     *
+     *        ["error"] => int(203)
+     *
+     *        ["message"] => string(35) "User already enrolled to the course"
+     *
+     *    }
+     */
+
+    public function updateUserInCourse ($parameters) {
+
+        if ( !array_key_exists( 'doceboId', $parameters) ) {
+
+            return( self::dataError ( 'doceboId', 'Required parameter "doceboId"') );
+
+        } elseif ( !array_key_exists( 'courseCode', $parameters) )  {
+
+            return( self::dataError ( 'courseCode', 'Required parameter "courseCode" missing') );
+
+        }
 
         $action = '/course/deleteUserSubscription';
 
@@ -1144,7 +1337,7 @@ class phocebo {
 
             return( self::dataError ( 'doceboId', 'Parameter doceboId missing') );
 
-        };
+        }
 
         $action = '/course/listEnrolledCourses';
 
@@ -1183,7 +1376,7 @@ class phocebo {
 
             return( self::dataError ( 'doceboId', 'Parameter doceboId missing') );
 
-        };
+        }
 
         $action = '/course/subscribeUserWithCode';
 
@@ -1250,7 +1443,7 @@ class phocebo {
 
             return( self::dataError ( 'parentBranchId', 'Required parameter "parentBranchId" missing') );
 
-        };
+        }
 
 
         $responseobj = self::getBranchbyCode( array ( 'branchCode' => $parameters['branchCode'] ) );
@@ -1319,7 +1512,7 @@ class phocebo {
 
             return( self::dataError ( 'branchId', 'Parameter branchId missing') );
 
-        };
+        }
 
         $action = '/orgchart/updateNode';
 
@@ -1366,7 +1559,7 @@ class phocebo {
 
             return( self::dataError ( 'branchId', 'Parameter "branchId" missing') );
 
-        };
+        }
 
         $action = '/orgchart/deleteNode';
 
@@ -1411,7 +1604,7 @@ class phocebo {
 
             return( self::dataError ( 'destinationParentId', 'Parameter "destinationParentId" missing') );
 
-        };
+        }
 
         $action = '/orgchart/moveNode';
 
@@ -1441,94 +1634,93 @@ class phocebo {
      * @access public
      * @param array $parameters
      * @return object
-
-            (stdClass) {
-
-              ["branchCode"] => string(4) "root"
-
-              ["translation"] => object(stdClass) {
-
-                ["arabic"] => string(4) "root"
-
-                ["bosnian"] => string(4) "root"
-
-                ["bulgarian"] => string(4) "root"
-
-                ["croatian"] => string(4) "root"
-
-                ["czech"] => string(4) "root"
-
-                ["danish"] => string(4) "root"
-
-                ["dutch"] => string(4) "root"
-
-                ["english"] => string(4) "root"
-
-                ["farsi"] => string(4) "root"
-
-                ["finnish"] => string(4) "root"
-
-                ["french"] => string(4) "root"
-
-                ["german"] => string(4) "root"
-
-                ["greek"] => string(4) "root"
-
-                ["hebrew"] => string(4) "root"
-
-                ["hungarian"] => string(4) "root"
-
-                ["indonesian"] => string(4) "root"
-
-                ["italian"] => string(4) "root"
-
-                ["japanese"] => string(4) "root"
-
-                ["korean"] => string(4) "root"
-
-                ["norwegian"] => string(4) "root"
-
-                ["polish"] => tring(4) "root"
-
-                ["portuguese"] => string(4) "root"
-
-                ["portuguese-br"] => string(4) "root"
-
-                ["romanian"] => string(4) "root"
-
-                ["russian"] => string(4) "root"
-
-                ["simplified_chinese"] => string(4) "root"
-
-                ["spanish"] => string(4) "root"
-
-                ["swedish"] => string(4) "root"
-
-                ["thai"] => string(4) "root"
-
-                ["turkish"] => string(4) "root"
-
-                ["ukrainian"] => string(4) "root"
-
-              }
-
-              ["success"] => bool(true)
-
-            }
-
-            (stdClass) {
-
-              ["branchCode"] => NULL
-
-              ["translation"] => array(0) {
-
-              }
-
-              ["success"] => bool(true)
-            }
-
-
-
+     *
+     *      (stdClass) {
+     *
+     *        ["branchCode"] => string(4) "root"
+     *
+     *        ["translation"] => object(stdClass) {
+     *
+     *          ["arabic"] => string(4) "root"
+     *
+     *          ["bosnian"] => string(4) "root"
+     *
+     *          ["bulgarian"] => string(4) "root"
+     *
+     *          ["croatian"] => string(4) "root"
+     *
+     *          ["czech"] => string(4) "root"
+     *
+     *          ["danish"] => string(4) "root"
+     *
+     *          ["dutch"] => string(4) "root"
+     *
+     *          ["english"] => string(4) "root"
+     *
+     *          ["farsi"] => string(4) "root"
+     *
+     *          ["finnish"] => string(4) "root"
+     *
+     *          ["french"] => string(4) "root"
+     *
+     *          ["german"] => string(4) "root"
+     *
+     *          ["greek"] => string(4) "root"
+     *
+     *          ["hebrew"] => string(4) "root"
+     *
+     *          ["hungarian"] => string(4) "root"
+     *
+     *          ["indonesian"] => string(4) "root"
+     *
+     *          ["italian"] => string(4) "root"
+     *
+     *          ["japanese"] => string(4) "root"
+     *
+     *          ["korean"] => string(4) "root"
+     *
+     *          ["norwegian"] => string(4) "root"
+     *
+     *          ["polish"] => tring(4) "root"
+     *
+     *          ["portuguese"] => string(4) "root"
+     *
+     *          ["portuguese-br"] => string(4) "root"
+     *
+     *          ["romanian"] => string(4) "root"
+     *
+     *          ["russian"] => string(4) "root"
+     *
+     *          ["simplified_chinese"] => string(4) "root"
+     *
+     *          ["spanish"] => string(4) "root"
+     *
+     *          ["swedish"] => string(4) "root"
+     *
+     *          ["thai"] => string(4) "root"
+     *
+     *          ["turkish"] => string(4) "root"
+     *
+     *          ["ukrainian"] => string(4) "root"
+     *
+     *        }
+     *
+     *        ["success"] => bool(true)
+     *
+     *      }
+     *
+     *      (stdClass) {
+     *
+     *        ["branchCode"] => NULL
+     *
+     *        ["translation"] => array(0) {
+     *
+     *        }
+     *
+     *       ["success"] => bool(true)
+     *
+     *      }
+     *
      */
 
     public function getBranchbyCode ($parameters) {
@@ -2166,6 +2358,27 @@ class phocebo {
      *
      *      }
      *
+     *      if no parameter sent, this is the error response, API does not request a parameter
+     *
+     *      object(stdClass) (3) {
+     *
+     *          ["success"] => bool(false)
+     *
+     *          ["message"] => string(40) "Authorization header value doesn't match"
+     *
+     *          ["branchCode"] => int(104)
+     *
+     *      }
+     *
+     *      if random paramter sent "category" a list is not returned
+     *
+     * object(stdClass)#22 (1) {
+    ["success"]=>
+    bool(true)
+    }
+
+     *
+
      * @todo create tests
      * @todo test $responseObj has expected attributes from server when valid
      * @todo test $responseObj does not have attributes (such as idst)
@@ -2188,6 +2401,12 @@ class phocebo {
             '500' => 'Internal server error',
 
         ];
+
+        $results = self::call ( $action, $data_params, $error_messages );
+
+//        echo 'here';
+//
+//        var_dump($results);
 
         return self::call ( $action, $data_params, $error_messages );
 
@@ -2487,7 +2706,7 @@ class phocebo {
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
      */
 
-    public function normalizeParams ( $json_array ) {
+    public function normalizeParams ( $json_array,  $alternative_meaning = null ) {
 
         if ( isset($json_array[0]) ) {
 
@@ -2567,15 +2786,23 @@ class phocebo {
 
             $groups = $json_array['groups'];
 
-            foreach ($groups as $key => $group) {
+            if ( 'Groups as List' == $alternative_meaning ) {
 
-                $json_array[$group['name']]['id'] = $group['id_group'];
 
-                $json_array[$group['name']]['description'] = $group['description'];
+            } else {
+
+                foreach ($groups as $key => $group) {
+
+                    $json_array[$group['name']]['id'] = $group['id_group'];
+
+                    $json_array[$group['name']]['description'] = $group['description'];
+
+                }
+
+                unset($json_array['groups']);
 
             }
 
-            unset($json_array['groups']);
 
         }
 
@@ -2727,7 +2954,7 @@ class phocebo {
      *
      */
 
-    public function call ( $action, $data_params, $error_messages ) {
+    public function call ( $action, $data_params, $error_messages, $alternative_meaning = null ) {
 
         $error_messages['500'] = 'Internal server error';
 
@@ -2817,7 +3044,7 @@ class phocebo {
 
             };
 
-            $output = self::normalizeParams ( $output );
+            $output = self::normalizeParams ( $output, $alternative_meaning );
 
         } finally {
 

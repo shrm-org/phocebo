@@ -12,10 +12,10 @@
  * Run All Tests
  *     ./vendor/bin/phpunit
  * Run Single Test
- *     ./vendor/bin/phpunit --filter testupgradeUserToPowerUser src/SHRM/Phocebo/tests/phoceboTest.php
+ *     ./vendor/bin/phpunit --filter testCustomErrorsStartDateInvalidFormateForEnrollUserInCourse src/SHRM/Phocebo/tests/phoceboTest.php
  *
  * Run Test with Results in HTML
- * ./vendor/bin/phpunit src/SHRM/Phocebo/tests/phoceboTest.php --testdox-html  src/SHRM/Phocebo/tests/test_results.html
+ * ./vendor/bin/phpunit src/SHRM/Phocebo/tests/phoceboTest.php --testdox-html  src/SHRM/Phocebo/tests/tests.html
  *
  */
 
@@ -91,9 +91,9 @@ if (file_exists(INI)) {
 } else die( "\nERROR: Phởcebo ingredients are missing (.env) \n\n");
 
 
-
 /**
  * PhởceboTest class.
+ * @property phocebo phocebo
  */
 
 class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
@@ -101,8 +101,6 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
     public function __construct ( $name = NULL, array $data = array(), $dataName = '' ) {
 
         global $settings;
-
-//        $this->preSetUp();
 
         parent::__construct($name, $data, $dataName);
 
@@ -396,7 +394,7 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
 
         $response = $this->phocebo->call($action, $data_params, []);
 
-        $this->assertEquals($response->success, true);
+        $this->assertTrue($res ponse->success, 'Response should be "true"');
 
     }
 
@@ -514,6 +512,7 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
      * testInvalidAuthenticateUser function.
      * @group User
      * @dataProvider authenticateUserInvalidProvider
+     * @param $parameters
      */
 
     public function testInvalidAuthenticateUser ( $parameters ) {
@@ -551,6 +550,7 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
      * testInvalidMessagesForAuthenticateUser function.
      * @group User
      * @dataProvider providerTesttestauthenticateUserInvalidJSONMessage400
+     * @param $parameters
      */
 
     public function testInvalidMessagesForAuthenticateUser ( $parameters ) {
@@ -678,6 +678,7 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
      * testCustomErrorsWhenEditingUser function.
      * @group User
      * @dataProvider providerTesttesteditUserCustomErrors
+     * @param $parameters
      */
 
     public function testCustomErrorsWhenEditingUser ( $parameters ) {
@@ -742,6 +743,7 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
      * testEditUser function.
      * @group User
      * @dataProvider providerTesttesteditUser
+     * @param $parameters
      */
 
     public function testEditUser ( $parameters ) {
@@ -1339,11 +1341,11 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * testCustomErrorsEnrollUserInCourse function.
+     * testCustomErrorsNoDoceboidForEnrollUserInCourse function.
      * @group Course
      */
 
-    public function testCustomErrorsEnrollUserInCourse () {
+    public function testCustomErrorsNoDoceboidForEnrollUserInCourse () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1366,6 +1368,15 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
 
         $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }
+
+    /**
+     * testCustomErrorsNoCourseCodeForEnrollUserInCourse function.
+     * @group Course
+     */
+
+    public function testCustomErrorsNoCourseCodeForEnrollUserInCourse () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
@@ -1392,6 +1403,86 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
+     * testCustomErrorsStartDateInvalidFormateForEnrollUserInCourse function.
+     * @group Course
+     * @dataProvider TestDateDataProvider
+     * @param $date
+     */
+
+    public function testCustomErrorsStartDateInvalidFormateForEnrollUserInCourse ($date) {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'doceboId'      => $userObj->doceboId,
+
+            'courseCode'    => TEST_COURSE_CODE,
+
+            'dateStart'    =>  $date
+
+        );
+
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }
+
+    /**
+     * testCustomErrorsEndDateInvalidFormateForEnrollUserInCourse function.
+     * @group Course
+     * @dataProvider TestDateDataProvider
+     * @param $date
+     */
+
+    public function testCustomErrorsEndDateInvalidFormateForEnrollUserInCourse ($date) {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'doceboId'      => $userObj->doceboId,
+
+            'courseCode'    => TEST_COURSE_CODE,
+
+            'dateEnd'    => $date
+
+        );
+
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be false' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, "Object response missing attribute error" );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }
+
+    public function TestDateDataProvider( ) {
+
+        return array (
+
+            array('2016'), array(''), array(null), array('3-3-2016'), array('3'), array('2016/3/3')
+
+        );
+
+    }
+
+    /**
      * testEnrollUserInCourse function.
      * @group Course
      */
@@ -1399,6 +1490,8 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
     public function testEnrollUserInCourse () {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $this->phocebo->unenrollUserInCourse(array('doceboId' => $userObj->doceboId , 'courseCode' =>  TEST_COURSE_CODE) );
 
         $parameters = array (
 
@@ -1427,6 +1520,93 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute( 'message', $responseObj, "Object response missing attribute message" );
 
     }
+
+    /**
+     * testStartAndEndDateForEnrollUserInCourse function.
+     * @group Course
+     */
+
+    public function testStartAndEndDateForEnrollUserInCourse () {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $this->phocebo->unenrollUserInCourse(array('doceboId' => $userObj->doceboId , 'courseCode' =>  TEST_COURSE_CODE) );
+
+        $parameters = array (
+
+            'doceboId'      => $userObj->doceboId,
+
+            'courseCode'    => TEST_COURSE_CODE,
+
+            'dateStart'     =>  '2016-03-01',
+
+            'dateEnd'       => '2017-03-01'
+
+        );
+
+        $responseObj = $this->phocebo->enrollUserInCourse($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be "true"' );
+
+    }
+
+
+    /**
+     * testFieldsForUpdateEnrollment function.
+     * @group Course
+     * @dataProvider TestDataForUpdateFieldsInUpdateEnrollement
+     * @param $field
+     * @param $value
+     */
+
+    public function testFieldsForUpdateEnrollment ( $field, $value) {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        var_dump($userObj);
+//
+//        echo "course code: " . TEST_COURSE_CODE;
+
+        $this->phocebo->enrollUserInCourse(array('doceboId' => $userObj->doceboId , 'courseCode' =>  TEST_COURSE_CODE) );
+
+        $parameters = array (
+
+            'doceboId'      => $userObj->doceboId,
+
+            'courseCode'    => TEST_COURSE_CODE,
+
+             $field    =>  $value
+
+        );
+
+        $responseObj = $this->phocebo->updateEnrollment($parameters);
+
+        var_dump($responseObj);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be "true"' );
+
+    }
+
+    public function TestDataForUpdateFieldsInUpdateEnrollement( ) {
+
+        return array (
+
+            'Set Start Date' => array ('dateStart', '2016-03-01'),
+
+//            'Set End Date' => array ('dateEnd', '2017-04-01'),
+
+//            'Set User Level' => array ('userLevel', 'student'),
+
+//            'Set User Status' => array ('userStatus', 'completed'),
+
+        );
+
+    }
+
 
     /**
      * testUnenrollUserInCourse function.
@@ -2389,8 +2569,6 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
         $this->assertStringMatchesFormat('%d', $response);
 
     }
-
-
 
 }
 
