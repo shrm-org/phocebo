@@ -388,13 +388,13 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
 
             'userid' => TEST_ACCOUNT,
 
-        	'also_check_as_email' => true,
+            'also_check_as_email' => true,
 
         );
 
         $response = $this->phocebo->call($action, $data_params, []);
 
-        $this->assertTrue($res ponse->success, 'Response should be "true"');
+        $this->assertTrue($response->success, 'Response should be "true"');
 
     }
 
@@ -1565,10 +1565,6 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
 
         $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
 
-        var_dump($userObj);
-//
-//        echo "course code: " . TEST_COURSE_CODE;
-
         $this->phocebo->enrollUserInCourse(array('doceboId' => $userObj->doceboId , 'courseCode' =>  TEST_COURSE_CODE) );
 
         $parameters = array (
@@ -1577,13 +1573,11 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
 
             'courseCode'    => TEST_COURSE_CODE,
 
-             $field    =>  $value
+            $field    =>  $value
 
         );
 
         $responseObj = $this->phocebo->updateEnrollment($parameters);
-
-        var_dump($responseObj);
 
         $this->assertObjectHasAttribute( 'success', $responseObj, "Object response missing attribute success" );
 
@@ -1597,16 +1591,141 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
 
             'Set Start Date' => array ('dateStart', '2016-03-01'),
 
-//            'Set End Date' => array ('dateEnd', '2017-04-01'),
+            'Set End Date' => array ('dateEnd', '2017-04-01'),
 
-//            'Set User Level' => array ('userLevel', 'student'),
+            'Set User Level' => array ('userLevel', 'student'),
 
-//            'Set User Status' => array ('userStatus', 'completed'),
+            'Set User Status' => array ('userStatus', 'completed'),
 
         );
 
     }
 
+    /**
+     * testUpdateEnrollmentCustomErrorsNoDoceobId function.
+     * @group Course
+     */
+
+    public function testUpdateEnrollmentCustomErrorsNoDoceobId () {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+//        $this->phocebo->unenrollUserInCourse(array('doceboId' => $userObj->doceboId , 'courseCode' =>  TEST_COURSE_CODE) );
+
+        $parameters = array (
+
+            'NodoceboId'      => $userObj->doceboId,
+
+            'courseCode'    => TEST_COURSE_CODE,
+
+        );
+
+        $responseObj = $this->phocebo->updateEnrollment($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"' );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be "False"' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, 'Object response missing attribute "error"' );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute "message"' );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }
+
+    /**
+     * testUpdateEnrollmentCustomErrorsNoCourseCode function.
+     * @group Course
+     */
+
+    public function testUpdateEnrollmentCustomErrorsNoCourseCode () {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'doceboId'      => $userObj->doceboId,
+
+            'NocourseCode'    => TEST_COURSE_CODE,
+
+        );
+
+        $responseObj = $this->phocebo->updateEnrollment($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"' );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be "False"' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, 'Object response missing attribute "error"' );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute "message"' );
+
+        $this->assertEquals ( $responseObj->error, '400', 'Object response should be reporting error 400' );
+
+    }
+
+    /**
+     * testUpdateEnrollmentDoceboErrorsInvalidSpecifiedUser function.
+     * @group Course
+     */
+
+    public function testUpdateEnrollmentDoceboErrorsInvalidSpecifiedUser () {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'doceboId'      => '1010101',
+
+            'courseCode'    => TEST_COURSE_CODE,
+
+        );
+
+        $responseObj = $this->phocebo->updateEnrollment($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"' );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be "False"' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, 'Object response missing attribute "error"' );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute "message"' );
+
+        $this->assertEquals ( $responseObj->error, '201', 'Object response should be reporting error "201"' );
+
+    }
+
+    /**
+     * testUpdateEnrollmentDoceboErrorsInvalidSpecifiedCourse function.
+     * @group Course
+     */
+
+    public function testUpdateEnrollmentDoceboErrorsInvalidSpecifiedCourse () {
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'doceboId'      => $userObj->doceboId,
+
+            'courseCode'    => 'NOT-A-COURSE-CODE',
+
+        );
+
+        $responseObj = $this->phocebo->updateEnrollment($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"' );
+
+        $this->assertFalse ( $responseObj->success,  'Success message should be "False"' );
+
+        $this->assertObjectHasAttribute( 'error', $responseObj, 'Object response missing attribute "error"' );
+
+        $this->assertObjectHasAttribute( 'message', $responseObj, 'Object response missing attribute "message"' );
+
+        $this->assertEquals ( $responseObj->error, '203', 'Object response should be reporting error "203"' );
+
+    }
 
     /**
      * testUnenrollUserInCourse function.

@@ -63,23 +63,23 @@ class phocebo {
      * @access public
      * @param array $parameters
 
-      'email' => $email
+    'email' => $email
 
      * @return object
 
-        (stdClass) {
+    (stdClass) {
 
-          ["email"] => string(13) "test@shrm.org"
+    ["email"] => string(13) "test@shrm.org"
 
-          ["success"]  => bool(true)
+    ["success"]  => bool(true)
 
-          ["doceboId"] => int(12337)
+    ["doceboId"] => int(12337)
 
-          ["firstName"] => string(4) "Test"
+    ["firstName"] => string(4) "Test"
 
-          ["lastName"] => string(0) ""
+    ["lastName"] => string(0) ""
 
-        }
+    }
 
      *
      * @link https://doceboapi.docebosaas.com/api/docs#!/user/user_checkUsername_post_0
@@ -313,21 +313,21 @@ class phocebo {
      * @access public
      * @param array $parameters
 
-        'firstName' => $firstName
+    'firstName' => $firstName
 
-        'lastName'  => $lastName
+    'lastName'  => $lastName
 
-        'email'     =>  $email
+    'email'     =>  $email
 
      * @return object
 
-            (stdClass) {
+    (stdClass) {
 
-              ["success"] => bool(true)
+    ["success"] => bool(true)
 
-              ["doceboId"] => string(5) "12367"
+    ["doceboId"] => string(5) "12367"
 
-            }
+    }
 
      * @link https://doceboapi.docebosaas.com/api/docs#!/user/user_create_post_5
      * @todo test $responseObj has expected attributes from server when valid
@@ -403,21 +403,21 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            (stdClass)#347 (3) {
-              ["success"]=>
-              bool(false)
-              ["error"]=>
-              int(211)
-              ["message"]=>
-              string(22) "Error in user deletion"
-            }
+    (stdClass)#347 (3) {
+    ["success"]=>
+    bool(false)
+    ["error"]=>
+    int(211)
+    ["message"]=>
+    string(22) "Error in user deletion"
+    }
 
-            (stdClass)#347 (2) { 12370
-              ["success"]=>
-              bool(true)
-              ["doceboId"]=>
-              string(5) "12366"
-            }
+    (stdClass)#347 (2) { 12370
+    ["success"]=>
+    bool(true)
+    ["doceboId"]=>
+    string(5) "12366"
+    }
 
 
      * @todo add phake mocking to test deleteUser
@@ -539,22 +539,22 @@ class phocebo {
      * @access public
      * @return object
      *
-       (stdClass) (2) {
-              ["fields"] => array(1) {
+    (stdClass) (2) {
+    ["fields"] => array(1) {
      *
-                [0] => object(stdClass) (2) {
+    [0] => object(stdClass) (2) {
      *
-                  ["id"] => int(1)
+    ["id"] => int(1)
      *
-                  ["name"] => string(8) "Job Role"
+    ["name"] => string(8) "Job Role"
      *
-                }
+    }
      *
-              }
+    }
      *
-              ["success"] => bool(true)
+    ["success"] => bool(true)
      *
-            }
+    }
      *
      * @todo test $responseObj has expected attributes from server when valid
      * @todo test $responseObj does not have attributes (such as idst)
@@ -589,49 +589,49 @@ class phocebo {
      * @param array $parameters
      * @return object
      *
-         (stdClass) (11) {
-          ["id_user"]=>
-          string(5) "12339"
-          ["userid"]=>
-          string(4) "vdas"
-          ["firstname"]=>
-          string(3) "Vla"
-          ["lastname"]=>
-          string(3) "Das"
-          ["email"]=>
-          string(16) "vdasic@gmail.com"
-          ["signature"]=>
-          string(0) ""
-          ["valid"]=>
-          bool(true)
-          ["register_date"]=>
-          string(19) "2015-09-23 03:16:23"
-          ["last_enter"]=>
-          string(19) "2015-09-23 01:20:11"
-          ["fields"]=>
-          array(1) {
-            [0]=>
-            object(stdClass) (3) {
-              ["id"]=>
-              string(1) "1"
-              ["name"]=>
-              string(8) "Job Role"
-              ["value"]=>
-              string(1) "3"
-            }
-          }
-          ["success"]=>
-          bool(true)
-        }
+    (stdClass) (11) {
+    ["id_user"]=>
+    string(5) "12339"
+    ["userid"]=>
+    string(4) "vdas"
+    ["firstname"]=>
+    string(3) "Vla"
+    ["lastname"]=>
+    string(3) "Das"
+    ["email"]=>
+    string(16) "vdasic@gmail.com"
+    ["signature"]=>
+    string(0) ""
+    ["valid"]=>
+    bool(true)
+    ["register_date"]=>
+    string(19) "2015-09-23 03:16:23"
+    ["last_enter"]=>
+    string(19) "2015-09-23 01:20:11"
+    ["fields"]=>
+    array(1) {
+    [0]=>
+    object(stdClass) (3) {
+    ["id"]=>
+    string(1) "1"
+    ["name"]=>
+    string(8) "Job Role"
+    ["value"]=>
+    string(1) "3"
+    }
+    }
+    ["success"]=>
+    bool(true)
+    }
 
-        (stdClass) (3) {
-          ["success"]=>
-          bool(false)
-          ["error"]=>
-          int(201)
-          ["message"]=>
-          string(26) "Invalid user specification"
-        }
+    (stdClass) (3) {
+    ["success"]=>
+    bool(false)
+    ["error"]=>
+    int(201)
+    ["message"]=>
+    string(26) "Invalid user specification"
+    }
      * @todo add Phake to mock calls
      */
 
@@ -733,19 +733,19 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            (stdClass)#376 (2) {
-              ["loggedIn"]=>
-              bool(false)
-              ["success"]=>
-              bool(true)
-            }
+    (stdClass)#376 (2) {
+    ["loggedIn"]=>
+    bool(false)
+    ["success"]=>
+    bool(true)
+    }
 
-            (stdClass)#376 (2) {
-              ["loggedIn"]=>
-              bool(false)
-              ["success"]=>
-              bool(true)
-            }
+    (stdClass)#376 (2) {
+    ["loggedIn"]=>
+    bool(false)
+    ["success"]=>
+    bool(true)
+    }
 
      */
 
@@ -796,21 +796,21 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            (stdClass) (2) {
-              ["doceboId"]=>
-              string(5) "12339"
-              ["success"]=>
-              bool(true)
-            }
+    (stdClass) (2) {
+    ["doceboId"]=>
+    string(5) "12339"
+    ["success"]=>
+    bool(true)
+    }
 
-             (stdClass)#355 (3) {
-              ["success"]=>
-              bool(false)
-              ["error"]=>
-              int(210)
-              ["message"]=>
-              string(26) "Invalid user specification"
-            }
+    (stdClass)#355 (3) {
+    ["success"]=>
+    bool(false)
+    ["error"]=>
+    int(210)
+    ["message"]=>
+    string(26) "Invalid user specification"
+    }
 
      * @todo add Phake to mock calls
      * @todo follow up on unenroll_deactivated
@@ -859,12 +859,12 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-        (stdClass) (2) {
-          ["doceboId"]=>
-          string(5) "12339"
-          ["success"]=>
-          bool(true)
-        }
+    (stdClass) (2) {
+    ["doceboId"]=>
+    string(5) "12339"
+    ["success"]=>
+    bool(true)
+    }
      * @todo test $responseObj has expected attributes from server when invalid
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
 
@@ -973,21 +973,21 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            (stdClass) (1) {
+    (stdClass) (1) {
 
-              ["success"] => bool(true)
+    ["success"] => bool(true)
 
-            }
+    }
 
-            (stdClass) (3) {
+    (stdClass) (3) {
 
-              ["success"] => bool(false)
+    ["success"] => bool(false)
 
-              ["error"] => int(203)
+    ["error"] => int(203)
 
-              ["message"] => string(35) "User already enrolled to the course"
+    ["message"] => string(35) "User already enrolled to the course"
 
-            }
+    }
 
      * the enrollment validity start (in yyyy-MM-dd HH:mm:ss format, UTC timezone)
      */
@@ -1058,26 +1058,17 @@ class phocebo {
     /**
      * updateEnrollment function.
      *
+     * @todo check next version - undocumented mandatory field user_level (202 Error if not sent)
      * @access public
      * @param array $parameters
      * @return object
-
-    (stdClass) (1) {
-
-    ["success"] => bool(true)
-
-    }
-
-    (stdClass) (3) {
-
-    ["success"] => bool(false)
-
-    ["error"] => int(203)
-
-    ["message"] => string(35) "User already enrolled to the course"
-
-    }
-
+     *
+     *     class stdClass (1) {
+     *
+     *         public $success => bool(true)
+     *
+     *      }
+     *
      * the enrollment validity start (in yyyy-MM-dd HH:mm:ss format, UTC timezone)
      */
 
@@ -1100,8 +1091,6 @@ class phocebo {
         (array_key_exists('courseCode', $parameters) ?  $data_params['course_code'] = $parameters['courseCode'] : '');
 
         (array_key_exists('courseId', $parameters) ?  $data_params['course_id'] = $parameters['courseId'] : '');
-
-        (array_key_exists('userLevel', $parameters) ?  $data_params['user_level'] = $parameters['userLevel'] : '');
 
         (array_key_exists('userStatus', $parameters) ?  $data_params['user_status'] = $parameters['userStatus'] : '');
 
@@ -1131,7 +1120,7 @@ class phocebo {
 
         }
 
-        var_dump($data_params);
+        $data_params['user_level'] = 'student';
 
         $error_messages = [
 
@@ -1289,41 +1278,41 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-        (stdClass) {
+    (stdClass) {
 
-          ["0"]=>
+    ["0"]=>
 
-          object(stdClass) {
+    object(stdClass) {
 
-            ["course_info"] => object(stdClass) {
+    ["course_info"] => object(stdClass) {
 
-              ["course_id"] => string(2) "10"
+    ["course_id"] => string(2) "10"
 
-              ["code"] => string(5) "14-06"
+    ["code"] => string(5) "14-06"
 
-              ["course_name"] => string(98) "The Foundation for Success: Effectively Aligning Performance Management Systems with Total Rewards"
+    ["course_name"] => string(98) "The Foundation for Success: Effectively Aligning Performance Management Systems with Total Rewards"
 
-              ["credits"] => string(4) "0.00"
+    ["credits"] => string(4) "0.00"
 
-              ["total_time"] => string(2) "0s"
+    ["total_time"] => string(2) "0s"
 
-              ["enrollment_date"] => string(19) "2015-11-09 13:00:44"
+    ["enrollment_date"] => string(19) "2015-11-09 13:00:44"
 
-              ["completion_date"] => NULL
+    ["completion_date"] => NULL
 
-              ["first_access_date"] => NULL
+    ["first_access_date"] => NULL
 
-              ["score"] => int(0)
+    ["score"] => int(0)
 
-              ["status"] => string(10) "Subscribed"
+    ["status"] => string(10) "Subscribed"
 
-            }
+    }
 
-          }
+    }
 
-          ["success"] => bool(true)
+    ["success"] => bool(true)
 
-        }
+    }
 
      * @todo test $responseObj has expected attributes from server when invalid
      * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
@@ -1458,7 +1447,12 @@ class phocebo {
 
                 'message' => "Branch already exists with that name",
 
-                'branchId' => $responseobj->branchId
+                'branchId' => $responseobj->branchId,
+
+                'branchCode' => $parameters['branchCode'],
+
+                'branchName' => $parameters['branchName']
+
 
             );
 
@@ -1610,9 +1604,9 @@ class phocebo {
 
         $data_params = array (
 
-           'id_org'                => $parameters['branchId'],
+            'id_org'                => $parameters['branchId'],
 
-           'destinationParentId'                => $parameters['destinationParentId'],
+            'destinationParentId'                => $parameters['destinationParentId'],
 
         );
 
@@ -1758,79 +1752,79 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            (stdClass) {
+    (stdClass) {
 
-              ["branchCode"] => string(4) "root"
+    ["branchCode"] => string(4) "root"
 
-              ["translation"] => object(stdClass) {
+    ["translation"] => object(stdClass) {
 
-                ["arabic"] => string(4) "root"
+    ["arabic"] => string(4) "root"
 
-                ["bosnian"] => string(4) "root"
+    ["bosnian"] => string(4) "root"
 
-                ["bulgarian"] => string(4) "root"
+    ["bulgarian"] => string(4) "root"
 
-                ["croatian"] => string(4) "root"
+    ["croatian"] => string(4) "root"
 
-                ["czech"] => string(4) "root"
+    ["czech"] => string(4) "root"
 
-                ["danish"] => string(4) "root"
+    ["danish"] => string(4) "root"
 
-                ["dutch"] => string(4) "root"
+    ["dutch"] => string(4) "root"
 
-                ["english"] => string(4) "root"
+    ["english"] => string(4) "root"
 
-                ["farsi"] => string(4) "root"
+    ["farsi"] => string(4) "root"
 
-                ["finnish"] => string(4) "root"
+    ["finnish"] => string(4) "root"
 
-                ["french"] => string(4) "root"
+    ["french"] => string(4) "root"
 
-                ["german"] => string(4) "root"
+    ["german"] => string(4) "root"
 
-                ["greek"] => string(4) "root"
+    ["greek"] => string(4) "root"
 
-                ["hebrew"] => string(4) "root"
+    ["hebrew"] => string(4) "root"
 
-                ["hungarian"] => string(4) "root"
+    ["hungarian"] => string(4) "root"
 
-                ["indonesian"] => string(4) "root"
+    ["indonesian"] => string(4) "root"
 
-                ["italian"] => string(4) "root"
+    ["italian"] => string(4) "root"
 
-                ["japanese"] => string(4) "root"
+    ["japanese"] => string(4) "root"
 
-                ["korean"] => string(4) "root"
+    ["korean"] => string(4) "root"
 
-                ["norwegian"] => string(4) "root"
+    ["norwegian"] => string(4) "root"
 
-                ["polish"] => tring(4) "root"
+    ["polish"] => tring(4) "root"
 
-                ["portuguese"] => string(4) "root"
+    ["portuguese"] => string(4) "root"
 
-                ["portuguese-br"] => string(4) "root"
+    ["portuguese-br"] => string(4) "root"
 
-                ["romanian"] => string(4) "root"
+    ["romanian"] => string(4) "root"
 
-                ["russian"] => string(4) "root"
+    ["russian"] => string(4) "root"
 
-                ["simplified_chinese"] => string(4) "root"
+    ["simplified_chinese"] => string(4) "root"
 
-                ["spanish"] => string(4) "root"
+    ["spanish"] => string(4) "root"
 
-                ["swedish"] => string(4) "root"
+    ["swedish"] => string(4) "root"
 
-                ["thai"] => string(4) "root"
+    ["thai"] => string(4) "root"
 
-                ["turkish"] => string(4) "root"
+    ["turkish"] => string(4) "root"
 
-                ["ukrainian"] => string(4) "root"
+    ["ukrainian"] => string(4) "root"
 
-              }
+    }
 
-              ["success"] => bool(true)
+    ["success"] => bool(true)
 
-            }
+    }
 
      */
 
@@ -1871,57 +1865,57 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            (stdClass)#273 (2) {
-              ["children"]=>
-              array(4) {
-                [0]=>
-                object(stdClass)#243 (3) {
-                  ["code"]=>
-                  string(3) "CG2"
-                  ["id_org"]=>
-                  int(2)
-                  ["translation"]=>
-                  object(stdClass)#245 (31) {
-                    ...
-                  }
-                }
-                [1]=>
-                object(stdClass)#241 (3) {
-                  ["code"]=>
-                  string(3) "CG3"
-                  ["id_org"]=>
-                  int(3)
-                  ["translation"]=>
-                  object(stdClass)#245 (31) {
-                    ...
-                  }
-                }
-                [2]=>
-                object(stdClass)#250 (3) {
-                  ["code"]=>
-                  NULL
-                  ["id_org"]=>
-                  int(7)
-                  ["translation"]=>
-                  object(stdClass)#245 (31) {
-                    ...
-                  }
-                }
-                [3]=>
-                object(stdClass)#244 (3) {
-                  ["code"]=>
-                  string(4) "Test"
-                  ["id_org"]=>
-                  int(8)
-                  ["translation"]=>
-                  object(stdClass)#245 (31) {
-                    ...
-                  }
-                }
-              }
-              ["success"]=>
-              bool(true)
-            }
+    (stdClass)#273 (2) {
+    ["children"]=>
+    array(4) {
+    [0]=>
+    object(stdClass)#243 (3) {
+    ["code"]=>
+    string(3) "CG2"
+    ["id_org"]=>
+    int(2)
+    ["translation"]=>
+    object(stdClass)#245 (31) {
+    ...
+    }
+    }
+    [1]=>
+    object(stdClass)#241 (3) {
+    ["code"]=>
+    string(3) "CG3"
+    ["id_org"]=>
+    int(3)
+    ["translation"]=>
+    object(stdClass)#245 (31) {
+    ...
+    }
+    }
+    [2]=>
+    object(stdClass)#250 (3) {
+    ["code"]=>
+    NULL
+    ["id_org"]=>
+    int(7)
+    ["translation"]=>
+    object(stdClass)#245 (31) {
+    ...
+    }
+    }
+    [3]=>
+    object(stdClass)#244 (3) {
+    ["code"]=>
+    string(4) "Test"
+    ["id_org"]=>
+    int(8)
+    ["translation"]=>
+    object(stdClass)#245 (31) {
+    ...
+    }
+    }
+    }
+    ["success"]=>
+    bool(true)
+    }
 
 
      * @todo create tests
@@ -1967,79 +1961,79 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            (stdClass) {
+    (stdClass) {
 
-              ["branchCode"] => string(4) "root"
+    ["branchCode"] => string(4) "root"
 
-              ["translation"] => object(stdClass) {
+    ["translation"] => object(stdClass) {
 
-                ["arabic"] => string(4) "root"
+    ["arabic"] => string(4) "root"
 
-                ["bosnian"] => string(4) "root"
+    ["bosnian"] => string(4) "root"
 
-                ["bulgarian"] => string(4) "root"
+    ["bulgarian"] => string(4) "root"
 
-                ["croatian"] => string(4) "root"
+    ["croatian"] => string(4) "root"
 
-                ["czech"] => string(4) "root"
+    ["czech"] => string(4) "root"
 
-                ["danish"] => string(4) "root"
+    ["danish"] => string(4) "root"
 
-                ["dutch"] => string(4) "root"
+    ["dutch"] => string(4) "root"
 
-                ["english"] => string(4) "root"
+    ["english"] => string(4) "root"
 
-                ["farsi"] => string(4) "root"
+    ["farsi"] => string(4) "root"
 
-                ["finnish"] => string(4) "root"
+    ["finnish"] => string(4) "root"
 
-                ["french"] => string(4) "root"
+    ["french"] => string(4) "root"
 
-                ["german"] => string(4) "root"
+    ["german"] => string(4) "root"
 
-                ["greek"] => string(4) "root"
+    ["greek"] => string(4) "root"
 
-                ["hebrew"] => string(4) "root"
+    ["hebrew"] => string(4) "root"
 
-                ["hungarian"] => string(4) "root"
+    ["hungarian"] => string(4) "root"
 
-                ["indonesian"] => string(4) "root"
+    ["indonesian"] => string(4) "root"
 
-                ["italian"] => string(4) "root"
+    ["italian"] => string(4) "root"
 
-                ["japanese"] => string(4) "root"
+    ["japanese"] => string(4) "root"
 
-                ["korean"] => string(4) "root"
+    ["korean"] => string(4) "root"
 
-                ["norwegian"] => string(4) "root"
+    ["norwegian"] => string(4) "root"
 
-                ["polish"] => tring(4) "root"
+    ["polish"] => tring(4) "root"
 
-                ["portuguese"] => string(4) "root"
+    ["portuguese"] => string(4) "root"
 
-                ["portuguese-br"] => string(4) "root"
+    ["portuguese-br"] => string(4) "root"
 
-                ["romanian"] => string(4) "root"
+    ["romanian"] => string(4) "root"
 
-                ["russian"] => string(4) "root"
+    ["russian"] => string(4) "root"
 
-                ["simplified_chinese"] => string(4) "root"
+    ["simplified_chinese"] => string(4) "root"
 
-                ["spanish"] => string(4) "root"
+    ["spanish"] => string(4) "root"
 
-                ["swedish"] => string(4) "root"
+    ["swedish"] => string(4) "root"
 
-                ["thai"] => string(4) "root"
+    ["thai"] => string(4) "root"
 
-                ["turkish"] => string(4) "root"
+    ["turkish"] => string(4) "root"
 
-                ["ukrainian"] => string(4) "root"
+    ["ukrainian"] => string(4) "root"
 
-              }
+    }
 
-              ["success"] => bool(true)
+    ["success"] => bool(true)
 
-            }
+    }
 
 
      * @todo create tests
@@ -2060,7 +2054,7 @@ class phocebo {
 
         $data_params = array (
 
-           'id_org'                => $parameters['branchId'],
+            'id_org'                => $parameters['branchId'],
 
         );
 
@@ -2083,15 +2077,15 @@ class phocebo {
      * @param array $parameters
      * @return object
 
-            (stdClass) {
+    (stdClass) {
 
-              ["assigned_users"] => string(5) "12337"
+    ["assigned_users"] => string(5) "12337"
 
-              ["success"] => bool(true)
+    ["success"] => bool(true)
 
-            }
+    }
 
-            note: returns same if user is already in the branch
+    note: returns same if user is already in the branch
 
      * @todo talk to Richard at Docebo - no method to remove a user from a branch /poweruser/unassignUsers
      * @todo create tests
@@ -2155,13 +2149,13 @@ class phocebo {
             return( self::dataError ( 'doceboId', 'Parameter "doceboId" missing: Docebo ID of an existing non Power User account') );
 
 
-       } elseif ( !array_key_exists( 'profileName', $parameters) ) {
+        } elseif ( !array_key_exists( 'profileName', $parameters) ) {
 
-           $json_array = self::dataError ( 'profileName', 'Parameter "profileName" missing: Power User profile name to be assigned');
+            $json_array = self::dataError ( 'profileName', 'Parameter "profileName" missing: Power User profile name to be assigned');
 
-       } elseif ( !array_key_exists( 'branchIds', $parameters) ) {
+        } elseif ( !array_key_exists( 'branchIds', $parameters) ) {
 
-           $json_array = self::dataError ( 'branchIds', 'Parameter "branchIds" missing: comma separated list of Branch Ids');
+            $json_array = self::dataError ( 'branchIds', 'Parameter "branchIds" missing: comma separated list of Branch Ids');
 
         };
 
@@ -2299,9 +2293,9 @@ class phocebo {
      * @param array $parameters
      * @return object
      *
-            (stdClass) {
+    (stdClass) {
      *
-                ["groups"] => array(5) {
+    ["groups"] => array(5) {
 
      *              [0] => object(stdClass) (3) {
 
@@ -2310,11 +2304,11 @@ class phocebo {
      *                  ["name"] => string(10) "SHRM Admin"
 
      *                  ["description"] => string(0) ""
-                    }
+    }
      *
-                   [1] => object(stdClass) (3) {
+    [1] => object(stdClass) (3) {
      *
-                       ["id_group"] => string(6) "122671"
+    ["id_group"] => string(6) "122671"
      *
      *                 ["name"] => string(10) "Power User"
      *
@@ -2322,17 +2316,17 @@ class phocebo {
      *
      *              }
      *
-                   [2] => object(stdClass) (3) {
+    [2] => object(stdClass) (3) {
      *
-                       ["id_group"] => string(6) "122672"
+    ["id_group"] => string(6) "122672"
      *
      *                 ["name"] => string(12) "SHRM Learner"
      *
      *                 ["description"] => string(0) ""
      *
-                    }
+    }
      *
-                   [3] => object(stdClass) (3) {
+    [3] => object(stdClass) (3) {
      *
      *                  ["id_group"] => string(6) "122700"
      *
@@ -2439,9 +2433,17 @@ class phocebo {
 
         if ( true == $groupArray['success']) {
 
-            $groupId = $groupArray[$parameters['groupName']]['id'];
+            if ( array_key_exists($parameters['groupName'], $groupArray) ) {
 
-            return $groupId;
+                $groupId = $groupArray[$parameters['groupName']]['id'];
+
+                return $groupId;
+
+            } else {
+
+                return false;
+
+            }
 
         } else {
 
@@ -2472,7 +2474,7 @@ class phocebo {
 
         } elseif ( !array_key_exists( 'groupId', $parameters) ) {
 
-                return( self::dataError ( 'groupId', 'Parameter "groupId" missing') );
+            return( self::dataError ( 'groupId', 'Parameter "groupId" missing') );
 
         };
 
@@ -2752,9 +2754,9 @@ class phocebo {
 
             if ( array_key_exists ( $old, $json_array ) ) {
 
-               $json_array[$new] = $json_array[$old];
+                $json_array[$new] = $json_array[$old];
 
-               unset( $json_array[$old] );
+                unset( $json_array[$old] );
 
             }
 
@@ -2824,7 +2826,7 @@ class phocebo {
 
         }
 
-       return( json_decode ( json_encode ( $json_array ), FALSE ) );
+        return( json_decode ( json_encode ( $json_array ), FALSE ) );
 
     }
 
@@ -2847,9 +2849,9 @@ class phocebo {
 
     private function dataError ( $attribute, $message) {
 
-       $json_array = array ('success' => false, 'error' => '400', 'message' => "$attribute: $message");
+        $json_array = array ('success' => false, 'error' => '400', 'message' => "$attribute: $message");
 
-       return $this->normalizeParams($json_array);
+        return $this->normalizeParams($json_array);
 
     }
 
@@ -3007,10 +3009,10 @@ class phocebo {
                 } else  {
 
                     throw new \Exception(sprintf("curl failed!\n * %d - %s\n * header: %s\n * data:%s\n",
-                                                 curl_getinfo($curl, CURLINFO_HTTP_CODE),
-                                                 $opt[CURLOPT_URL],
-                                                 json_encode($opt[CURLOPT_HTTPHEADER]),
-                                                 json_encode($opt[CURLOPT_POSTFIELDS])));
+                        curl_getinfo($curl, CURLINFO_HTTP_CODE),
+                        $opt[CURLOPT_URL],
+                        json_encode($opt[CURLOPT_HTTPHEADER]),
+                        json_encode($opt[CURLOPT_POSTFIELDS])));
 
                 };
 
@@ -3037,10 +3039,10 @@ class phocebo {
                     if ($output['message'] == null) {
 
                         throw new \Exception(sprintf("curl failed!\n * %d - %s\n * header: %s\n * data:%s\n",
-                                                     curl_getinfo($curl, CURLINFO_HTTP_CODE),
-                                                     $opt[CURLOPT_URL],
-                                                     json_encode($opt[CURLOPT_HTTPHEADER]),
-                                                     json_encode($opt[CURLOPT_POSTFIELDS])));
+                            curl_getinfo($curl, CURLINFO_HTTP_CODE),
+                            $opt[CURLOPT_URL],
+                            json_encode($opt[CURLOPT_HTTPHEADER]),
+                            json_encode($opt[CURLOPT_POSTFIELDS])));
 
                     };
 
