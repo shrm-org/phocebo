@@ -1016,7 +1016,7 @@ class phocebo {
 
             if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateStart'] )) {
 
-                $data_params['date_begin_validity'] = $parameters['dateStart'] .  ' 00:00:00 UTC';
+                $data_params['date_begin_validity'] = $parameters['dateStart'] .  ' 00:00:00';
 
             } else {
 
@@ -1029,7 +1029,7 @@ class phocebo {
 
             if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateEnd'] )) {
 
-                $data_params['date_expire_validity'] = $parameters['dateEnd'] .  ' 00:00:00 UTC';
+                $data_params['date_expire_validity'] = $parameters['dateEnd'] .  ' 00:00:00';
 
             } else {
 
@@ -1098,7 +1098,7 @@ class phocebo {
 
             if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateStart'] )) {
 
-                $data_params['date_begin_validity'] = $parameters['dateStart'] .  ' 00:00:00 UTC';
+                $data_params['date_begin_validity'] = $parameters['dateStart'] .  ' 00:00:00';
 
             } else {
 
@@ -1111,7 +1111,7 @@ class phocebo {
 
             if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateEnd'] )) {
 
-                $data_params['date_expire_validity'] = $parameters['dateEnd'] .  ' 00:00:00 UTC';
+                $data_params['date_expire_validity'] = $parameters['dateEnd'] .  ' 00:00:00';
 
             } else {
 
