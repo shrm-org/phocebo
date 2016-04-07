@@ -1538,7 +1538,7 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
 
             'courseCode'    => TEST_COURSE_CODE,
 
-            'dateStart'     =>  '2016-03-01',
+            'dateStart'     => '2016-03-01',
 
             'dateEnd'       => '2017-03-01'
 

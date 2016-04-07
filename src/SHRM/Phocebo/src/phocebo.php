@@ -1014,9 +1014,9 @@ class phocebo {
 
         if (array_key_exists('dateStart', $parameters ) ) {
 
-            if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateStart'] )) {
+            if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/", $parameters['dateStart'] )) {
 
-                $data_params['date_begin_validity'] = $parameters['dateStart'] .  ' 00:00:00';
+                $data_params['date_begin_validity'] = date('Y-m-d H:i:s', strtotime($parameters['dateStart'] . " " . date('H:i:s', time()) . " UTC"));
 
             } else {
 
@@ -1027,9 +1027,9 @@ class phocebo {
 
         if (array_key_exists('dateEnd', $parameters ) ) {
 
-            if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateEnd'] )) {
+            if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/", $parameters['dateEnd'] )) {
 
-                $data_params['date_expire_validity'] = $parameters['dateEnd'] .  ' 00:00:00';
+                $data_params['date_expire_validity'] = date('Y-m-d H:i:s', strtotime($parameters['dateEnd'] . " " . date('H:i:s', time()) . " UTC"));
 
             } else {
 
@@ -1096,9 +1096,9 @@ class phocebo {
 
         if (array_key_exists('dateStart', $parameters ) ) {
 
-            if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateStart'] )) {
+            if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/", $parameters['dateStart'] )) {
 
-                $data_params['date_begin_validity'] = $parameters['dateStart'] .  ' 00:00:00';
+                $data_params['date_begin_validity'] = date('Y-m-d H:i:s', strtotime($parameters['dateStart'] . " " . date('H:i:s', time()) . " UTC"));
 
             } else {
 
@@ -1109,9 +1109,9 @@ class phocebo {
 
         if (array_key_exists('dateEnd', $parameters ) ) {
 
-            if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $parameters['dateEnd'] )) {
+            if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/", $parameters['dateEnd'] )) {
 
-                $data_params['date_expire_validity'] = $parameters['dateEnd'] .  ' 00:00:00';
+                $data_params['date_expire_validity'] = date('Y-m-d H:i:s', strtotime($parameters['dateEnd'] . " " . date('H:i:s', time()) . " UTC"));
 
             } else {
 
