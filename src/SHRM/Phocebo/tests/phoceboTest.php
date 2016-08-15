@@ -2689,6 +2689,49 @@ class PhoceboAPITest extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * testValidUserUnassignedToBranch function.
+     * @group Branch
+     */
+
+    public function testValidUserUnassignedToBranch () {
+
+        $parameters = array (
+
+            'parentBranchId' => '0',
+
+            'branchName'    => TEST_BRANCH_CREATE,
+
+            'branchCode'    => TEST_BRANCH_CREATE
+
+        );
+
+        $this->phocebo->createBranch( $parameters );
+
+        $branchObj = $this->phocebo->getBranchbyCode( array ( 'branchCode' => TEST_BRANCH_CREATE ) );
+
+        $userObj = $this->phocebo->getdoceboId( array ( 'email' => TEST_ACCOUNT ) );
+
+        $parameters = array (
+
+            'branchId' => $branchObj->branchId,
+
+            'doceboIds'   => $userObj->doceboId
+
+        );
+
+        $responseObj = $this->phocebo->assignUserToBranch($parameters);
+
+        $responseObj = $this->phocebo->unassignUserToBranch($parameters);
+
+        $this->assertObjectHasAttribute( 'success', $responseObj, 'Object response missing attribute "success"');
+
+        $this->assertTrue ( $responseObj->success,  'Success message should be true' );
+
+        $this->assertObjectHasAttribute( 'unassigned_users', $responseObj, 'Object response missing attribute "unassigned_users"');
+
+    }
+
 }
 
 ?>

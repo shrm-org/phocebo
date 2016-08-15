@@ -2118,9 +2118,71 @@ class phocebo {
 
         $error_messages = [
 
-            '401' => 'Missing or invalid required parameter "branchId"',
+            '401' => "Missing or invalid required parameter 'branchId'",
 
-            '402' => 'Missing or invalid required list of branchIds',
+            '402' => "Missing or invalid required list of 'branchIds'",
+
+        ];
+
+        return self::call ( $action, $data_params, $error_messages );
+
+    }
+
+    /**
+     * unassignUserToBranch function.
+     *
+     * @access public
+     * @param array $parameters
+     * @return object
+
+    (stdClass) {
+
+    ["assigned_users"] => string(5) "12337"
+
+    ["success"] => bool(true)
+
+    }
+
+    note: returns same if user is already in the branch
+
+     * @todo talk to Richard at Docebo - no method to remove a user from a branch /poweruser/unassignUsers
+     * @todo create tests
+     * @todo test $responseObj does not have attributes (such as idst)
+     * @todo test $responseObj has expected attributes from server when invalid
+     * @todo test $responseObj custom errors has proper attributes success, error and message and error value 400
+     */
+
+    public function unassignUserToBranch ($parameters) {
+
+        if ( !array_key_exists( 'branchId', $parameters) ) {
+
+            return( self::dataError ( 'branchId', 'Required parameter "branchId" missing') );
+
+        } elseif ( !array_key_exists( 'doceboIds', $parameters) ) {
+
+            return( self::dataError ( 'doceboIds', 'Parameter "doceboIds" missing: comma separated list of user doceboId') );
+
+        };
+
+        $action = '/orgchart/unassignUsersFromNode';
+
+        $data_params = array (
+
+            'id_org'                => $parameters['branchId'],
+
+            'user_ids'              => $parameters['doceboIds'],
+
+        );
+
+        $error_messages = [
+
+            '401' => "Missing or invalid required parameter 'branchId'",
+
+            '402' => "Missing or invalid required list of 'user_ids'",
+
+            '403' => "Invalid 'branchId'",
+
+            '500' => 'Internal server error'
 
         ];
 
