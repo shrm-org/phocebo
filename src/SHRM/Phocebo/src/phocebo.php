@@ -2935,9 +2935,11 @@ class phocebo {
 
         $codice = array( 'sha1' => '', 'x_auth' => '' );
 
+        self::normalizeArray($data_params, $data);
+
         if ( !empty ( $data_params ) ) {
 
-            $codice['sha1'] = sha1 ( implode( ',', $data_params ) . ',' . $this->secret );
+            $codice['sha1'] = sha1 ( implode( ',', $data ) . ',' . $this->secret );
 
             $codice['x_auth'] = base64_encode ( $this->key . ':' . $codice['sha1'] );
 
@@ -2979,6 +2981,36 @@ class phocebo {
 
         );
 
+    }
+
+    /**
+     * normalizeArray function.
+     *
+     * @package Phởcebo Cooking
+     * @author Patricia Walton <patricia.walton@shrm.org>
+     * @version 0.3.2
+     * @access private
+     * @param array $arrays
+     * @param array $new
+     * @param string $prefix
+     *
+     * @return array containing default header
+     *
+     */
+    private function normalizeArray( $arrays, &$new = array(), $prefix = null  ) {
+
+        if ( is_object($arrays) ) {
+            $arrays = get_object_vars($arrays);
+        }
+
+        foreach ( $arrays as $key => $value ) {
+            $k = isset($prefix) ? $prefix . '[' . $key . ']' : $key;
+            if (is_array($value) OR is_object($value)) {
+                self::normalizeArray($value, $new, $k);
+            } else {
+                $new[$k] = $value;
+            }
+        }
     }
 
 
@@ -3027,6 +3059,8 @@ class phocebo {
 
         $curl = curl_init();
 
+        self::normalizeArray($data_params, $data);
+
         try {
 
             $hash_info = self::getHash ( $data_params );
@@ -3043,7 +3077,7 @@ class phocebo {
 
                 CURLOPT_POST => 1,
 
-                CURLOPT_POSTFIELDS => $data_params,
+                CURLOPT_POSTFIELDS => $data,
 
                 CURLOPT_CONNECTTIMEOUT => 20, // Timeout to 5 seconds
 
