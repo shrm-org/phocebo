@@ -921,7 +921,7 @@ class phocebo {
 
         }
 
-        $action = '/user/userCourses';
+        $action = '/user/enrollments';
 
         $data_params = array (
 
