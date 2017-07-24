@@ -12,6 +12,7 @@
 
 
 namespace SHRM\Phocebo;
+
 use Symfony\Component\Validator\Constraints\DateTime;
 
 
@@ -509,7 +510,14 @@ class phocebo {
 
         (array_key_exists('valid', $parameters) ?  $data_params['valid'] = $parameters['valid'] : '');
 
-        (array_key_exists('fields', $parameters) ?  $data_params['fields'] = $parameters['fields'] : '');
+        if (array_key_exists('field_id', $parameters)) {
+
+            $field_id = 'fields[' . $parameters['field_id'] . ']';
+
+            $data_params[$field_id] = $parameters['field_value'];
+
+
+        }
 
         (array_key_exists('orgchart', $parameters) ?  $data_params['orgchart'] = $parameters['orgchart'] : '');
 
@@ -524,6 +532,10 @@ class phocebo {
             '203' => "Error while updating user",
 
         ];
+
+        echo 'data params ';
+        var_dump($data_params);
+
 
         return self::call( $action, $data_params, $error_messages );
 
@@ -2939,7 +2951,7 @@ class phocebo {
 
         if ( !empty ( $data_params ) ) {
 
-            $codice['sha1'] = sha1 ( implode( ',', $data ) . ',' . $this->secret );
+            $codice['sha1'] = sha1 ( implode( ',', $data_params ) . ',' . $this->secret );
 
             $codice['x_auth'] = base64_encode ( $this->key . ':' . $codice['sha1'] );
 
@@ -3156,6 +3168,49 @@ class phocebo {
         return $output;
 
     }
+
+    public function getGroupNameFromProductSku ($product_sku) {
+
+        if (preg_match('/STAFF/', $product_sku)) {                  // STAFF-CFGI-001, STAFF-HRPS-001, STAFF-SHRM-001
+
+            if (preg_match('/SHRM/', $product_sku)) {               // STAFF-SHRM-001
+                $groupName = config('services.staff.shrm');         // CONSUL: STAFF_SHRM
+
+            } elseif (preg_match('/CFGI/', $product_sku)) {         // product SKU STAFF-CFGI-001
+                $groupName = config('services.staff.cfgi');         // CONSUL: STAFF_CFGI
+
+            } elseif (preg_match('/HRPS/', $product_sku)) {         // STAFF-HRPS-001
+                $groupName = config('services.staff.hrps');         // CONSUL: STAFF_HRPS
+
+            }
+
+        } elseif (preg_match('/CFGI/', $product_sku)) {             // CFGI-OT-EVP-001, CFGI-OT-EVP-002, CFGI-OT-EVP-003, CFGI-OT-EVP-004, CFGI-OT-EVP-005, CFGI-OT-VISA-001
+            $groupName = config('services.docebo.cfgi');            // CONSUL: DOCEBO_CFGI
+
+        } elseif (preg_match('/EL-SUB/', $product_sku)) {           // EL-SUB-101
+            $groupName = config('services.docebo.subscription_group');  // CONSUL: DOCEBO_SUBSCRIPTION_GROUP
+
+        } elseif (preg_match('/^(48|61)\./', $product_sku)) {       // 48.66502-T ..., 61.13508-T ...
+            $groupName = config('services.docebo.book_quiz_group'); // CONSUL: DOCEBO_BOOKQUIZ_GROUP
+
+        } else {
+            $groupName = config('services.docebo.shrm_learner');    // default if it doesn't match anything else
+
+        }
+
+        return $groupName;
+
+    }
+
+    public function getGroupIdFromProductSku ($productSku) {
+
+        $groupName = $this->getGroupNameFromProductSku($productSku);
+
+        return $this->getGroupId( array("groupName" => $groupName) );
+
+    }
+
+
 
 }
 
